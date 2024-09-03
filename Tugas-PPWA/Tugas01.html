@@ -180,7 +180,10 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Tugas-1.html">Tugas 1 : Webstatis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 01 : Crawling Berita</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 01 : <strong>Crawling Berita</strong></a></li>
+
+
+
 </ul>
 
     </div>
@@ -384,7 +387,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -400,6 +405,18 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas 01 : <strong>Crawling Berita</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-dan-isi-dari-sebuah-halaman-website-berita-online">Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong> dan <strong>Isi</strong> dari sebuah halaman website berita online</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-program-crawling-berita-online">Code Program <strong>Crawling Berita Online :</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-code-program-crawling-data-berita-online">PENJELASAN CODE PROGRAM <strong>CRAWLING DATA BERITA ONLINE :</strong></a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -410,9 +427,24 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="tugas-01-crawling-berita">
-<h1>Tugas 01 : Crawling Berita<a class="headerlink" href="#tugas-01-crawling-berita" title="Link to this heading">#</a></h1>
+<h1>Tugas 01 : <strong>Crawling Berita</strong><a class="headerlink" href="#tugas-01-crawling-berita" title="Link to this heading">#</a></h1>
+<p>NAMA : Mohammad Iqbal Surya Ramadhan</p>
+<p>NIM  : 210411100002</p>
+<p>MATA KULIAH : Pencarian dan Penambangan Web - A</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-dan-isi-dari-sebuah-halaman-website-berita-online">
+<h1>Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong> dan <strong>Isi</strong> dari sebuah halaman website berita online<a class="headerlink" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-dan-isi-dari-sebuah-halaman-website-berita-online" title="Link to this heading">#</a></h1>
 <p><strong>Pengertian Crawling</strong></p>
 <p>Crawling adalah proses otomatisasi yang dilakukan oleh program komputer untuk menjelajahi dan mengumpulkan data dari halaman-halaman web di internet. Proses ini sering kali dilakukan oleh bot yang dikenal sebagai web crawlers atau spiders. Web crawlers ini akan menelusuri (crawl) berbagai situs web, mengakses halaman-halaman yang ada, dan mengunduh atau mengekstraksi informasi yang dibutuhkan untuk kemudian disimpan atau diindeks dalam database.</p>
+<p><strong>Crawling website berita adalah</strong> <em>proses otomatis mengumpulkan data dari berbagai situs berita di internet. Proses ini dilakukan oleh program khusus yang disebut crawler atau spider. Crawler ini akan menjelajahi internet, mengunjungi berbagai situs berita, dan mengambil data seperti judul berita, isi berita, tanggal publikasi, dan tautan terkait.</em></p>
+<p><strong>Beautiful Soup (Python)</strong></p>
+<p><strong>Kelebihan:</strong></p>
+<p><em>Mudah digunakan dan memiliki API yang intuitif.</em></p>
+<p><em>Cocok untuk proyek-proyek kecil hingga menengah.</em></p>
+<p><em>Fleksibel dalam parsing HTML dan XML.</em></p>
+<p><strong>Kekurangan:</strong></p>
+<p><em>Tidak sekuat Scrapy untuk proyek yang kompleks.</em></p>
+<p><em>Tidak memiliki fitur built-in untuk manajemen permintaan seperti Scrapy.</em></p>
 <p><strong>Fungsi Crawling</strong></p>
 <ol class="arabic simple">
 <li><p>Mengindeks Halaman Web:</p></li>
@@ -438,6 +470,50 @@ document.write(`
 <ul class="simple">
 <li><p>Bagi pengelola situs web, memahami bagaimana proses crawling bekerja dapat membantu dalam optimasi mesin pencari (SEO). Dengan memastikan bahwa halaman-halaman web mereka mudah di-crawl dan diindeks, mereka bisa meningkatkan kemungkinan situs web mereka muncul di hasil pencarian mesin pencari.</p></li>
 </ul>
+<p><strong>Teknologi yang Digunakan :</strong></p>
+<ul class="simple">
+<li><p>Library Pemrograman: Python dengan library seperti BeautifulSoup4, Scrapy, dan Requests adalah pilihan populer karena fleksibel dan memiliki banyak fitur.</p></li>
+<li><p>Python dan Scrapy : Scrapy adalah framework open-source di Python yang banyak digunakan untuk crawling data, termasuk berita online. Scrapy memudahkan proses fetching, parsing, dan menyimpan data.</p></li>
+<li><p>BeautifulSoup: Library Python ini digunakan untuk mengurai dokumen HTML dan XML, membantu mengekstrak data yang diinginkan dari halaman web.</p></li>
+<li><p>Selenium: Selenium digunakan untuk melakukan crawling pada halaman web yang memerlukan interaksi dinamis, seperti login atau scroll.</p></li>
+<li><p>API Berita: Beberapa situs berita menyediakan API yang memudahkan akses data mereka tanpa perlu crawling. Ini adalah cara yang lebih legal dan stabil untuk mendapatkan data.</p></li>
+<li><p>Perangkat Lunak Khusus: Ada juga perangkat lunak khusus yang dirancang untuk crawling data, seperti Octoparse dan ParseHub.</p></li>
+</ul>
+<p><strong>Beautiful Soup: Perpustakaan Python untuk Parsing HTML dan XML</strong></p>
+<p><strong>Beautiful Soup</strong> <em>adalah sebuah perpustakaan Python yang sangat populer dan mudah digunakan untuk parsing dokumen HTML dan XML. Dengan menggunakan Beautiful Soup, kita dapat mengekstrak data dari halaman web dengan cara yang efisien dan elegan. Bayangkan BeautifulSoup sebagai sebuah parser yang dapat mengubah dokumen HTML atau XML yang berantakan menjadi struktur data yang mudah dipahami oleh Python.</em></p>
+<p><strong>Mengapa Menggunakan BeautifulSoup?</strong></p>
+<ul class="simple">
+<li><p>Sederhana: BeautifulSoup memiliki API yang sangat intuitif dan mudah dipelajari, bahkan bagi pemula.</p></li>
+<li><p>Fleksibel: BeautifulSoup dapat digunakan untuk berbagai jenis parsing, mulai dari tugas sederhana hingga yang kompleks.</p></li>
+<li><p>Pythonic: BeautifulSoup terintegrasi dengan baik dengan ekosistem Python, sehingga Anda dapat dengan mudah menggabungkan BeautifulSoup dengan perpustakaan Python lainnya.</p></li>
+<li><p>Komunitas yang Besar: BeautifulSoup memiliki komunitas yang sangat aktif, sehingga Anda dapat dengan mudah menemukan dokumentasi, tutorial, dan bantuan jika Anda mengalami kesulitan.</p></li>
+</ul>
+<p><strong>Kegunaan BeautifulSoup</strong></p>
+<p><strong>Web Scraping:</strong> <em>Mengambil data dari halaman web untuk berbagai tujuan, seperti analisis sentimen, riset pasar, dan pengembangan aplikasi.</em></p>
+<p><strong>Parsing Data:</strong> <em>Mengubah data yang tidak terstruktur menjadi format yang terstruktur.</em></p>
+<p><strong>Automasi:</strong> <em>Mengotomatiskan tugas-tugas yang berulang, seperti mengunduh data dari banyak halaman web.</em></p>
+<p><strong>Contoh Penggunaan Crawling Data :</strong></p>
+<p><strong>E-commerce:</strong> <em>Untuk membandingkan harga produk dari berbagai toko online.</em></p>
+<p><strong>Riset Pasar:</strong> <em>Untuk mengumpulkan data tentang tren pasar, opini konsumen, atau perilaku kompetitor.</em></p>
+<p><strong>Jurnalisme :</strong> <em>Untuk mengumpulkan data dari berbagai sumber berita untuk membuat laporan yang komprehensif.</em></p>
+<p><strong>Pengembangan Produk:</strong> <em>Untuk mengumpulkan data yang dapat digunakan untuk melatih model machine learning dan mengembangkan produk baru.</em></p>
+<p><strong>Akademik:</strong> <em>Untuk mengumpulkan data untuk penelitian ilmiah.</em></p>
+<p><strong>Tujuan Crawling Berita Online :</strong></p>
+<p><strong>Mengumpulkan Informasi :</strong> <em>Tujuan utama crawling berita adalah untuk mengumpulkan informasi terbaru dari berbagai sumber berita. Informasi ini bisa digunakan untuk membuat agregasi berita, analisis sentimen, atau membangun basis data untuk penelitian.</em></p>
+<p><strong>Pemantauan Berita:</strong> <em>Crawling dapat digunakan untuk memantau berita secara real-time, membantu perusahaan atau individu untuk tetap up-to-date dengan perkembangan terbaru.</em></p>
+<p><strong>Pengindeksan untuk Mesin Pencari:</strong> <em>Beberapa perusahaan melakukan crawling untuk mengindeks konten berita sehingga dapat ditampilkan dalam hasil pencarian.</em></p>
+<p><strong>Membangun Agregator Berita:</strong> <em>Data yang dikumpulkan oleh crawler dapat digunakan untuk membuat agregator berita, yaitu platform yang mengumpulkan berita dari berbagai sumber dan menyajikannya dalam satu tempat. Contohnya adalah Google News.</em></p>
+<p><strong>Analisis Sentimen:</strong> <em>Dengan mengumpulkan berita dalam jumlah besar, kita dapat menganalisis sentimen publik terhadap suatu topik tertentu. Misalnya, kita dapat mengetahui apakah opini publik terhadap suatu produk baru cenderung positif atau negatif.</em></p>
+<p><strong>Riset Jurnalistik:</strong> <em>Wartawan dapat menggunakan data yang dikumpulkan oleh crawler untuk melakukan investigasi atau membuat laporan yang lebih mendalam.</em></p>
+<p><strong>Pengembangan AI:</strong> <em>Data berita dapat digunakan untuk melatih model machine learning, misalnya untuk membuat sistem rekomendasi berita atau untuk menghasilkan berita secara otomatis.</em></p>
+<p><strong>Manfaat dan Penggunaan Data Hasil Crawling :</strong></p>
+<p><strong>Agregasi Berita :</strong> <em>Data yang dikumpulkan dapat digunakan untuk membuat platform agregasi berita yang menyajikan berita dari berbagai sumber.</em></p>
+<p><strong>Analisis Sentimen :</strong> <em>Data berita dapat digunakan untuk analisis sentimen, membantu perusahaan memahami opini publik terhadap topik tertentu.</em></p>
+<p><strong>Pemantauan Media :</strong> Data dapat dimanfaatkan oleh agensi untuk memantau media dan menyusun laporan tentang tren berita.</p>
+<p><strong>Penelitian :</strong> <em>Peneliti dapat menggunakan data hasil crawling untuk studi terkait jurnalisme, media, atau fenomena sosial lainnya.</em></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="code-program-crawling-berita-online">
+<h1>Code Program <strong>Crawling Berita Online :</strong><a class="headerlink" href="#code-program-crawling-berita-online" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
@@ -516,148 +592,34 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dulu Motor Bebek Itu Primadona sampai Dipakai Artis, Sekarang Nasibnya...
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Komunitas Moge HOG Indo Jakarta Chapter Tuntaskan Touring ke Bali
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Paus Fransiskus Mendarat di Indonesia, Dijemput Innova Zenix Duduk di Depan
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hyundai Venue Siap Tantang Rocky-Raize, Segini Nilai Jualnya
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dibayar Sedikit, Kenapa Banyak Orang Mau Jadi Relawan MotoGP Mandalika?
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ini Cara Komunitas Toyota Yaris Rayakan Ulang Tahun Ke-18
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yamaha X-Force 155 Versi 2025 Meluncur, Harga Rp 43 Jutaan
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Perusahaan Induk KTM PHK Ratusan Karyawan Gara-gara Penjualan Anjlok
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Terungkap! Hyundai Daftarkan Mobil Baru di Indonesia, Penantang Rocky-Raize
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aktivitas Produksi Mobil di Pabrik GM Ekuador yang Bakal Tutup Selamanya
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wacana Subsidi Berbasis NIK: Pemerintah Harusnya Berterimakasih Publik Naik KRL
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Penjualan Sepeda Motor Tetap &#39;Aman&#39; Berkat Hal Ini
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tanggapan Honda Soal Isu Motor Harus Euro 4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Potret Mobil Baru Fajar Alfian, Hadiah untuk Orang Tua
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Heboh Jadi Relawan MotoGP Mandalika Dimintain Duit, Begini Kata Panitia
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pemerintah Diminta Tutup Gojek-Grab, Nasib Ojol Bagaimana?
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crash Horror Bagnaia, Quartararo Salahkan Alex Marquez
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sialnya Nasib Luca Marini: Balapan Sendirian di Belakang, Nyaris Di-overlap Marquez
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-1-0e55c354b047&gt;</span> in <span class="ni">&lt;cell line: 55&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">59</span> 
-<span class="g g-Whitespace">     </span><span class="mi">60</span>         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">61</span>         <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span>         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 2 detik antara permintaan halaman</span>
-<span class="g g-Whitespace">     </span><span class="mi">63</span> 
-
-<span class="nn">&lt;ipython-input-1-0e55c354b047&gt;</span> in <span class="ni">get_data</span><span class="nt">(url, kategori)</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>         <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span>             <span class="n">link</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
-<span class="ne">---&gt; </span><span class="mi">24</span>             <span class="n">article_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span>             <span class="n">article_response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>         <span class="k">except</span> <span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/api.py</span> in <span class="ni">get</span><span class="nt">(url, params, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">71</span>     <span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">72</span><span class="s2"> </span>
-<span class="ne">---&gt; </span><span class="mi">73</span><span class="s2">     return request(&quot;get&quot;, url, params=params, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">74</span><span class="s2"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">75</span><span class="s2"> </span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/api.py</span> in <span class="ni">request</span><span class="nt">(method, url, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span><span class="s2">     # cases, and look like a memory leak in others.</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span><span class="s2">     with sessions.Session() as session:</span>
-<span class="ne">---&gt; </span><span class="mi">59</span><span class="s2">         return session.request(method=method, url=url, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">60</span><span class="s2"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">61</span><span class="s2"> </span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/sessions.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)</span>
-<span class="g g-Whitespace">    </span><span class="mi">587</span><span class="s2">         }</span>
-<span class="g g-Whitespace">    </span><span class="mi">588</span><span class="s2">         send_kwargs.update(settings)</span>
-<span class="ne">--&gt; </span><span class="mi">589</span><span class="s2">         resp = self.send(prep, **send_kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">590</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">591</span><span class="s2">         return resp</span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/sessions.py</span> in <span class="ni">send</span><span class="nt">(self, request, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">701</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">702</span><span class="s2">         # Send the request</span>
-<span class="ne">--&gt; </span><span class="mi">703</span><span class="s2">         r = adapter.send(request, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">705</span><span class="s2">         # Total elapsed time of the request (approximately)</span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/adapters.py</span> in <span class="ni">send</span><span class="nt">(self, request, stream, timeout, verify, cert, proxies)</span>
-<span class="g g-Whitespace">    </span><span class="mi">665</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">666</span><span class="s2">         try:</span>
-<span class="ne">--&gt; </span><span class="mi">667</span><span class="s2">             resp = conn.urlopen(</span>
-<span class="g g-Whitespace">    </span><span class="mi">668</span><span class="s2">                 method=request.method,</span>
-<span class="g g-Whitespace">    </span><span class="mi">669</span><span class="s2">                 url=url,</span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">urlopen</span><span class="nt">(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, preload_content, decode_content, **response_kw)</span>
-<span class="g g-Whitespace">    </span><span class="mi">789</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">790</span><span class="s2">             # Make the request on the HTTPConnection object</span>
-<span class="ne">--&gt; </span><span class="mi">791</span><span class="s2">             response = self._make_request(</span>
-<span class="g g-Whitespace">    </span><span class="mi">792</span><span class="s2">                 conn,</span>
-<span class="g g-Whitespace">    </span><span class="mi">793</span><span class="s2">                 method,</span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">_make_request</span><span class="nt">(self, conn, method, url, body, headers, retries, timeout, chunked, response_conn, preload_content, decode_content, enforce_content_length)</span>
-<span class="g g-Whitespace">    </span><span class="mi">535</span><span class="s2">         # Receive the response from the server</span>
-<span class="g g-Whitespace">    </span><span class="mi">536</span><span class="s2">         try:</span>
-<span class="ne">--&gt; </span><span class="mi">537</span><span class="s2">             response = conn.getresponse()</span>
-<span class="g g-Whitespace">    </span><span class="mi">538</span><span class="s2">         except (BaseSSLError, OSError) as e:</span>
-<span class="g g-Whitespace">    </span><span class="mi">539</span><span class="s2">             self._raise_timeout(err=e, url=url, timeout_value=read_timeout)</span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connection.py</span> in <span class="ni">getresponse</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">459</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">460</span><span class="s2">         # Get the response from http.client.HTTPConnection</span>
-<span class="ne">--&gt; </span><span class="mi">461</span><span class="s2">         httplib_response = super().getresponse()</span>
-<span class="g g-Whitespace">    </span><span class="mi">462</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">463</span><span class="s2">         try:</span>
-
-<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">getresponse</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1373</span><span class="s2">         try:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1374</span><span class="s2">             try:</span>
-<span class="ne">-&gt; </span><span class="mi">1375</span><span class="s2">                 response.begin()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1376</span><span class="s2">             except ConnectionError:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1377</span><span class="s2">                 self.close()</span>
-
-<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">begin</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">316</span><span class="s2">         # read until we get a non-100 response</span>
-<span class="g g-Whitespace">    </span><span class="mi">317</span><span class="s2">         while True:</span>
-<span class="ne">--&gt; </span><span class="mi">318</span><span class="s2">             version, status, reason = self._read_status()</span>
-<span class="g g-Whitespace">    </span><span class="mi">319</span><span class="s2">             if status != CONTINUE:</span>
-<span class="g g-Whitespace">    </span><span class="mi">320</span><span class="s2">                 break</span>
-
-<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">_read_status</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">277</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">278</span><span class="s2">     def _read_status(self):</span>
-<span class="ne">--&gt; </span><span class="mi">279</span><span class="s2">         line = str(self.fp.readline(_MAXLINE + 1), &quot;iso-8859-1&quot;)</span>
-<span class="g g-Whitespace">    </span><span class="mi">280</span><span class="s2">         if len(line) &gt; _MAXLINE:</span>
-<span class="g g-Whitespace">    </span><span class="mi">281</span><span class="s2">             raise LineTooLong(&quot;status line&quot;)</span>
-
-<span class="nn">/usr/lib/python3.10/socket.py</span> in <span class="ni">readinto</span><span class="nt">(self, b)</span>
-<span class="g g-Whitespace">    </span><span class="mi">703</span><span class="s2">         while True:</span>
-<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="s2">             try:</span>
-<span class="ne">--&gt; </span><span class="mi">705</span><span class="s2">                 return self._sock.recv_into(b)</span>
-<span class="g g-Whitespace">    </span><span class="mi">706</span><span class="s2">             except timeout:</span>
-<span class="g g-Whitespace">    </span><span class="mi">707</span><span class="s2">                 self._timeout_occurred = True</span>
-
-<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1301</span><span class="s2">                   &quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot; %</span>
-<span class="g g-Whitespace">   </span><span class="mi">1302</span><span class="s2">                   self.__class__)</span>
-<span class="ne">-&gt; </span><span class="mi">1303</span><span class="s2">             return self.read(nbytes, buffer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1304</span><span class="s2">         else:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1305</span><span class="s2">             return super().recv_into(buffer, nbytes, flags)</span>
-
-<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">read</span><span class="nt">(self, len, buffer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1157</span><span class="s2">         try:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1158</span><span class="s2">             if buffer is not None:</span>
-<span class="ne">-&gt; </span><span class="mi">1159</span><span class="s2">                 return self._sslobj.read(len, buffer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1160</span><span class="s2">             else:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1161</span><span class="s2">                 return self._sslobj.read(len)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kesederhanaan Paus Fransiskus: Dulu Tolak Lamborghini, Kini Naik Innova Zenix
 </pre></div>
 </div>
 </div>
@@ -671,7 +633,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-532cb6bf-142d-4c7c-adaf-64d739b36872" class="colab-df-container">
+  <div id="df-392fe064-c3d5-4f34-9897-967b029c015c" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -698,79 +660,79 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>Rayakan Ultah Ke-18, Komunitas Innova Buktikan...</td>
-      <td>Senin, 02 Sep 2024 20:39 WIB</td>
-      <td>Jakarta - Berbeda dengan perayaan hari jadi se...</td>
+      <td>Komunitas Moge HOG Indo Jakarta Chapter Tuntas...</td>
+      <td>Selasa, 03 Sep 2024 20:38 WIB</td>
+      <td>Jakarta - Komunitas motor gede (moge) Harley-D...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Macam-macam Ukuran Helm, Cara Memilih, dan Sya...</td>
-      <td>Senin, 02 Sep 2024 20:03 WIB</td>
-      <td>Daftar Isi\n\n\n\n\r\n\t\t\t\t\t\t\tPanduan Uk...</td>
+      <td>Hyundai Venue Siap Tantang Rocky-Raize, Segini...</td>
+      <td>Selasa, 03 Sep 2024 20:01 WIB</td>
+      <td>Jakarta - Hyundai telah mendaftarkan SUV compa...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Bezzecchi Bela Bagnaia, Kritik Pedas Alex Marq...</td>
-      <td>Senin, 02 Sep 2024 19:22 WIB</td>
-      <td>Jakarta - Respons pebalap terkait kecelakaan b...</td>
+      <td>Ini Cara Komunitas Toyota Yaris Rayakan Ulang ...</td>
+      <td>Selasa, 03 Sep 2024 19:43 WIB</td>
+      <td>Jakarta - Toyota Yaris Club Indonesia (TYCI) m...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>BYD Lebarkan Sayap ke Bali</td>
-      <td>Senin, 02 Sep 2024 18:38 WIB</td>
-      <td>Jakarta - Produsen mobil asal China, BYD, kemb...</td>
+      <td>Perusahaan Induk KTM PHK Ratusan Karyawan Gara...</td>
+      <td>Selasa, 03 Sep 2024 19:07 WIB</td>
+      <td>Jakarta - Perusahaan induk KTM, Pierer Mobilit...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Cara Menghitung CC Motor dan Faktor yang Menen...</td>
-      <td>Senin, 02 Sep 2024 18:07 WIB</td>
-      <td>Daftar Isi\n\n\n\n\r\n\t\t\t\t\t\t\tCara Mengh...</td>
+      <td>Aktivitas Produksi Mobil di Pabrik GM Ekuador ...</td>
+      <td>Selasa, 03 Sep 2024 18:30 WIB</td>
+      <td>Ekuador - Pabrik General Motors GM.N di Ekuado...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Pebulu Tangkis Fajar Alfian Beri Hadiah Mobil ...</td>
-      <td>Senin, 02 Sep 2024 17:34 WIB</td>
-      <td>Jakarta - Fajar Alfian, pebulu tangkis nasiona...</td>
+      <td>Penjualan Sepeda Motor Tetap 'Aman' Berkat Hal...</td>
+      <td>Selasa, 03 Sep 2024 18:04 WIB</td>
+      <td>Jakarta - Angka penjualan motor bisa dikatakan...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>Kawasaki Brusky 125 Bakal Dibawa ke Indonesia?...</td>
-      <td>Senin, 02 Sep 2024 17:07 WIB</td>
-      <td>Jakarta - Kawasaki Brusky 125 baru saja dilunc...</td>
+      <td>Potret Mobil Baru Fajar Alfian, Hadiah untuk O...</td>
+      <td>Selasa, 03 Sep 2024 17:43 WIB</td>
+      <td>Jakarta - Fajar Alfian, pebulu tangkis nasiona...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>Finis Kedua di Aragon, Martin: Ini yang Terbai...</td>
-      <td>Senin, 02 Sep 2024 16:30 WIB</td>
-      <td>Jakarta - Jorge Martin finis kedua pada balap ...</td>
+      <td>Pemerintah Diminta Tutup Gojek-Grab, Nasib Ojo...</td>
+      <td>Selasa, 03 Sep 2024 17:13 WIB</td>
+      <td>Jakarta - Garda Indonesia tak setuju dengan de...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>Kala Ariel sampai Raffi Ahmad Pakai Motor Bebe...</td>
-      <td>Senin, 02 Sep 2024 16:08 WIB</td>
-      <td>Jakarta - Para artis seperti Ariel, Raffi Ahma...</td>
+      <td>Sialnya Nasib Luca Marini: Balapan Sendirian d...</td>
+      <td>Selasa, 03 Sep 2024 16:45 WIB</td>
+      <td>Jakarta - Nasib sial menimpa Luca Marini pada ...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>Cara Menghemat Baterai Mobil Listrik</td>
-      <td>Senin, 02 Sep 2024 15:36 WIB</td>
-      <td>Jakarta - Anda salah satu pengguna mobil listr...</td>
+      <td>Kesederhanaan Paus Fransiskus: Dulu Tolak Lamb...</td>
+      <td>Selasa, 03 Sep 2024 16:13 WIB</td>
+      <td>Jakarta - Paus Fransiskus, pemimpin negara Vat...</td>
     </tr>
   </tbody>
 </table>
 </div>
     <div class="colab-df-buttons">
-
+      
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-532cb6bf-142d-4c7c-adaf-64d739b36872')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-392fe064-c3d5-4f34-9897-967b029c015c')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
-
+      
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
     <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
   </svg>
     </button>
-
+    
   <style>
     .colab-df-container {
       display:flex;
@@ -814,12 +776,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-532cb6bf-142d-4c7c-adaf-64d739b36872 button.colab-df-convert');
+        document.querySelector('#df-392fe064-c3d5-4f34-9897-967b029c015c button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-532cb6bf-142d-4c7c-adaf-64d739b36872');
+        const element = document.querySelector('#df-392fe064-c3d5-4f34-9897-967b029c015c');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -837,194 +799,142 @@ document.write(`
       }
     </script>
   </div>
-
-
-<div id="df-e43a7f1d-1d6e-41b7-8811-cd3d116287f1">
-  <button class="colab-df-quickchart" onclick="quickchart('df-e43a7f1d-1d6e-41b7-8811-cd3d116287f1')"
-            title="Suggest charts"
-            style="display:none;">
-
-<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-     width="24px">
-    <g>
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-    </g>
-</svg>
-  </button>
-
-<style>
-  .colab-df-quickchart {
-      --bg-color: #E8F0FE;
-      --fill-color: #1967D2;
-      --hover-bg-color: #E2EBFA;
-      --hover-fill-color: #174EA6;
-      --disabled-fill-color: #AAA;
-      --disabled-bg-color: #DDD;
-  }
-
-  [theme=dark] .colab-df-quickchart {
-      --bg-color: #3B4455;
-      --fill-color: #D2E3FC;
-      --hover-bg-color: #434B5C;
-      --hover-fill-color: #FFFFFF;
-      --disabled-bg-color: #3B4455;
-      --disabled-fill-color: #666;
-  }
-
-  .colab-df-quickchart {
-    background-color: var(--bg-color);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: none;
-    fill: var(--fill-color);
-    height: 32px;
-    padding: 0;
-    width: 32px;
-  }
-
-  .colab-df-quickchart:hover {
-    background-color: var(--hover-bg-color);
-    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-    fill: var(--button-hover-fill-color);
-  }
-
-  .colab-df-quickchart-complete:disabled,
-  .colab-df-quickchart-complete:disabled:hover {
-    background-color: var(--disabled-bg-color);
-    fill: var(--disabled-fill-color);
-    box-shadow: none;
-  }
-
-  .colab-df-spinner {
-    border: 2px solid var(--fill-color);
-    border-color: transparent;
-    border-bottom-color: var(--fill-color);
-    animation:
-      spin 1s steps(1) infinite;
-  }
-
-  @keyframes spin {
-    0% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-      border-left-color: var(--fill-color);
-    }
-    20% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    30% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-      border-right-color: var(--fill-color);
-    }
-    40% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    60% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-    }
-    80% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-bottom-color: var(--fill-color);
-    }
-    90% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-    }
-  }
-</style>
-
-  <script>
-    async function quickchart(key) {
-      const quickchartButtonEl =
-        document.querySelector('#' + key + ' button');
-      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-      quickchartButtonEl.classList.add('colab-df-spinner');
-      try {
-        const charts = await google.colab.kernel.invokeFunction(
-            'suggestCharts', [key], {});
-      } catch (error) {
-        console.error('Error during call to suggestCharts:', error);
-      }
-      quickchartButtonEl.classList.remove('colab-df-spinner');
-      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-    }
-    (() => {
-      let quickchartButtonEl =
-        document.querySelector('#df-e43a7f1d-1d6e-41b7-8811-cd3d116287f1 button');
-      quickchartButtonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-    })();
-  </script>
-</div>
-
-  <div id="id_fbce9de6-9a3a-4c99-a2bf-5557ce1187c2">
-    <style>
-      .colab-df-generate {
-        background-color: #E8F0FE;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        display: none;
-        fill: #1967D2;
-        height: 32px;
-        padding: 0 0 0 0;
-        width: 32px;
-      }
-
-      .colab-df-generate:hover {
-        background-color: #E2EBFA;
-        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-        fill: #174EA6;
-      }
-
-      [theme=dark] .colab-df-generate {
-        background-color: #3B4455;
-        fill: #D2E3FC;
-      }
-
-      [theme=dark] .colab-df-generate:hover {
-        background-color: #434B5C;
-        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-        fill: #FFFFFF;
-      }
-    </style>
-    <button class="colab-df-generate" onclick="generateWithVariable('df')"
-            title="Generate code using this dataframe."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
-  </svg>
-    </button>
-    <script>
-      (() => {
-      const buttonEl =
-        document.querySelector('#id_fbce9de6-9a3a-4c99-a2bf-5557ce1187c2 button.colab-df-generate');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      buttonEl.onclick = () => {
-        google.colab.notebook.generateWithVariable('df');
-      }
-      })();
-    </script>
-  </div>
-
+  
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="penjelasan-code-program-crawling-data-berita-online">
+<h1>PENJELASAN CODE PROGRAM <strong>CRAWLING DATA BERITA ONLINE :</strong><a class="headerlink" href="#penjelasan-code-program-crawling-data-berita-online" title="Link to this heading">#</a></h1>
+<p><strong>Import Libraries</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+</pre></div>
+</div>
+<p><strong>requests :</strong> <em>Library ini digunakan untuk mengirimkan HTTP request ke situs web dan mendapatkan respons dalam bentuk HTML.</em></p>
+<p><strong>BeautifulSoup :</strong> <em>Merupakan bagian dari library bs4 yang digunakan untuk mengurai dan mengekstrak data dari dokumen HTML atau XML dengan cara yang mudah dibaca.</em></p>
+<p><strong>pandas :</strong> <em>Library ini digunakan untuk manipulasi dan analisis data. Di sini, kita menggunakannya untuk membuat DataFrame dan menyimpan data dalam format CSV.</em></p>
+<p><strong>time :</strong> <em>Library standar Python yang digunakan untuk mengatur jeda waktu (delay) antara operasi tertentu.</em></p>
+<p><strong>Fungsi get_data</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">kategori</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+    <span class="n">articles</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;article&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;list-content__item&quot;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p><strong>def get_data(url, kategori):</strong> <em>Mendefinisikan sebuah fungsi bernama get_data yang menerima dua parameter : url (alamat halaman web yang akan di-crawl) dan kategori (kategori berita, misalnya ‘Otomotif’).</em></p>
+<p><strong>try: response = requests.get(url):</strong> <em>Mengirimkan request HTTP GET ke url yang diberikan untuk mendapatkan halaman web.</em></p>
+<p><strong>response.raise_for_status():</strong> <em>Memeriksa apakah permintaan HTTP berhasil (status kode 200). Jika gagal, exception akan di-raise.</em></p>
+<p><strong>except requests.exceptions.RequestException as e:</strong> <em>Menangkap semua jenis error yang terkait dengan HTTP request, dan menampilkan pesan error jika ada.</em></p>
+<p><strong>soup = BeautifulSoup(response.content, “html.parser”):</strong> <em>Mengurai konten HTML dari respons web menggunakan BeautifulSoup untuk mempermudah ekstraksi data.</em></p>
+<p><strong>articles = soup.find_all(“article”, class_=”list-content__item”):</strong> <em>Mencari semua elemen article dengan class list-content__item, yang kemungkinan besar merupakan elemen HTML yang berisi berita.</em></p>
+<p><strong>Ekstraksi Data dari Setiap Artikel</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># Hentikan jika sudah 10 berita</span>
+            <span class="k">return</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">link</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
+            <span class="n">article_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+            <span class="n">article_response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request for article failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="n">article_soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">article_response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+        <span class="n">title_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__title&quot;</span><span class="p">)</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">title_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">title_element</span> <span class="k">else</span> <span class="s2">&quot;Title Not Found&quot;</span>
+        <span class="n">date_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__date&quot;</span><span class="p">)</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">date_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">date_element</span> <span class="k">else</span> <span class="s2">&quot;Date Not Found&quot;</span>
+        <span class="n">content_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__body-text&quot;</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">content_element</span> <span class="k">else</span> <span class="s2">&quot;Content Not Found&quot;</span>
+
+        <span class="n">judul</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">tanggal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+        <span class="n">isi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 1 detik antara permintaan artikel</span>
+
+</pre></div>
+</div>
+<p><strong>for article in articles :</strong> <em>Iterasi melalui setiap elemen article yang ditemukan di halaman.</em></p>
+<p><strong>if len(judul) &gt;= 10 :</strong> <em>Mengecek apakah jumlah berita yang di-crawl sudah mencapai 10. Jika ya, fungsi akan berhenti (return).</em></p>
+<p><strong>link = article.find(“a”)[“href”] :</strong> <em>Menemukan elemen a (link) di dalam artikel dan mengambil atribut href yang merupakan URL dari artikel tersebut.</em></p>
+<p><strong>article_response = requests.get(link) :</strong> <em>Mengirimkan request HTTP GET ke URL artikel untuk mendapatkan konten halaman berita.</em></p>
+<p><strong>article_soup = BeautifulSoup(article_response.content, “html.parser”)</strong> <em>Mengurai konten HTML dari halaman artikel.</em></p>
+<p><strong>title_element = article_soup.find(“h1”, class_=”detail__title”) :</strong> <em>Mencari elemen h1 yang memiliki class detail__title untuk mendapatkan judul berita.</em></p>
+<p><strong>title = title_element.text.strip() if title_element else “Title Not Found” :</strong> <em>Jika elemen judul ditemukan, teksnya diekstrak dan dihapus spasi berlebih; jika tidak, akan menggunakan nilai default “Title Not Found”.</em></p>
+<p><strong>date_element = article_soup.find(“div”, class_=”detail__date”) :</strong> <em>Mencari elemen div yang memiliki class detail__date untuk mendapatkan tanggal publikasi berita.</em></p>
+<p><strong>content_element = article_soup.find(“div”, class_=”detail__body-text”) :</strong> <em>Mencari elemen div yang memiliki class detail__body-text untuk mendapatkan isi berita.</em></p>
+<p><strong>judul.append(title), tanggal.append(date), isi.append(content) :</strong> <em>Menambahkan judul, tanggal, dan isi berita ke dalam list yang sesuai.</em></p>
+<p><strong>time.sleep(1) :</strong> <em>Menambahkan jeda waktu 1 detik antara permintaan untuk menghindari terlalu banyak permintaan dalam waktu singkat (rate-limiting).</em></p>
+<p><strong>Inisialisasi URL dan Kategori</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">base_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;https://oto.detik.com/indeks&quot;</span><span class="p">]</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Otomotif&quot;</span><span class="p">]</span>
+
+</pre></div>
+</div>
+<p><strong>base_urls :</strong> <em>List yang berisi URL dasar dari halaman indeks berita untuk kategori tertentu (dalam hal ini, Otomotif).</em></p>
+<p><strong>categories :</strong> <em>List yang berisi kategori berita yang akan di-crawl.</em></p>
+<p><strong>Inisialisasi List untuk Menyimpan Data</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">judul</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tanggal</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">isi</span> <span class="o">=</span> <span class="p">[]</span>
+
+</pre></div>
+</div>
+<p><strong>judul, tanggal, isi:</strong> <em>List kosong yang akan digunakan untuk menyimpan data berita yang di-crawl, seperti judul, tanggal, dan isi berita.</em></p>
+<p><strong>Iterasi Melalui Halaman dan Kategori</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">base_urls</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>  <span class="c1"># Looping untuk beralih halaman</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># Hentikan jika sudah 10 berita</span>
+            <span class="k">break</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 2 detik antara permintaan halaman</span>
+
+</pre></div>
+</div>
+<p><strong>for base_url, category in zip(base_urls, categories) :</strong> <em>Iterasi melalui setiap pasangan base_url dan category (meskipun dalam contoh ini hanya ada satu kategori dan URL).</em></p>
+<p><strong>for page in range(1, 4) :</strong> <em>Looping untuk halaman 1 hingga 3, untuk meng-crawl beberapa halaman indeks berita.</em></p>
+<p><strong>if len(judul) &gt;= 10 :</strong> <em>Mengecek apakah sudah ada 10 berita yang di-crawl. Jika ya, iterasi dihentikan (break).</em></p>
+<p><strong>url = f”{base_url}/{page}” :</strong> <em>Menggabungkan base_url dengan nomor halaman untuk membuat URL yang lengkap.</em></p>
+<p><strong>get_data(url, category) :</strong> <em>Memanggil fungsi get_data untuk meng-crawl data dari halaman tersebut.</em></p>
+<p><strong>time.sleep(2) :</strong> <em>Menambahkan jeda waktu 2 detik antara permintaan halaman untuk mencegah rate-limiting.</em></p>
+<p><strong>Membuat DataFrame dan Menyimpan ke CSV</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;judul&quot;</span><span class="p">:</span> <span class="n">judul</span><span class="p">,</span>
+    <span class="s2">&quot;tanggal&quot;</span><span class="p">:</span> <span class="n">tanggal</span><span class="p">,</span>
+    <span class="s2">&quot;isi&quot;</span><span class="p">:</span> <span class="n">isi</span>
+<span class="p">})</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita-Otomotif.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p><strong>df = pd.DataFrame({“judul”: judul, “tanggal”: tanggal, “isi”: isi}) :</strong> <em>Membuat DataFrame dari list judul, tanggal, dan isi.</em></p>
+<p><strong>df.to_csv(“Crawl-berita-Otomotif.csv”, index=False) :</strong> <em>Menyimpan DataFrame ke dalam file CSV dengan nama Crawl-berita-Otomotif.csv.</em></p>
+<p><em>Parameter index=False digunakan untuk tidak menyimpan indeks DataFrame dalam file CSV.</em></p>
+<p><strong>Membaca dan Menampilkan Data dari CSV</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita-Otomotif.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+<p><strong>df = pd.read_csv(“Crawl-berita-Otomotif.csv”) :</strong> <em>Membaca kembali data dari file CSV ke dalam DataFrame df.</em></p>
+<p><strong>df :</strong> <em>Menampilkan isi DataFrame df untuk melihat data yang telah di-crawl dan disimpan.</em></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1072,6 +982,25 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas 01 : <strong>Crawling Berita</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-dan-isi-dari-sebuah-halaman-website-berita-online">Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong> dan <strong>Isi</strong> dari sebuah halaman website berita online</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-program-crawling-berita-online">Code Program <strong>Crawling Berita Online :</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-code-program-crawling-data-berita-online">PENJELASAN CODE PROGRAM <strong>CRAWLING DATA BERITA ONLINE :</strong></a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
