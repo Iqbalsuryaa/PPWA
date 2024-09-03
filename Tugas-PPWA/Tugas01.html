@@ -437,6 +437,15 @@ document.write(`
 <p><strong>Pengertian Crawling</strong></p>
 <p>Crawling adalah proses otomatisasi yang dilakukan oleh program komputer untuk menjelajahi dan mengumpulkan data dari halaman-halaman web di internet. Proses ini sering kali dilakukan oleh bot yang dikenal sebagai web crawlers atau spiders. Web crawlers ini akan menelusuri (crawl) berbagai situs web, mengakses halaman-halaman yang ada, dan mengunduh atau mengekstraksi informasi yang dibutuhkan untuk kemudian disimpan atau diindeks dalam database.</p>
 <p><strong>Crawling website berita adalah</strong> <em>proses otomatis mengumpulkan data dari berbagai situs berita di internet. Proses ini dilakukan oleh program khusus yang disebut crawler atau spider. Crawler ini akan menjelajahi internet, mengunjungi berbagai situs berita, dan mengambil data seperti judul berita, isi berita, tanggal publikasi, dan tautan terkait.</em></p>
+<p><strong>Penjelasan Data</strong></p>
+<p><em>Data yang diambil berasal dari Website DetikOto, yang merupakan bagian dari portal berita <a class="reference external" href="http://Detik.com">Detik.com</a>, berfokus pada topik otomotif, termasuk ulasan kendaraan, berita terbaru, tips perawatan, dan tren otomotif terkini.</em></p>
+<p><em>Data diambil menggunakan metode web crawling atau scraping untuk pengumpulan data dengan mengarahkan crawler ke <a class="reference external" href="https://oto.detik.com/indeks">https://oto.detik.com/indeks</a> dan mengumpulkan data terkait otomotif.</em></p>
+<p><strong>contoh data :</strong></p>
+<ul class="simple">
+<li><p>judul : <em>Komunitas Moge HOG Indo Jakarta Chapter Tuntaskan Touring ke Bali</em></p></li>
+<li><p>tanggal : <em>Selasa, 03 Sep 2024 20:38 WIB</em></p></li>
+<li><p>isi/deskripsi : <em>Jakarta - Komunitas motor gede (moge) Harley-Davidson Owners Group (H.O.G.) Indo Jakarta Chapter telah menuntaskan touring ke Bali selama tiga hari. Sebanyak 232 rider dengan 92 pillion (istri yang ikut dibonceng naik motor) meramaikan touring moge Harley-Davidson ini.H.O.G. Indo Jakarta Chapter merupakan komunitas motor besar Harley-Davidson berskala international yang baru berdiri di Jakarta. Usia komunitas ini belum genap 1 tahun, tapi membernya sudah lebih dari 550 orang. Adapun acara ini merupakan touring ketiga yang dilakukan setelah Bandung dan Solo.</em></p></li>
+</ul>
 <p><strong>Beautiful Soup (Python)</strong></p>
 <p><strong>Kelebihan:</strong></p>
 <p><em>Mudah digunakan dan memiliki API yang intuitif.</em></p>
@@ -498,6 +507,27 @@ document.write(`
 <p><strong>Jurnalisme :</strong> <em>Untuk mengumpulkan data dari berbagai sumber berita untuk membuat laporan yang komprehensif.</em></p>
 <p><strong>Pengembangan Produk:</strong> <em>Untuk mengumpulkan data yang dapat digunakan untuk melatih model machine learning dan mengembangkan produk baru.</em></p>
 <p><strong>Akademik:</strong> <em>Untuk mengumpulkan data untuk penelitian ilmiah.</em></p>
+<p><strong>Cara Crawling Data :</strong></p>
+<p><em>pertama kita tentukan terlebih dahulu ingin mengambil data berita dari sumber mana, jika sudah menentukan data yang akan diambil dan di crawling, kemudian kita lakukan crawling data menggunakan code.</em></p>
+<ol class="arabic simple">
+<li><p>langkah pertama melakukan import Library yang akan mempermudah saat melakukan crawling data.</p></li>
+</ol>
+<ul class="simple">
+<li><p><em>import requests (digunakan untuk melakukan permintaan HTTP ke web server, seperti GET atau POST, dan mendapatkan tanggapan, termasuk HTML dari halaman web yang akan discrape.)</em></p></li>
+<li><p><em>from bs4 import BeautifulSoup (digunakan untuk parsing dokumen HTML yang didapatkan dari permintaan HTTP, membuatnya lebih mudah untuk bergerak melalui struktur HTML, mencari elemen, dan mengubah data.)</em></p></li>
+<li><p><em>import pandas as pd (library ini mengorganisir data dalam bentuk tabel, seperti dataframe, yang memudahkan analisis dan penyimpanan data kedalam format seperti CSV.)</em></p></li>
+<li><p><em>import time (library  ini menambahkan jeda waktu, atau tidur, antara satu operasi dan operasi berikutnya, yang penting untuk proses crawling agar tidak terlalu banyak permintaan dalam waktu singkat.)</em></p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>langkah kedua code mengambil data dari sebuah halaman web, memprosesnya, dan mengekstrak artikel-artikel yang relevan.</p></li>
+<li><p>langkah ketiga code melakukan pengecekan, dengan memeriksa satu per satu artikel yang ditemukan di halaman web. Jika sudah berhasil mengambil 10 artikel, prosesnya akan berhenti.
+Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halaman detail artikel tersebut. Jika ada masalah seperti link rusak atau halaman tidak bisa dibuka, kode ini akan mencatat kesalahan tersebut dan langsung melanjutkan ke artikel berikutnya tanpa menghentikan keseluruhan proses pengambilan data.</p></li>
+<li><p>langkah keempat code mengambil judul, tanggal publikasi, dan isi dari setiap artikel yang ada di halaman web. Pertama, kode memproses halaman artikel dengan menggunakan BeautifulSoup untuk memudahkan pencarian elemen HTML yang berisi informasi tersebut. Jika elemen seperti judul, tanggal, atau isi ditemukan, data diambil dan disimpan dalam daftar; jika tidak ditemukan, elemen tersebut akan ditandai sebagai “Tidak ditemukan”. Setiap judul artikel yang berhasil ditemukan akan dicetak di layar.</p></li>
+<li><p>langkah kelima code membuat dua daftar, atau list, yang digunakan dalam proses crawling data. Daftar pertama, base_urls, yang berisi URL halaman web yang akan diambil datanya,  halaman indeks DetikFood. Daftar kedua, categories, berisi kategori yang terkait dengan data yang ingin diambil, yaitu “Makanan”. Keduanya akan digunakan bersama dalam proses crawling untuk menentukan halaman web mana yang harus diakses dan kategori mana yang relevan dengan pencarian.</p></li>
+<li><p>langkah keenam code membuat tiga daftar kosong, judul, tanggal, dan isi, yang akan digunakan untuk menyimpan data hasil crawling. Judul, tanggal, dan isi menyimpan judul dan konten utama artikel, dan daftar tanggal menyimpan tanggal publikasi setiap artikel. Ini mempersiapkan tempat untuk menyimpan data yang akan diambil dari halaman web di masa mendatang.</p></li>
+<li><p>langkah ketujuh membuat code Untuk setiap kombinasi URL dan kategori yang telah dibuat sebelumnya, kode ini melakukan proses iterasi, atau perulangan. Kode akan mengambil data dari beberapa halaman untuk setiap URL, mulai dari halaman 1 hingga 3. Jika jumlah artikel mencapai sepuluh, proses akan dihentikan. Setelah membuat URL baru yang sesuai untuk setiap halaman, fungsi get_data digunakan untuk mengambil data dari halaman tersebut. Untuk mencegah data diambil terlalu cepat, kode menunggu selama dua detik setelah mengambil data dari satu halaman sebelum melanjutkan ke halaman berikutnya.</p></li>
+<li><p>langkah terakhir membuat code untuk mengumpulkan data yang disimpan dalam bentuk daftar judul, tanggal, dan isi, lalu menyusunnya ke dalam bentuk tabel DataFrame menggunakan pustaka pandas. “Judul”, “tanggal”, dan “isi” adalah nama kolom dalam tabel DataFrame. Kode menyimpan tabel ke dalam file CSV dengan nama “Crawl-berita.csv” tanpa index. Setelah itu, Anda dapat membuka dan menganalisis file CSV ini menggunakan aplikasi spreadsheet atau perangkat lunak lain yang mendukung format CSV.</p></li>
+</ol>
 <p><strong>Tujuan Crawling Berita Online :</strong></p>
 <p><strong>Mengumpulkan Informasi :</strong> <em>Tujuan utama crawling berita adalah untuk mengumpulkan informasi terbaru dari berbagai sumber berita. Informasi ini bisa digunakan untuk membuat agregasi berita, analisis sentimen, atau membangun basis data untuk penelitian.</em></p>
 <p><strong>Pemantauan Berita:</strong> <em>Crawling dapat digunakan untuk memantau berita secara real-time, membantu perusahaan atau individu untuk tetap up-to-date dengan perkembangan terbaru.</em></p>
@@ -633,7 +663,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-f74b3231-ea42-4ee5-ba2d-7e70805df96e" class="colab-df-container">
+  <div id="df-16bfc31e-17c4-4d4c-96f6-a3b648477fb1" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -724,7 +754,7 @@ document.write(`
     <div class="colab-df-buttons">
       
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-f74b3231-ea42-4ee5-ba2d-7e70805df96e')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-16bfc31e-17c4-4d4c-96f6-a3b648477fb1')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
       
@@ -776,12 +806,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-f74b3231-ea42-4ee5-ba2d-7e70805df96e button.colab-df-convert');
+        document.querySelector('#df-16bfc31e-17c4-4d4c-96f6-a3b648477fb1 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-f74b3231-ea42-4ee5-ba2d-7e70805df96e');
+        const element = document.querySelector('#df-16bfc31e-17c4-4d4c-96f6-a3b648477fb1');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
