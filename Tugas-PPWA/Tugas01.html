@@ -411,7 +411,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas 01 : <strong>Crawling Berita</strong></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-dan-isi-dari-sebuah-halaman-website-berita-online">Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong> dan <strong>Isi</strong> dari sebuah halaman website berita online</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-isi-dan-kategori-berita-dari-sebuah-halaman-website-berita-online">Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong>, <strong>Isi</strong> dan <strong>Kategori Berita</strong> dari sebuah halaman website berita online</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-program-crawling-berita-online">Code Program <strong>Crawling Berita Online :</strong></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-code-program-crawling-data-berita-online">PENJELASAN CODE PROGRAM <strong>CRAWLING DATA BERITA ONLINE :</strong></a></li>
 </ul>
@@ -432,8 +432,8 @@ document.write(`
 <p>NIM  : 210411100002</p>
 <p>MATA KULIAH : Pencarian dan Penambangan Web - A</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-dan-isi-dari-sebuah-halaman-website-berita-online">
-<h1>Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong> dan <strong>Isi</strong> dari sebuah halaman website berita online<a class="headerlink" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-dan-isi-dari-sebuah-halaman-website-berita-online" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-isi-dan-kategori-berita-dari-sebuah-halaman-website-berita-online">
+<h1>Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong>, <strong>Isi</strong> dan <strong>Kategori Berita</strong> dari sebuah halaman website berita online<a class="headerlink" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-isi-dan-kategori-berita-dari-sebuah-halaman-website-berita-online" title="Link to this heading">#</a></h1>
 <p><strong>Pengertian Crawling</strong></p>
 <p>Crawling adalah proses otomatisasi yang dilakukan oleh program komputer untuk menjelajahi dan mengumpulkan data dari halaman-halaman web di internet. Proses ini sering kali dilakukan oleh bot yang dikenal sebagai web crawlers atau spiders. Web crawlers ini akan menelusuri (crawl) berbagai situs web, mengakses halaman-halaman yang ada, dan mengunduh atau mengekstraksi informasi yang dibutuhkan untuk kemudian disimpan atau diindeks dalam database.</p>
 <p><strong>Crawling website berita adalah</strong> <em>proses otomatis mengumpulkan data dari berbagai situs berita di internet. Proses ini dilakukan oleh program khusus yang disebut crawler atau spider. Crawler ini akan menjelajahi internet, mengunjungi berbagai situs berita, dan mengambil data seperti judul berita, isi berita, tanggal publikasi, dan tautan terkait.</em></p>
@@ -445,6 +445,7 @@ document.write(`
 <li><p>judul : <em>Komunitas Moge HOG Indo Jakarta Chapter Tuntaskan Touring ke Bali</em></p></li>
 <li><p>tanggal : <em>Selasa, 03 Sep 2024 20:38 WIB</em></p></li>
 <li><p>isi/deskripsi : <em>Jakarta - Komunitas motor gede (moge) Harley-Davidson Owners Group (H.O.G.) Indo Jakarta Chapter telah menuntaskan touring ke Bali selama tiga hari. Sebanyak 232 rider dengan 92 pillion (istri yang ikut dibonceng naik motor) meramaikan touring moge Harley-Davidson ini.H.O.G. Indo Jakarta Chapter merupakan komunitas motor besar Harley-Davidson berskala international yang baru berdiri di Jakarta. Usia komunitas ini belum genap 1 tahun, tapi membernya sudah lebih dari 550 orang. Adapun acara ini merupakan touring ketiga yang dilakukan setelah Bandung dan Solo.</em></p></li>
+<li><p>Kategori Berita : <em>Otomotif</em></p></li>
 </ul>
 <p><strong>Beautiful Soup (Python)</strong></p>
 <p><strong>Kelebihan:</strong></p>
@@ -564,7 +565,7 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
     <span class="n">articles</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;article&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;list-content__item&quot;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># Hentikan jika sudah 10 berita</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>  <span class="c1"># Hentikan jika sudah 10 berita</span>
             <span class="k">return</span>
 
         <span class="k">try</span><span class="p">:</span>
@@ -583,9 +584,11 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
         <span class="n">content_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__body-text&quot;</span><span class="p">)</span>
         <span class="n">content</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">content_element</span> <span class="k">else</span> <span class="s2">&quot;Content Not Found&quot;</span>
 
+        <span class="c1"># Menambahkan data ke dalam list</span>
         <span class="n">judul</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
         <span class="n">tanggal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
         <span class="n">isi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">kategori_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kategori</span><span class="p">)</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 1 detik antara permintaan artikel</span>
@@ -598,11 +601,12 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
 <span class="n">judul</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">tanggal</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">isi</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">kategori_list</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1"># Melakukan iterasi untuk setiap url dan kategori</span>
 <span class="k">for</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">base_urls</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>  <span class="c1"># Looping untuk beralih halaman</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># Hentikan jika sudah 10 berita</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>  <span class="c1"># Hentikan jika sudah 10 berita</span>
             <span class="k">break</span>
 
         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -612,8 +616,9 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
 <span class="c1"># Membuat dataframe dari list data</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
     <span class="s2">&quot;judul&quot;</span><span class="p">:</span> <span class="n">judul</span><span class="p">,</span>
+    <span class="s2">&quot;isi&quot;</span><span class="p">:</span> <span class="n">isi</span><span class="p">,</span>
     <span class="s2">&quot;tanggal&quot;</span><span class="p">:</span> <span class="n">tanggal</span><span class="p">,</span>
-    <span class="s2">&quot;isi&quot;</span><span class="p">:</span> <span class="n">isi</span>
+    <span class="s2">&quot;kategori&quot;</span><span class="p">:</span> <span class="n">kategori_list</span>
 <span class="p">})</span>
 
 <span class="c1"># Menyimpan dataframe ke file CSV</span>
@@ -622,34 +627,151 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Komunitas Moge HOG Indo Jakarta Chapter Tuntaskan Touring ke Bali
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jakarta Polusi, Rano Karno Bilang Mobil Listrik Bisa Jadi Solusi
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hyundai Venue Siap Tantang Rocky-Raize, Segini Nilai Jualnya
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mobil Beli Pertalite Bakal Dibatasi Pakai cc, Motor Gimana?
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ini Cara Komunitas Toyota Yaris Rayakan Ulang Tahun Ke-18
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Catat! Rekayasa Lalu Lintas saat Misa Akbar Paus di GBK Hari Ini
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Perusahaan Induk KTM PHK Ratusan Karyawan Gara-gara Penjualan Anjlok
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Momen Jokowi Pakai Kijang Innova Zenix Hitam Berpelat RI 1
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aktivitas Produksi Mobil di Pabrik GM Ekuador yang Bakal Tutup Selamanya
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kenapa Paus Fransiskus Tak Naik Mobil Listrik di Indonesia?
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Penjualan Sepeda Motor Tetap &#39;Aman&#39; Berkat Hal Ini
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jadwal MotoGP San Marino Akhir Pekan Ini
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Potret Mobil Baru Fajar Alfian, Hadiah untuk Orang Tua
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Awas! Foto Tanda Tangan Kayak Begini Bisa Bikin Gagal Perpanjang SIM Online
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pemerintah Diminta Tutup Gojek-Grab, Nasib Ojol Bagaimana?
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intip Garasi Franz Theodor, Anggota DPRD Pematangsiantar yang Cuma Raih 94 Suara
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sialnya Nasib Luca Marini: Balapan Sendirian di Belakang, Nyaris Di-overlap Marquez
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ini Deretan Mobil yang Masih Boleh Pakai Pertalite
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kesederhanaan Paus Fransiskus: Dulu Tolak Lamborghini, Kini Naik Innova Zenix
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cara 17 Komunitas Bersama-sama Rayakan Hari Kemerdekaan Indonesia
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-1-e3c352a4d904&gt;</span> in <span class="ni">&lt;cell line: 58&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span> 
+<span class="g g-Whitespace">     </span><span class="mi">63</span>         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">64</span>         <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 2 detik antara permintaan halaman</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span> 
+
+<span class="nn">&lt;ipython-input-1-e3c352a4d904&gt;</span> in <span class="ni">get_data</span><span class="nt">(url, kategori)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>         <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span>             <span class="n">link</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
+<span class="ne">---&gt; </span><span class="mi">24</span>             <span class="n">article_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>             <span class="n">article_response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span>         <span class="k">except</span> <span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/api.py</span> in <span class="ni">get</span><span class="nt">(url, params, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span>     <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span><span class="s2"> </span>
+<span class="ne">---&gt; </span><span class="mi">73</span><span class="s2">     return request(&quot;get&quot;, url, params=params, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span><span class="s2"> </span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/api.py</span> in <span class="ni">request</span><span class="nt">(method, url, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span><span class="s2">     # cases, and look like a memory leak in others.</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span><span class="s2">     with sessions.Session() as session:</span>
+<span class="ne">---&gt; </span><span class="mi">59</span><span class="s2">         return session.request(method=method, url=url, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span><span class="s2"> </span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/sessions.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)</span>
+<span class="g g-Whitespace">    </span><span class="mi">587</span><span class="s2">         }</span>
+<span class="g g-Whitespace">    </span><span class="mi">588</span><span class="s2">         send_kwargs.update(settings)</span>
+<span class="ne">--&gt; </span><span class="mi">589</span><span class="s2">         resp = self.send(prep, **send_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">590</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">591</span><span class="s2">         return resp</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/sessions.py</span> in <span class="ni">send</span><span class="nt">(self, request, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">701</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">702</span><span class="s2">         # Send the request</span>
+<span class="ne">--&gt; </span><span class="mi">703</span><span class="s2">         r = adapter.send(request, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">705</span><span class="s2">         # Total elapsed time of the request (approximately)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/adapters.py</span> in <span class="ni">send</span><span class="nt">(self, request, stream, timeout, verify, cert, proxies)</span>
+<span class="g g-Whitespace">    </span><span class="mi">665</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">666</span><span class="s2">         try:</span>
+<span class="ne">--&gt; </span><span class="mi">667</span><span class="s2">             resp = conn.urlopen(</span>
+<span class="g g-Whitespace">    </span><span class="mi">668</span><span class="s2">                 method=request.method,</span>
+<span class="g g-Whitespace">    </span><span class="mi">669</span><span class="s2">                 url=url,</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">urlopen</span><span class="nt">(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, preload_content, decode_content, **response_kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">789</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span><span class="s2">             # Make the request on the HTTPConnection object</span>
+<span class="ne">--&gt; </span><span class="mi">791</span><span class="s2">             response = self._make_request(</span>
+<span class="g g-Whitespace">    </span><span class="mi">792</span><span class="s2">                 conn,</span>
+<span class="g g-Whitespace">    </span><span class="mi">793</span><span class="s2">                 method,</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">_make_request</span><span class="nt">(self, conn, method, url, body, headers, retries, timeout, chunked, response_conn, preload_content, decode_content, enforce_content_length)</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span><span class="s2">         # Receive the response from the server</span>
+<span class="g g-Whitespace">    </span><span class="mi">536</span><span class="s2">         try:</span>
+<span class="ne">--&gt; </span><span class="mi">537</span><span class="s2">             response = conn.getresponse()</span>
+<span class="g g-Whitespace">    </span><span class="mi">538</span><span class="s2">         except (BaseSSLError, OSError) as e:</span>
+<span class="g g-Whitespace">    </span><span class="mi">539</span><span class="s2">             self._raise_timeout(err=e, url=url, timeout_value=read_timeout)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connection.py</span> in <span class="ni">getresponse</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">459</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">460</span><span class="s2">         # Get the response from http.client.HTTPConnection</span>
+<span class="ne">--&gt; </span><span class="mi">461</span><span class="s2">         httplib_response = super().getresponse()</span>
+<span class="g g-Whitespace">    </span><span class="mi">462</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">463</span><span class="s2">         try:</span>
+
+<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">getresponse</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1373</span><span class="s2">         try:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1374</span><span class="s2">             try:</span>
+<span class="ne">-&gt; </span><span class="mi">1375</span><span class="s2">                 response.begin()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1376</span><span class="s2">             except ConnectionError:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1377</span><span class="s2">                 self.close()</span>
+
+<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">begin</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">316</span><span class="s2">         # read until we get a non-100 response</span>
+<span class="g g-Whitespace">    </span><span class="mi">317</span><span class="s2">         while True:</span>
+<span class="ne">--&gt; </span><span class="mi">318</span><span class="s2">             version, status, reason = self._read_status()</span>
+<span class="g g-Whitespace">    </span><span class="mi">319</span><span class="s2">             if status != CONTINUE:</span>
+<span class="g g-Whitespace">    </span><span class="mi">320</span><span class="s2">                 break</span>
+
+<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">_read_status</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">277</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">278</span><span class="s2">     def _read_status(self):</span>
+<span class="ne">--&gt; </span><span class="mi">279</span><span class="s2">         line = str(self.fp.readline(_MAXLINE + 1), &quot;iso-8859-1&quot;)</span>
+<span class="g g-Whitespace">    </span><span class="mi">280</span><span class="s2">         if len(line) &gt; _MAXLINE:</span>
+<span class="g g-Whitespace">    </span><span class="mi">281</span><span class="s2">             raise LineTooLong(&quot;status line&quot;)</span>
+
+<span class="nn">/usr/lib/python3.10/socket.py</span> in <span class="ni">readinto</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">703</span><span class="s2">         while True:</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="s2">             try:</span>
+<span class="ne">--&gt; </span><span class="mi">705</span><span class="s2">                 return self._sock.recv_into(b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">706</span><span class="s2">             except timeout:</span>
+<span class="g g-Whitespace">    </span><span class="mi">707</span><span class="s2">                 self._timeout_occurred = True</span>
+
+<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1301</span><span class="s2">                   &quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot; %</span>
+<span class="g g-Whitespace">   </span><span class="mi">1302</span><span class="s2">                   self.__class__)</span>
+<span class="ne">-&gt; </span><span class="mi">1303</span><span class="s2">             return self.read(nbytes, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1304</span><span class="s2">         else:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1305</span><span class="s2">             return super().recv_into(buffer, nbytes, flags)</span>
+
+<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">read</span><span class="nt">(self, len, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1157</span><span class="s2">         try:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1158</span><span class="s2">             if buffer is not None:</span>
+<span class="ne">-&gt; </span><span class="mi">1159</span><span class="s2">                 return self._sslobj.read(len, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1160</span><span class="s2">             else:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1161</span><span class="s2">                 return self._sslobj.read(len)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -663,7 +785,7 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-16bfc31e-17c4-4d4c-96f6-a3b648477fb1" class="colab-df-container">
+  <div id="df-608bbb9c-5c78-45c9-9982-9d3b07e44c2a" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -683,86 +805,167 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
     <tr style="text-align: right;">
       <th></th>
       <th>judul</th>
-      <th>tanggal</th>
       <th>isi</th>
+      <th>tanggal</th>
+      <th>kategori</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Komunitas Moge HOG Indo Jakarta Chapter Tuntas...</td>
-      <td>Selasa, 03 Sep 2024 20:38 WIB</td>
-      <td>Jakarta - Komunitas motor gede (moge) Harley-D...</td>
+      <td>Jakarta Polusi, Rano Karno Bilang Mobil Listri...</td>
+      <td>Jakarta - Bakal Calon Wakil Gubernur Jakarta, ...</td>
+      <td>Kamis, 05 Sep 2024 11:09 WIB</td>
+      <td>Otomotif</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Hyundai Venue Siap Tantang Rocky-Raize, Segini...</td>
-      <td>Selasa, 03 Sep 2024 20:01 WIB</td>
-      <td>Jakarta - Hyundai telah mendaftarkan SUV compa...</td>
+      <td>Mobil Beli Pertalite Bakal Dibatasi Pakai cc, ...</td>
+      <td>Jakarta - Mobil dengan kapasitas tertentu baka...</td>
+      <td>Kamis, 05 Sep 2024 10:44 WIB</td>
+      <td>Otomotif</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Ini Cara Komunitas Toyota Yaris Rayakan Ulang ...</td>
-      <td>Selasa, 03 Sep 2024 19:43 WIB</td>
-      <td>Jakarta - Toyota Yaris Club Indonesia (TYCI) m...</td>
+      <td>Catat! Rekayasa Lalu Lintas saat Misa Akbar Pa...</td>
+      <td>Jakarta - Hari ini, Kamis (5/9/2024) akan diad...</td>
+      <td>Kamis, 05 Sep 2024 10:02 WIB</td>
+      <td>Otomotif</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Perusahaan Induk KTM PHK Ratusan Karyawan Gara...</td>
-      <td>Selasa, 03 Sep 2024 19:07 WIB</td>
-      <td>Jakarta - Perusahaan induk KTM, Pierer Mobilit...</td>
+      <td>Momen Jokowi Pakai Kijang Innova Zenix Hitam B...</td>
+      <td>Jakarta - Selain Mercedes-Benz S600 Guard, Pre...</td>
+      <td>Kamis, 05 Sep 2024 09:31 WIB</td>
+      <td>Otomotif</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Aktivitas Produksi Mobil di Pabrik GM Ekuador ...</td>
-      <td>Selasa, 03 Sep 2024 18:30 WIB</td>
-      <td>Ekuador - Pabrik General Motors GM.N di Ekuado...</td>
+      <td>Kenapa Paus Fransiskus Tak Naik Mobil Listrik ...</td>
+      <td>Jakarta - Paus Fransiskus sudah berada di Indo...</td>
+      <td>Kamis, 05 Sep 2024 09:04 WIB</td>
+      <td>Otomotif</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Penjualan Sepeda Motor Tetap 'Aman' Berkat Hal...</td>
-      <td>Selasa, 03 Sep 2024 18:04 WIB</td>
-      <td>Jakarta - Angka penjualan motor bisa dikatakan...</td>
+      <td>Jadwal MotoGP San Marino Akhir Pekan Ini</td>
+      <td>Daftar Isi\n\n\n\n\r\n\t\t\t\t\t\t\tJadwal Mot...</td>
+      <td>Kamis, 05 Sep 2024 08:33 WIB</td>
+      <td>Otomotif</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>Potret Mobil Baru Fajar Alfian, Hadiah untuk O...</td>
-      <td>Selasa, 03 Sep 2024 17:43 WIB</td>
-      <td>Jakarta - Fajar Alfian, pebulu tangkis nasiona...</td>
+      <td>Awas! Foto Tanda Tangan Kayak Begini Bisa Biki...</td>
+      <td>Daftar Isi\n\n\n\n\r\n\t\t\t\t\t\t\tCara Perpa...</td>
+      <td>Kamis, 05 Sep 2024 08:08 WIB</td>
+      <td>Otomotif</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>Pemerintah Diminta Tutup Gojek-Grab, Nasib Ojo...</td>
-      <td>Selasa, 03 Sep 2024 17:13 WIB</td>
-      <td>Jakarta - Garda Indonesia tak setuju dengan de...</td>
+      <td>Intip Garasi Franz Theodor, Anggota DPRD Pemat...</td>
+      <td>Jakarta - Franz Theodor Sihaloho resmi dilanti...</td>
+      <td>Kamis, 05 Sep 2024 07:40 WIB</td>
+      <td>Otomotif</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>Sialnya Nasib Luca Marini: Balapan Sendirian d...</td>
-      <td>Selasa, 03 Sep 2024 16:45 WIB</td>
-      <td>Jakarta - Nasib sial menimpa Luca Marini pada ...</td>
+      <td>Ini Deretan Mobil yang Masih Boleh Pakai Perta...</td>
+      <td>Jakarta - Bila jadi dibatasi berdasarkan kapas...</td>
+      <td>Kamis, 05 Sep 2024 07:04 WIB</td>
+      <td>Otomotif</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>Kesederhanaan Paus Fransiskus: Dulu Tolak Lamb...</td>
-      <td>Selasa, 03 Sep 2024 16:13 WIB</td>
-      <td>Jakarta - Paus Fransiskus, pemimpin negara Vat...</td>
+      <td>Cara 17 Komunitas Bersama-sama Rayakan Hari Ke...</td>
+      <td>Jakarta - Jika satu komunitas bersama-sama mer...</td>
+      <td>Rabu, 04 Sep 2024 20:32 WIB</td>
+      <td>Otomotif</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Peringati Hari Pelanggan Nasional, SPBU Ini Te...</td>
+      <td>Jakarta - Sejumlah perusahaan memperingati Har...</td>
+      <td>Rabu, 04 Sep 2024 20:18 WIB</td>
+      <td>Otomotif</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>BYD Kenalkan Rival Toyota Alphard, Harga Mulai...</td>
+      <td>Jakarta - BYD baru saja mengenalkan minivan te...</td>
+      <td>Rabu, 04 Sep 2024 20:01 WIB</td>
+      <td>Otomotif</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Periklindo Gelar Konferensi Kendaraan Listrik ...</td>
+      <td>Jakarta - Periklindo akan menggelar konferensi...</td>
+      <td>Rabu, 04 Sep 2024 19:32 WIB</td>
+      <td>Otomotif</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Tes Lengkap Haval H6 HEV: Mobil Rp 600 Jutaan,...</td>
+      <td>Tak hanya mendatangkan Tank, GWM Indonesia jug...</td>
+      <td>2,650 Views  |  Rabu, 04 Sep 2024 18:27 WIB</td>
+      <td>Otomotif</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Melihat Popemobile Buatan Pindad yang Dipakai ...</td>
+      <td>Jakarta - Paus Fransiskus akan menggunakan pop...</td>
+      <td>Rabu, 04 Sep 2024 19:08 WIB</td>
+      <td>Otomotif</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Mobil China Serbu Eropa, VW Pertimbangkan Tutu...</td>
+      <td>Jakarta - Volkswagen (VW) dikabarkan tengah me...</td>
+      <td>Rabu, 04 Sep 2024 18:36 WIB</td>
+      <td>Otomotif</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Motor Listrik Masih Sepi Peminat, Honda Bilang...</td>
+      <td>Jakarta - Penjualan motor listrik masih minim....</td>
+      <td>Rabu, 04 Sep 2024 18:05 WIB</td>
+      <td>Otomotif</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Periklindo Tolak Insentif Mobil Hybrid: Masih ...</td>
+      <td>Jakarta - Persatuan Industri Kendaraan Listrik...</td>
+      <td>Rabu, 04 Sep 2024 17:28 WIB</td>
+      <td>Otomotif</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Kawasaki Indonesia Segarkan Versys-X 250, Kini...</td>
+      <td>Jakarta - Kawasaki Motor Indonesia (KMI) resmi...</td>
+      <td>Rabu, 04 Sep 2024 17:05 WIB</td>
+      <td>Otomotif</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Ragam 'Mobil Rakyat' Tunggangan Paus Fransiskus</td>
+      <td>Jakarta - Paus Fransiskus dikenal dengan kesed...</td>
+      <td>Rabu, 04 Sep 2024 16:36 WIB</td>
+      <td>Otomotif</td>
     </tr>
   </tbody>
 </table>
 </div>
     <div class="colab-df-buttons">
-      
+
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-16bfc31e-17c4-4d4c-96f6-a3b648477fb1')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-608bbb9c-5c78-45c9-9982-9d3b07e44c2a')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
-      
+
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
     <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
   </svg>
     </button>
-    
+
   <style>
     .colab-df-container {
       display:flex;
@@ -806,12 +1009,12 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
 
     <script>
       const buttonEl =
-        document.querySelector('#df-16bfc31e-17c4-4d4c-96f6-a3b648477fb1 button.colab-df-convert');
+        document.querySelector('#df-608bbb9c-5c78-45c9-9982-9d3b07e44c2a button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-16bfc31e-17c4-4d4c-96f6-a3b648477fb1');
+        const element = document.querySelector('#df-608bbb9c-5c78-45c9-9982-9d3b07e44c2a');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -829,10 +1032,193 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
       }
     </script>
   </div>
-  
+
+
+<div id="df-e4acbbb4-b841-4070-baa3-52b7246136ef">
+  <button class="colab-df-quickchart" onclick="quickchart('df-e4acbbb4-b841-4070-baa3-52b7246136ef')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-e4acbbb4-b841-4070-baa3-52b7246136ef button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_58dc50f8-9595-4d7d-9799-22f8330c19ee">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('df')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_58dc50f8-9595-4d7d-9799-22f8330c19ee button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('df');
+      }
+      })();
+    </script>
+  </div>
+
     </div>
   </div>
-  </div></div>
+</div></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="penjelasan-code-program-crawling-data-berita-online">
@@ -985,40 +1371,40 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                               judul  \
-0  Komunitas Moge HOG Indo Jakarta Chapter Tuntas...   
-1  Hyundai Venue Siap Tantang Rocky-Raize, Segini...   
-2  Ini Cara Komunitas Toyota Yaris Rayakan Ulang ...   
-3  Perusahaan Induk KTM PHK Ratusan Karyawan Gara...   
-4  Aktivitas Produksi Mobil di Pabrik GM Ekuador ...   
-5  Penjualan Sepeda Motor Tetap &#39;Aman&#39; Berkat Hal...   
-6  Potret Mobil Baru Fajar Alfian, Hadiah untuk O...   
-7  Pemerintah Diminta Tutup Gojek-Grab, Nasib Ojo...   
-8  Sialnya Nasib Luca Marini: Balapan Sendirian d...   
-9  Kesederhanaan Paus Fransiskus: Dulu Tolak Lamb...   
+0  Jakarta Polusi, Rano Karno Bilang Mobil Listri...   
+1  Mobil Beli Pertalite Bakal Dibatasi Pakai cc, ...   
+2  Catat! Rekayasa Lalu Lintas saat Misa Akbar Pa...   
+3  Momen Jokowi Pakai Kijang Innova Zenix Hitam B...   
+4  Kenapa Paus Fransiskus Tak Naik Mobil Listrik ...   
+5           Jadwal MotoGP San Marino Akhir Pekan Ini   
+6  Awas! Foto Tanda Tangan Kayak Begini Bisa Biki...   
+7  Intip Garasi Franz Theodor, Anggota DPRD Pemat...   
+8  Ini Deretan Mobil yang Masih Boleh Pakai Perta...   
+9  Cara 17 Komunitas Bersama-sama Rayakan Hari Ke...   
 
-                         tanggal  \
-0  Selasa, 03 Sep 2024 20:38 WIB   
-1  Selasa, 03 Sep 2024 20:01 WIB   
-2  Selasa, 03 Sep 2024 19:43 WIB   
-3  Selasa, 03 Sep 2024 19:07 WIB   
-4  Selasa, 03 Sep 2024 18:30 WIB   
-5  Selasa, 03 Sep 2024 18:04 WIB   
-6  Selasa, 03 Sep 2024 17:43 WIB   
-7  Selasa, 03 Sep 2024 17:13 WIB   
-8  Selasa, 03 Sep 2024 16:45 WIB   
-9  Selasa, 03 Sep 2024 16:13 WIB   
+                                                 isi  \
+0  Jakarta - Bakal Calon Wakil Gubernur Jakarta, ...   
+1  Jakarta - Mobil dengan kapasitas tertentu baka...   
+2  Jakarta - Hari ini, Kamis (5/9/2024) akan diad...   
+3  Jakarta - Selain Mercedes-Benz S600 Guard, Pre...   
+4  Jakarta - Paus Fransiskus sudah berada di Indo...   
+5  Daftar Isi\n\n\n\n\r\n\t\t\t\t\t\t\tJadwal Mot...   
+6  Daftar Isi\n\n\n\n\r\n\t\t\t\t\t\t\tCara Perpa...   
+7  Jakarta - Franz Theodor Sihaloho resmi dilanti...   
+8  Jakarta - Bila jadi dibatasi berdasarkan kapas...   
+9  Jakarta - Jika satu komunitas bersama-sama mer...   
 
-                                                 isi  
-0  Jakarta - Komunitas motor gede (moge) Harley-D...  
-1  Jakarta - Hyundai telah mendaftarkan SUV compa...  
-2  Jakarta - Toyota Yaris Club Indonesia (TYCI) m...  
-3  Jakarta - Perusahaan induk KTM, Pierer Mobilit...  
-4  Ekuador - Pabrik General Motors GM.N di Ekuado...  
-5  Jakarta - Angka penjualan motor bisa dikatakan...  
-6  Jakarta - Fajar Alfian, pebulu tangkis nasiona...  
-7  Jakarta - Garda Indonesia tak setuju dengan de...  
-8  Jakarta - Nasib sial menimpa Luca Marini pada ...  
-9  Jakarta - Paus Fransiskus, pemimpin negara Vat...  
+                        tanggal  kategori  
+0  Kamis, 05 Sep 2024 11:09 WIB  Otomotif  
+1  Kamis, 05 Sep 2024 10:44 WIB  Otomotif  
+2  Kamis, 05 Sep 2024 10:02 WIB  Otomotif  
+3  Kamis, 05 Sep 2024 09:31 WIB  Otomotif  
+4  Kamis, 05 Sep 2024 09:04 WIB  Otomotif  
+5  Kamis, 05 Sep 2024 08:33 WIB  Otomotif  
+6  Kamis, 05 Sep 2024 08:08 WIB  Otomotif  
+7  Kamis, 05 Sep 2024 07:40 WIB  Otomotif  
+8  Kamis, 05 Sep 2024 07:04 WIB  Otomotif  
+9   Rabu, 04 Sep 2024 20:32 WIB  Otomotif  
 </pre></div>
 </div>
 </div>
@@ -1081,7 +1467,7 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas 01 : <strong>Crawling Berita</strong></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-dan-isi-dari-sebuah-halaman-website-berita-online">Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong> dan <strong>Isi</strong> dari sebuah halaman website berita online</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-isi-dan-kategori-berita-dari-sebuah-halaman-website-berita-online">Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong>, <strong>Isi</strong> dan <strong>Kategori Berita</strong> dari sebuah halaman website berita online</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-program-crawling-berita-online">Code Program <strong>Crawling Berita Online :</strong></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-code-program-crawling-data-berita-online">PENJELASAN CODE PROGRAM <strong>CRAWLING DATA BERITA ONLINE :</strong></a></li>
 </ul>
