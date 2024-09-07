@@ -1,0 +1,904 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tugas Crawling Berita Online Untuk Mendapatkan Judul, Tanggal, Isi dan Kategori Berita dari sebuah halaman website berita online, Lalu Membuat Vector Space Model dengan Bobot TFIDF &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas-PPWA/Tugas02';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Tugas 01 : Crawling Berita" href="Tugas01.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/PROFIL.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="../_static/PROFIL.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to my website!
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tugas-1.html">Membuat Sebuah Webstatis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas01.html">Tugas 01 : <strong>Crawling Berita</strong></a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong>, <strong>Isi</strong> dan <strong>Kategori Berita</strong> dari sebuah halaman website berita online, <strong>Lalu Membuat Vector Space Model dengan Bobot TFIDF</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/Iqbalsuryaa/PPWA/blob/gh-pages/_sources/Tugas-PPWA/Tugas02.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Iqbalsuryaa/PPWA" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Iqbalsuryaa/PPWA/issues/new?title=Issue%20on%20page%20%2FTugas-PPWA/Tugas02.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Tugas-PPWA/Tugas02.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tugas Crawling Berita Online Untuk Mendapatkan Judul, Tanggal, Isi dan Kategori Berita dari sebuah halaman website berita online, Lalu Membuat Vector Space Model dengan Bobot TFIDF</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-isi-dan-kategori-berita-dari-sebuah-halaman-website-berita-online-lalu-membuat-vector-space-model-dengan-bobot-tfidf">
+<h1>Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong>, <strong>Isi</strong> dan <strong>Kategori Berita</strong> dari sebuah halaman website berita online, <strong>Lalu Membuat Vector Space Model dengan Bobot TFIDF</strong><a class="headerlink" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-isi-dan-kategori-berita-dari-sebuah-halaman-website-berita-online-lalu-membuat-vector-space-model-dengan-bobot-tfidf" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># Inisialisasi list untuk menyimpan data</span>
+<span class="n">judul</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tanggal</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">isi</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">url_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">kategori_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Fungsi untuk mengambil data dari halaman web Detik.com</span>
+<span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">kategori</span><span class="p">,</span> <span class="n">min_articles_per_category</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+    <span class="n">articles</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;article&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;list-content__item&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kategori_list</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">kategori</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">min_articles_per_category</span><span class="p">:</span>
+            <span class="k">return</span>  <span class="c1"># Menghentikan proses jika jumlah artikel sudah mencapai minimum yang diinginkan</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">link</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
+            <span class="n">article_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+            <span class="n">article_response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request for article failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Melakukan scraping dan memasukkan hasilnya ke dalam list</span>
+        <span class="n">article_soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">article_response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Mengambil judul artikel</span>
+        <span class="n">title_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__title&quot;</span><span class="p">)</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">title_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">title_element</span> <span class="ow">and</span> <span class="n">title_element</span><span class="o">.</span><span class="n">text</span> <span class="k">else</span> <span class="s2">&quot;Title Not Found&quot;</span>
+
+        <span class="c1"># Mengambil tanggal artikel</span>
+        <span class="n">date_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__date&quot;</span><span class="p">)</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">date_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">date_element</span> <span class="ow">and</span> <span class="n">date_element</span><span class="o">.</span><span class="n">text</span> <span class="k">else</span> <span class="s2">&quot;Date Not Found&quot;</span>
+
+        <span class="c1"># Mengambil isi artikel</span>
+        <span class="n">content_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__body-text&quot;</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">content_element</span> <span class="ow">and</span> <span class="n">content_element</span><span class="o">.</span><span class="n">text</span> <span class="k">else</span> <span class="s2">&quot;Content Not Found&quot;</span>
+
+        <span class="c1"># Memasukkan hasil scraping ke dalam list global</span>
+        <span class="n">judul</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">tanggal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+        <span class="n">isi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">url_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+        <span class="n">kategori_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kategori</span><span class="p">)</span>
+
+        <span class="c1"># Menampilkan judul artikel</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 1 detik antara permintaan artikel</span>
+
+<span class="c1"># Membuat list url dan kategori yang akan di-crawl</span>
+<span class="n">base_urls</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;https://oto.detik.com/indeks&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;https://finance.detik.com/indeks&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Otomotif&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Keuangan&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># Batas minimal artikel per kategori</span>
+<span class="n">min_articles_per_category</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Melakukan iterasi untuk setiap url dan kategori</span>
+<span class="k">for</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">base_urls</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kategori_list</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">category</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">min_articles_per_category</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">min_articles_per_category</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 2 detik antara permintaan halaman</span>
+        <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># Membuat dataframe dari list data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;judul&quot;</span><span class="p">:</span> <span class="n">judul</span><span class="p">,</span> <span class="s2">&quot;tanggal&quot;</span><span class="p">:</span> <span class="n">tanggal</span><span class="p">,</span> <span class="s2">&quot;isi&quot;</span><span class="p">:</span> <span class="n">isi</span><span class="p">,</span> <span class="s2">&quot;kategori&quot;</span><span class="p">:</span> <span class="n">kategori_list</span><span class="p">})</span>
+
+<span class="c1"># Menyimpan dataframe ke file csv</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;data_berita_Otomotif_Finance_detik.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan dataframe</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Di Hub Space 2024, Isuzu Pamerkan Kendaraan Inovasi Traga Bus
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil Sprint Race MotoGP San Marino: Martin Juara, Marquez Kelima
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Simulasi Cicilan Toyota Kijang Innova Zenix, Mulai dari Rp 5 Juta-an per Bulan
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Link Live Streaming Sprint Race MotoGP San Marino 2024
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kualifikasi MotoGP San Marino: 3 Murid Rossi Terdepan, Marquez Jatuh!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MGPA Berbenah Sambut MotoGP Mandalika 2024
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bus Pariwisata PO Bagong Ada di Hub Space 2024, Tawarkan Program Diskon 10%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sopir Pajero Bikin Ulah Lagi, Kini Pamer Pistol Usai Senggol Mobil Lain
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ini Mobil yang Dipakai Paus Fransiskus di Papua Nugini
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Spesifikasi Toyota Fortuner Baru: Muka Berubah, Punya Wifi Hotspot
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kisah Nakhoda Keliling Dunia Bawa Kapal Ramah Lingkungan Pertama RI
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-1-5c8e53de96a1&gt;</span> in <span class="ni">&lt;cell line: 77&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">79</span>     <span class="k">while</span> <span class="nb">len</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kategori_list</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">category</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">min_articles_per_category</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">80</span>         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">81</span>         <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">min_articles_per_category</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">82</span>         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 2 detik antara permintaan halaman</span>
+<span class="g g-Whitespace">     </span><span class="mi">83</span>         <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nn">&lt;ipython-input-1-5c8e53de96a1&gt;</span> in <span class="ni">get_data</span><span class="nt">(url, kategori, min_articles_per_category)</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span>         <span class="c1"># Menampilkan judul artikel</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span>         <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">61</span>         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 1 detik antara permintaan artikel</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span> 
+<span class="g g-Whitespace">     </span><span class="mi">63</span> <span class="c1"># Membuat list url dan kategori yang akan di-crawl</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Membuat Vector Space Model dengan Bobot TFIDF</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: dari data di atas buatkan Vector Space Model dengan Bobot TFIDF untuk isi dari setiap judul</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="c1"># Membuat objek TfidfVectorizer</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+
+<span class="c1"># Melakukan transformasi isi berita menjadi matriks TF-IDF</span>
+<span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;isi&#39;</span><span class="p">])</span>
+
+<span class="c1"># Menampilkan matriks TF-IDF</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="p">)</span>
+
+<span class="c1"># Mendapatkan daftar kata-kata yang digunakan dalam model</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+
+<span class="c1"># Membuat DataFrame dari matriks TF-IDF</span>
+<span class="n">df_tfidf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan DataFrame TF-IDF</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_tfidf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  (0, 819)	0.032533549740497256
+  (0, 818)	0.030097672309911443
+  (0, 664)	0.0447755026553114
+  (0, 144)	0.0447755026553114
+  (0, 226)	0.0447755026553114
+  (0, 808)	0.021999493741507066
+  (0, 706)	0.0447755026553114
+  (0, 2197)	0.0393583521926983
+  (0, 2073)	0.0447755026553114
+  (0, 692)	0.0447755026553114
+  (0, 1246)	0.0447755026553114
+  (0, 1923)	0.0393583521926983
+  (0, 2037)	0.0447755026553114
+  (0, 1250)	0.0447755026553114
+  (0, 866)	0.0447755026553114
+  (0, 1309)	0.035514822772524546
+  (0, 1009)	0.0447755026553114
+  (0, 1351)	0.0447755026553114
+  (0, 1486)	0.035514822772524546
+  (0, 796)	0.026254142889737687
+  (0, 1396)	0.0393583521926983
+  (0, 1818)	0.0447755026553114
+  (0, 485)	0.019767594882843582
+  (0, 524)	0.0447755026553114
+  (0, 344)	0.032533549740497256
+  :	:
+  (19, 1860)	0.018955599306149654
+  (19, 485)	0.1532925943766865
+  (19, 344)	0.028032142018069403
+  (19, 1516)	0.030600920085480873
+  (19, 1374)	0.016179396280812164
+  (19, 934)	0.06643160726284238
+  (19, 229)	0.027888632356549235
+  (19, 375)	0.0170325104862985
+  (19, 1897)	0.0226215665956581
+  (19, 463)	0.013286321452568474
+  (19, 2294)	0.013286321452568474
+  (19, 464)	0.013286321452568474
+  (19, 2175)	0.013286321452568474
+  (19, 1884)	0.013286321452568474
+  (19, 125)	0.02657264290513695
+  (19, 1888)	0.1207937488531747
+  (19, 517)	0.0531452858102739
+  (19, 1291)	0.0226215665956581
+  (19, 490)	0.17729476570702643
+  (19, 582)	0.06782530200751766
+  (19, 2301)	0.11397520652594556
+  (19, 532)	0.03622030511527158
+  (19, 35)	0.016179396280812164
+  (19, 846)	0.07181577609645315
+  (19, 902)	0.012663911836216174
+          00       000   000type       049        05       064        10  \
+0   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.030098   
+1   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+2   0.000000  0.060809  0.000000  0.000000  0.000000  0.000000  0.000000   
+3   0.092870  0.000000  0.000000  0.000000  0.051126  0.000000  0.068733   
+4   0.000000  0.000000  0.000000  0.000000  0.000000  0.041931  0.000000   
+5   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+6   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.014770   
+7   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+8   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+9   0.000000  0.091367  0.048636  0.000000  0.000000  0.000000  0.000000   
+10  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.020780   
+11  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+12  0.038016  0.131053  0.000000  0.000000  0.000000  0.000000  0.000000   
+13  0.000000  0.075502  0.000000  0.000000  0.000000  0.000000  0.027016   
+14  0.037821  0.032595  0.000000  0.000000  0.000000  0.000000  0.000000   
+15  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+16  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+17  0.028011  0.096562  0.000000  0.077102  0.000000  0.000000  0.000000   
+18  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+19  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+
+         100      10an        11  ...     yakni      yang    yannes      year  \
+0   0.000000  0.000000  0.000000  ...  0.026254  0.073487  0.000000  0.044776   
+1   0.000000  0.000000  0.000000  ...  0.027875  0.046815  0.000000  0.000000   
+2   0.000000  0.000000  0.000000  ...  0.000000  0.026563  0.000000  0.000000   
+3   0.000000  0.000000  0.000000  ...  0.000000  0.041955  0.000000  0.000000   
+4   0.000000  0.000000  0.000000  ...  0.049173  0.055056  0.000000  0.000000   
+5   0.028420  0.000000  0.000000  ...  0.000000  0.106130  0.000000  0.000000   
+6   0.000000  0.000000  0.000000  ...  0.000000  0.028850  0.000000  0.000000   
+7   0.000000  0.000000  0.000000  ...  0.000000  0.192264  0.097621  0.000000   
+8   0.000000  0.000000  0.000000  ...  0.000000  0.000000  0.000000  0.000000   
+9   0.000000  0.000000  0.021376  ...  0.028518  0.055877  0.000000  0.000000   
+10  0.027173  0.000000  0.000000  ...  0.018126  0.081179  0.000000  0.000000   
+11  0.000000  0.000000  0.000000  ...  0.042653  0.191023  0.000000  0.000000   
+12  0.000000  0.000000  0.000000  ...  0.000000  0.068697  0.000000  0.000000   
+13  0.000000  0.040191  0.000000  ...  0.023566  0.026385  0.000000  0.000000   
+14  0.000000  0.000000  0.000000  ...  0.000000  0.068344  0.000000  0.000000   
+15  0.000000  0.000000  0.000000  ...  0.000000  0.075189  0.000000  0.000000   
+16  0.000000  0.000000  0.000000  ...  0.000000  0.000000  0.000000  0.000000   
+17  0.000000  0.000000  0.033887  ...  0.000000  0.050618  0.000000  0.000000   
+18  0.000000  0.000000  0.000000  ...  0.000000  0.149402  0.000000  0.000000   
+19  0.000000  0.000000  0.000000  ...  0.000000  0.113975  0.000000  0.000000   
+
+        yesu  youknowminn       yuk  zarcopol       zef     zenix  
+0   0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+1   0.000000      0.00000  0.000000   0.04754  0.000000  0.000000  
+2   0.000000      0.00000  0.000000   0.00000  0.000000  0.355666  
+3   0.000000      0.00000  0.025563   0.00000  0.000000  0.000000  
+4   0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+5   0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+6   0.000000      0.00000  0.000000   0.00000  0.021973  0.019314  
+7   0.000000      0.03254  0.000000   0.00000  0.000000  0.000000  
+8   0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+9   0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+10  0.030914      0.00000  0.000000   0.00000  0.000000  0.000000  
+11  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+12  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+13  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+14  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+15  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+16  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+17  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+18  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+19  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+
+[20 rows x 2310 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: dari hasil di atas, simpan dan tampilkan dalam bentuk csv</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1"># Menyimpan DataFrame TF-IDF ke file CSV</span>
+<span class="n">df_tfidf</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;tfidf_matrix.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan DataFrame TF-IDF dari file CSV</span>
+<span class="n">df_tfidf_csv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;tfidf_matrix.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_tfidf_csv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          00       000   000type       049        05       064        10  \
+0   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.030098   
+1   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+2   0.000000  0.060809  0.000000  0.000000  0.000000  0.000000  0.000000   
+3   0.092870  0.000000  0.000000  0.000000  0.051126  0.000000  0.068733   
+4   0.000000  0.000000  0.000000  0.000000  0.000000  0.041931  0.000000   
+5   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+6   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.014770   
+7   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+8   0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+9   0.000000  0.091367  0.048636  0.000000  0.000000  0.000000  0.000000   
+10  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.020780   
+11  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+12  0.038016  0.131053  0.000000  0.000000  0.000000  0.000000  0.000000   
+13  0.000000  0.075502  0.000000  0.000000  0.000000  0.000000  0.027016   
+14  0.037821  0.032595  0.000000  0.000000  0.000000  0.000000  0.000000   
+15  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+16  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+17  0.028011  0.096562  0.000000  0.077102  0.000000  0.000000  0.000000   
+18  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+19  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+
+         100      10an        11  ...     yakni      yang    yannes      year  \
+0   0.000000  0.000000  0.000000  ...  0.026254  0.073487  0.000000  0.044776   
+1   0.000000  0.000000  0.000000  ...  0.027875  0.046815  0.000000  0.000000   
+2   0.000000  0.000000  0.000000  ...  0.000000  0.026563  0.000000  0.000000   
+3   0.000000  0.000000  0.000000  ...  0.000000  0.041955  0.000000  0.000000   
+4   0.000000  0.000000  0.000000  ...  0.049173  0.055056  0.000000  0.000000   
+5   0.028420  0.000000  0.000000  ...  0.000000  0.106130  0.000000  0.000000   
+6   0.000000  0.000000  0.000000  ...  0.000000  0.028850  0.000000  0.000000   
+7   0.000000  0.000000  0.000000  ...  0.000000  0.192264  0.097621  0.000000   
+8   0.000000  0.000000  0.000000  ...  0.000000  0.000000  0.000000  0.000000   
+9   0.000000  0.000000  0.021376  ...  0.028518  0.055877  0.000000  0.000000   
+10  0.027173  0.000000  0.000000  ...  0.018126  0.081179  0.000000  0.000000   
+11  0.000000  0.000000  0.000000  ...  0.042653  0.191023  0.000000  0.000000   
+12  0.000000  0.000000  0.000000  ...  0.000000  0.068697  0.000000  0.000000   
+13  0.000000  0.040191  0.000000  ...  0.023566  0.026385  0.000000  0.000000   
+14  0.000000  0.000000  0.000000  ...  0.000000  0.068344  0.000000  0.000000   
+15  0.000000  0.000000  0.000000  ...  0.000000  0.075189  0.000000  0.000000   
+16  0.000000  0.000000  0.000000  ...  0.000000  0.000000  0.000000  0.000000   
+17  0.000000  0.000000  0.033887  ...  0.000000  0.050618  0.000000  0.000000   
+18  0.000000  0.000000  0.000000  ...  0.000000  0.149402  0.000000  0.000000   
+19  0.000000  0.000000  0.000000  ...  0.000000  0.113975  0.000000  0.000000   
+
+        yesu  youknowminn       yuk  zarcopol       zef     zenix  
+0   0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+1   0.000000      0.00000  0.000000   0.04754  0.000000  0.000000  
+2   0.000000      0.00000  0.000000   0.00000  0.000000  0.355666  
+3   0.000000      0.00000  0.025563   0.00000  0.000000  0.000000  
+4   0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+5   0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+6   0.000000      0.00000  0.000000   0.00000  0.021973  0.019314  
+7   0.000000      0.03254  0.000000   0.00000  0.000000  0.000000  
+8   0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+9   0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+10  0.030914      0.00000  0.000000   0.00000  0.000000  0.000000  
+11  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+12  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+13  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+14  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+15  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+16  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+17  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+18  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+19  0.000000      0.00000  0.000000   0.00000  0.000000  0.000000  
+
+[20 rows x 2310 columns]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Tugas-PPWA"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Tugas01.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tugas 01 : <strong>Crawling Berita</strong></p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 210411100002 - Mohammad Iqbal Surya Ramadhan
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
