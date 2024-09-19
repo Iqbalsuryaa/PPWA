@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas-PPWA/Tugas01';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tugas 02 : Membuat Vector Space Model dengan Bobot TFIDF Dari Hasil Tugas 1 Crawling Berita" href="Tugas02.html" />
+    <link rel="next" title="Tugas 02 : Membuat Vector Space Model dengan Bobot TFID" href="Tugas02.html" />
     <link rel="prev" title="Membuat Sebuah Webstatis" href="Tugas-1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -188,7 +188,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="Tugas02.html">Tugas 02 : <strong>Membuat Vector Space Model dengan Bobot TFIDF Dari Hasil Tugas 1 Crawling Berita</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas02.html">Tugas 02 : <strong>Membuat Vector Space Model dengan Bobot TFID</strong></a></li>
 </ul>
 
     </div>
@@ -417,7 +417,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas 01 : <strong>Crawling Berita</strong></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-isi-dan-kategori-berita-dari-sebuah-halaman-website-berita-online">Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong>, <strong>Isi</strong> dan <strong>Kategori Berita</strong> dari sebuah halaman website berita online</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-program-crawling-berita-online">Code Program <strong>Crawling Berita Online :</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-program-proses-crawling-berita-online">Code Program Proses <strong>Crawling Berita Online :</strong></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-code-program-crawling-data-berita-online">PENJELASAN CODE PROGRAM <strong>CRAWLING DATA BERITA ONLINE :</strong></a></li>
 </ul>
 
@@ -548,17 +548,62 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
 <p><strong>Pemantauan Media :</strong> Data dapat dimanfaatkan oleh agensi untuk memantau media dan menyusun laporan tentang tren berita.</p>
 <p><strong>Penelitian :</strong> <em>Peneliti dapat menggunakan data hasil crawling untuk studi terkait jurnalisme, media, atau fenomena sosial lainnya.</em></p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="code-program-crawling-berita-online">
-<h1>Code Program <strong>Crawling Berita Online :</strong><a class="headerlink" href="#code-program-crawling-berita-online" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="code-program-proses-crawling-berita-online">
+<h1>Code Program Proses <strong>Crawling Berita Online :</strong><a class="headerlink" href="#code-program-proses-crawling-berita-online" title="Link to this heading">#</a></h1>
+<p>Dalam proses crawling ini saya menggunakan beberapa library dan diantara library yang penting di import adalah <em>BeautifulSoup</em> yang berfungsi sebagai library crawler</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">time</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Membuat fungsi filter konten
+Berfungsi untuk Mem-filter dari elemen-elemen HTML pada berita yang tidak diinginkan , Contoh kasus seperti iklan, daftar isi, gambar , link sisipan, dll</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fungsi untuk membersihkan konten dari elemen-elemen yang tidak diinginkan</span>
+<span class="k">def</span> <span class="nf">clean_content</span><span class="p">(</span><span class="n">content_element</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">content_element</span><span class="p">:</span>
+        <span class="c1"># Hapus elemen yang berisi daftar isi</span>
+        <span class="k">for</span> <span class="n">daftar_isi</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;collapsible&quot;</span><span class="p">]:</span>
+            <span class="n">unwanted</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">daftar_isi</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">unwanted</span><span class="p">:</span>
+                <span class="n">unwanted</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
 
-<span class="c1"># Fungsi untuk mengambil data dari halaman web Detik.com</span>
-<span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">kategori</span><span class="p">):</span>
+        <span class="c1"># Hapus elemen yang berisi tag</span>
+        <span class="k">for</span> <span class="n">tag_class</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;aevp&quot;</span><span class="p">,</span> <span class="s2">&quot;detail__body-tag mgt-16&quot;</span><span class="p">]:</span>
+            <span class="n">unwanted</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="n">tag_class</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">unwanted</span><span class="p">:</span>
+                <span class="n">el</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Hapus elemen yang berisi link sisipan</span>
+        <span class="n">link_sisip</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;linksisip&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">link_sisip</span><span class="p">:</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Hapus elemen paragraf dan span dengan class &#39;para_caption&#39;</span>
+        <span class="n">unwanted_paragraphs</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find_all</span><span class="p">([</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="s2">&quot;span&quot;</span><span class="p">],</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;para_caption&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">para</span> <span class="ow">in</span> <span class="n">unwanted_paragraphs</span><span class="p">:</span>
+            <span class="n">para</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Kembalikan teks yang tersisa</span>
+        <span class="k">return</span> <span class="n">content_element</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">strip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="s2">&quot;Content Not Found&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Membuat fungsi untuk melakukan crawling data pada situs web <a class="reference external" href="http://Detik.com">Detik.com</a>.
+Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan kategori berita yang terdapat di halaman tersebut.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fungsi untuk mengambil data dari halaman web Detik.com</span>
+<span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">kategori</span><span class="p">,</span> <span class="n">min_articles_per_category</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
@@ -570,8 +615,8 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
     <span class="n">articles</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;article&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;list-content__item&quot;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>  <span class="c1"># Hentikan jika sudah 10 berita</span>
-            <span class="k">return</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kategori_list</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">kategori</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">min_articles_per_category</span><span class="p">:</span>
+            <span class="k">return</span>  <span class="c1"># Menghentikan proses jika jumlah artikel sudah mencapai minimum yang diinginkan</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">link</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
@@ -589,18 +634,27 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
         <span class="n">content_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__body-text&quot;</span><span class="p">)</span>
         <span class="n">content</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">content_element</span> <span class="k">else</span> <span class="s2">&quot;Content Not Found&quot;</span>
 
-        <span class="c1"># Menambahkan data ke dalam list</span>
+        <span class="c1"># Bersihkan konten menggunakan fungsi clean_content</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">clean_content</span><span class="p">(</span><span class="n">content_element</span><span class="p">)</span>
+
         <span class="n">judul</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
         <span class="n">tanggal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
         <span class="n">isi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">kategori_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kategori</span><span class="p">)</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 1 detik antara permintaan artikel</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Membuat list url dan kategori yang akan di-crawl</span>
-<span class="n">base_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;https://oto.detik.com/indeks&quot;</span><span class="p">]</span>
-<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Otomotif&quot;</span><span class="p">]</span>
+<span class="n">base_urls</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;https://oto.detik.com/indeks&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;https://finance.detik.com/indeks&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Otomotif&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Keuangan&quot;</span><span class="p">,</span>
+<span class="p">]</span>
 
 <span class="c1"># Inisialisasi list untuk menyimpan data</span>
 <span class="n">judul</span> <span class="o">=</span> <span class="p">[]</span>
@@ -608,30 +662,30 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
 <span class="n">isi</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">kategori_list</span> <span class="o">=</span> <span class="p">[]</span>
 
+<span class="c1"># Batas minimal artikel per kategori</span>
+<span class="n">min_articles_per_category</span> <span class="o">=</span> <span class="mi">50</span>
+
 <span class="c1"># Melakukan iterasi untuk setiap url dan kategori</span>
 <span class="k">for</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">base_urls</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>  <span class="c1"># Looping untuk beralih halaman</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>  <span class="c1"># Hentikan jika sudah 10 berita</span>
-            <span class="k">break</span>
-
+    <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kategori_list</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">category</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">min_articles_per_category</span><span class="p">:</span>
         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 2 detik antara permintaan halaman</span>
+        <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">min_articles_per_category</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
 
 <span class="c1"># Membuat dataframe dari list data</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s2">&quot;judul&quot;</span><span class="p">:</span> <span class="n">judul</span><span class="p">,</span>
-    <span class="s2">&quot;isi&quot;</span><span class="p">:</span> <span class="n">isi</span><span class="p">,</span>
-    <span class="s2">&quot;tanggal&quot;</span><span class="p">:</span> <span class="n">tanggal</span><span class="p">,</span>
-    <span class="s2">&quot;kategori&quot;</span><span class="p">:</span> <span class="n">kategori_list</span>
-<span class="p">})</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;judul&quot;</span><span class="p">:</span> <span class="n">judul</span><span class="p">,</span> <span class="s2">&quot;tanggal&quot;</span><span class="p">:</span> <span class="n">tanggal</span><span class="p">,</span> <span class="s2">&quot;isi&quot;</span><span class="p">:</span> <span class="n">isi</span><span class="p">,</span> <span class="s2">&quot;kategori&quot;</span><span class="p">:</span> <span class="n">kategori_list</span><span class="p">})</span>
 
-<span class="c1"># Menyimpan dataframe ke file CSV</span>
-<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita-Otomotif.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># Menyimpan dataframe ke file csv</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita-Otomotif&amp;Finance.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MG Bakal Bikin Pabrik Baterai Mobil Listrik di Indonesia
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jadi Juru Kunci di MotoGP, Adik Valentino Rossi Nggak Nyesel Gabung Honda
 </pre></div>
 </div>
@@ -659,96 +713,119 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gara-gara Ini Orang Indonesia Masih Banyak yang Kepincut Kijang Innova
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11 Bus Baru PO Harapan Jaya Lahir dari Garasi Laksana
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kendaraan Sudah Dijual, Jangan Lupa STNK-nya Diblokir Biar Nggak Begini!
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mobil Listrik BMW i5 Touring Meluncur, Harga Rp 2,2 Miliar di Luar Pajak
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lokasi SIM Keliling Jabodetabek 19 September, Simak Jadwal Lengkapnya
-</pre></div>
-</div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-1-e3c352a4d904&gt;</span> in <span class="ni">&lt;cell line: 58&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span> 
-<span class="g g-Whitespace">     </span><span class="mi">63</span>         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">64</span>         <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">65</span>         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 2 detik antara permintaan halaman</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span> 
+<span class="nn">&lt;ipython-input-3-7ab36c1f35b8&gt;</span> in <span class="ni">&lt;cell line: 65&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="k">while</span> <span class="nb">len</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kategori_list</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">category</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">min_articles_per_category</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span>         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">69</span>         <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">min_articles_per_category</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span>         <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="nn">&lt;ipython-input-1-e3c352a4d904&gt;</span> in <span class="ni">get_data</span><span class="nt">(url, kategori)</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>             <span class="k">continue</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span> 
-<span class="ne">---&gt; </span><span class="mi">30</span>         <span class="n">article_soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">article_response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span>         <span class="n">title_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__title&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span>         <span class="n">title</span> <span class="o">=</span> <span class="n">title_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">title_element</span> <span class="k">else</span> <span class="s2">&quot;Title Not Found&quot;</span>
+<span class="nn">&lt;ipython-input-3-7ab36c1f35b8&gt;</span> in <span class="ni">get_data</span><span class="nt">(url, kategori, min_articles_per_category)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>         <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>             <span class="n">link</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
+<span class="ne">---&gt; </span><span class="mi">19</span>             <span class="n">article_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>             <span class="n">article_response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>         <span class="k">except</span> <span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-<span class="nn">/usr/local/lib/python3.10/dist-packages/bs4/__init__.py</span> in <span class="ni">__init__</span><span class="nt">(self, markup, features, builder, parse_only, from_encoding, exclude_encodings, element_classes, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">333</span>             <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">initialize_soup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">334</span>             <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">335</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">_feed</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">336</span>                 <span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="g g-Whitespace">    </span><span class="mi">337</span>                 <span class="k">break</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/api.py</span> in <span class="ni">get</span><span class="nt">(url, params, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span>     <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span><span class="s2"> </span>
+<span class="ne">---&gt; </span><span class="mi">73</span><span class="s2">     return request(&quot;get&quot;, url, params=params, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span><span class="s2"> </span>
 
-<span class="nn">/usr/local/lib/python3.10/dist-packages/bs4/__init__.py</span> in <span class="ni">_feed</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">476</span>         <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">477</span> 
-<span class="ne">--&gt; </span><span class="mi">478</span>         <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">markup</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">479</span>         <span class="c1"># Close out any unfinished strings and close all the open tags.</span>
-<span class="g g-Whitespace">    </span><span class="mi">480</span>         <span class="bp">self</span><span class="o">.</span><span class="n">endData</span><span class="p">()</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/api.py</span> in <span class="ni">request</span><span class="nt">(method, url, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span><span class="s2">     # cases, and look like a memory leak in others.</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span><span class="s2">     with sessions.Session() as session:</span>
+<span class="ne">---&gt; </span><span class="mi">59</span><span class="s2">         return session.request(method=method, url=url, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span><span class="s2"> </span>
 
-<span class="nn">/usr/local/lib/python3.10/dist-packages/bs4/builder/_htmlparser.py</span> in <span class="ni">feed</span><span class="nt">(self, markup)</span>
-<span class="g g-Whitespace">    </span><span class="mi">378</span>         <span class="n">parser</span><span class="o">.</span><span class="n">soup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">soup</span>
-<span class="g g-Whitespace">    </span><span class="mi">379</span>         <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">380</span>             <span class="n">parser</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">markup</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">381</span>             <span class="n">parser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">382</span>         <span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/sessions.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)</span>
+<span class="g g-Whitespace">    </span><span class="mi">587</span><span class="s2">         }</span>
+<span class="g g-Whitespace">    </span><span class="mi">588</span><span class="s2">         send_kwargs.update(settings)</span>
+<span class="ne">--&gt; </span><span class="mi">589</span><span class="s2">         resp = self.send(prep, **send_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">590</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">591</span><span class="s2">         return resp</span>
 
-<span class="nn">/usr/lib/python3.10/html/parser.py</span> in <span class="ni">feed</span><span class="nt">(self, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span>         <span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">109</span><span class="s2">         self.rawdata = self.rawdata + data</span>
-<span class="ne">--&gt; </span><span class="mi">110</span><span class="s2">         self.goahead(0)</span>
-<span class="g g-Whitespace">    </span><span class="mi">111</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">112</span><span class="s2">     def close(self):</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/sessions.py</span> in <span class="ni">send</span><span class="nt">(self, request, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">701</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">702</span><span class="s2">         # Send the request</span>
+<span class="ne">--&gt; </span><span class="mi">703</span><span class="s2">         r = adapter.send(request, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">705</span><span class="s2">         # Total elapsed time of the request (approximately)</span>
 
-<span class="nn">/usr/lib/python3.10/html/parser.py</span> in <span class="ni">goahead</span><span class="nt">(self, end)</span>
-<span class="g g-Whitespace">    </span><span class="mi">168</span><span class="s2">             if startswith(&#39;&lt;&#39;, i):</span>
-<span class="g g-Whitespace">    </span><span class="mi">169</span><span class="s2">                 if starttagopen.match(rawdata, i): # &lt; + letter</span>
-<span class="ne">--&gt; </span><span class="mi">170</span><span class="s2">                     k = self.parse_starttag(i)</span>
-<span class="g g-Whitespace">    </span><span class="mi">171</span><span class="s2">                 elif startswith(&quot;&lt;/&quot;, i):</span>
-<span class="g g-Whitespace">    </span><span class="mi">172</span><span class="s2">                     k = self.parse_endtag(i)</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/requests/adapters.py</span> in <span class="ni">send</span><span class="nt">(self, request, stream, timeout, verify, cert, proxies)</span>
+<span class="g g-Whitespace">    </span><span class="mi">665</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">666</span><span class="s2">         try:</span>
+<span class="ne">--&gt; </span><span class="mi">667</span><span class="s2">             resp = conn.urlopen(</span>
+<span class="g g-Whitespace">    </span><span class="mi">668</span><span class="s2">                 method=request.method,</span>
+<span class="g g-Whitespace">    </span><span class="mi">669</span><span class="s2">                 url=url,</span>
 
-<span class="nn">/usr/lib/python3.10/html/parser.py</span> in <span class="ni">parse_starttag</span><span class="nt">(self, i)</span>
-<span class="g g-Whitespace">    </span><span class="mi">342</span><span class="s2">             self.handle_startendtag(tag, attrs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">343</span><span class="s2">         else:</span>
-<span class="ne">--&gt; </span><span class="mi">344</span><span class="s2">             self.handle_starttag(tag, attrs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">345</span><span class="s2">             if tag in self.CDATA_CONTENT_ELEMENTS:</span>
-<span class="g g-Whitespace">    </span><span class="mi">346</span><span class="s2">                 self.set_cdata_mode(tag)</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">urlopen</span><span class="nt">(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, preload_content, decode_content, **response_kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">789</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span><span class="s2">             # Make the request on the HTTPConnection object</span>
+<span class="ne">--&gt; </span><span class="mi">791</span><span class="s2">             response = self._make_request(</span>
+<span class="g g-Whitespace">    </span><span class="mi">792</span><span class="s2">                 conn,</span>
+<span class="g g-Whitespace">    </span><span class="mi">793</span><span class="s2">                 method,</span>
 
-<span class="nn">/usr/local/lib/python3.10/dist-packages/bs4/builder/_htmlparser.py</span> in <span class="ni">handle_starttag</span><span class="nt">(self, name, attrs, handle_empty_element)</span>
-<span class="g g-Whitespace">    </span><span class="mi">135</span><span class="s2">         #print(&quot;START&quot;, name)</span>
-<span class="g g-Whitespace">    </span><span class="mi">136</span><span class="s2">         sourceline, sourcepos = self.getpos()</span>
-<span class="ne">--&gt; </span><span class="mi">137</span><span class="s2">         tag = self.soup.handle_starttag(</span>
-<span class="g g-Whitespace">    </span><span class="mi">138</span><span class="s2">             name, None, None, attr_dict, sourceline=sourceline,</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span><span class="s2">             sourcepos=sourcepos</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">_make_request</span><span class="nt">(self, conn, method, url, body, headers, retries, timeout, chunked, response_conn, preload_content, decode_content, enforce_content_length)</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span><span class="s2">         # Receive the response from the server</span>
+<span class="g g-Whitespace">    </span><span class="mi">536</span><span class="s2">         try:</span>
+<span class="ne">--&gt; </span><span class="mi">537</span><span class="s2">             response = conn.getresponse()</span>
+<span class="g g-Whitespace">    </span><span class="mi">538</span><span class="s2">         except (BaseSSLError, OSError) as e:</span>
+<span class="g g-Whitespace">    </span><span class="mi">539</span><span class="s2">             self._raise_timeout(err=e, url=url, timeout_value=read_timeout)</span>
 
-<span class="nn">/usr/local/lib/python3.10/dist-packages/bs4/__init__.py</span> in <span class="ni">handle_starttag</span><span class="nt">(self, name, namespace, nsprefix, attrs, sourceline, sourcepos, namespaces)</span>
-<span class="g g-Whitespace">    </span><span class="mi">747</span><span class="s2">             return None</span>
-<span class="g g-Whitespace">    </span><span class="mi">748</span><span class="s2"> </span>
-<span class="ne">--&gt; </span><span class="mi">749</span><span class="s2">         tag = self.element_classes.get(Tag, Tag)(</span>
-<span class="g g-Whitespace">    </span><span class="mi">750</span><span class="s2">             self, self.builder, name, namespace, nsprefix, attrs,</span>
-<span class="g g-Whitespace">    </span><span class="mi">751</span><span class="s2">             self.currentTag, self._most_recent_element,</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connection.py</span> in <span class="ni">getresponse</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">459</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">460</span><span class="s2">         # Get the response from http.client.HTTPConnection</span>
+<span class="ne">--&gt; </span><span class="mi">461</span><span class="s2">         httplib_response = super().getresponse()</span>
+<span class="g g-Whitespace">    </span><span class="mi">462</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">463</span><span class="s2">         try:</span>
 
-<span class="nn">/usr/local/lib/python3.10/dist-packages/bs4/element.py</span> in <span class="ni">__init__</span><span class="nt">(self, parser, builder, name, namespace, prefix, attrs, parent, previous, is_xml, sourceline, sourcepos, can_be_empty_element, cdata_list_attributes, preserve_whitespace_tags, interesting_string_types, namespaces)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1253</span><span class="s2">         self.prefix = prefix</span>
-<span class="g g-Whitespace">   </span><span class="mi">1254</span><span class="s2">         if ((not builder or builder.store_line_numbers)</span>
-<span class="ne">-&gt; </span><span class="mi">1255</span><span class="s2">             and (sourceline is not None or sourcepos is not None)):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1256</span><span class="s2">             self.sourceline = sourceline</span>
-<span class="g g-Whitespace">   </span><span class="mi">1257</span><span class="s2">             self.sourcepos = sourcepos</span>
+<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">getresponse</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1373</span><span class="s2">         try:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1374</span><span class="s2">             try:</span>
+<span class="ne">-&gt; </span><span class="mi">1375</span><span class="s2">                 response.begin()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1376</span><span class="s2">             except ConnectionError:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1377</span><span class="s2">                 self.close()</span>
+
+<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">begin</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">316</span><span class="s2">         # read until we get a non-100 response</span>
+<span class="g g-Whitespace">    </span><span class="mi">317</span><span class="s2">         while True:</span>
+<span class="ne">--&gt; </span><span class="mi">318</span><span class="s2">             version, status, reason = self._read_status()</span>
+<span class="g g-Whitespace">    </span><span class="mi">319</span><span class="s2">             if status != CONTINUE:</span>
+<span class="g g-Whitespace">    </span><span class="mi">320</span><span class="s2">                 break</span>
+
+<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">_read_status</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">277</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">278</span><span class="s2">     def _read_status(self):</span>
+<span class="ne">--&gt; </span><span class="mi">279</span><span class="s2">         line = str(self.fp.readline(_MAXLINE + 1), &quot;iso-8859-1&quot;)</span>
+<span class="g g-Whitespace">    </span><span class="mi">280</span><span class="s2">         if len(line) &gt; _MAXLINE:</span>
+<span class="g g-Whitespace">    </span><span class="mi">281</span><span class="s2">             raise LineTooLong(&quot;status line&quot;)</span>
+
+<span class="nn">/usr/lib/python3.10/socket.py</span> in <span class="ni">readinto</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">703</span><span class="s2">         while True:</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="s2">             try:</span>
+<span class="ne">--&gt; </span><span class="mi">705</span><span class="s2">                 return self._sock.recv_into(b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">706</span><span class="s2">             except timeout:</span>
+<span class="g g-Whitespace">    </span><span class="mi">707</span><span class="s2">                 self._timeout_occurred = True</span>
+
+<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1301</span><span class="s2">                   &quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot; %</span>
+<span class="g g-Whitespace">   </span><span class="mi">1302</span><span class="s2">                   self.__class__)</span>
+<span class="ne">-&gt; </span><span class="mi">1303</span><span class="s2">             return self.read(nbytes, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1304</span><span class="s2">         else:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1305</span><span class="s2">             return super().recv_into(buffer, nbytes, flags)</span>
+
+<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">read</span><span class="nt">(self, len, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1157</span><span class="s2">         try:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1158</span><span class="s2">             if buffer is not None:</span>
+<span class="ne">-&gt; </span><span class="mi">1159</span><span class="s2">                 return self._sslobj.read(len, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1160</span><span class="s2">             else:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1161</span><span class="s2">                 return self._sslobj.read(len)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -757,14 +834,14 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita-Otomotif.csv&quot;</span><span class="p">)</span>
-<span class="n">df</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita-Otomotif&amp;Finance.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-213f7625-7e98-4383-be4c-9813ddb04f89" class="colab-df-container">
+  <div id="df-bc7bcdc9-e96b-45cb-a547-f5e88783f095" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -784,150 +861,80 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
     <tr style="text-align: right;">
       <th></th>
       <th>judul</th>
-      <th>isi</th>
       <th>tanggal</th>
+      <th>isi</th>
       <th>kategori</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Pelajaran dari Kecelakaan Datsun Go Tertabrak ...</td>
-      <td>Jakarta - Peristiwa kecelakaan di perlintasan ...</td>
-      <td>Kamis, 05 Sep 2024 13:42 WIB</td>
+      <td>Nunggak 8 Bulan, Segini Pajak Ford Mustang Mil...</td>
+      <td>Kamis, 19 Sep 2024 13:05 WIB</td>
+      <td>Jakarta - Bareskrim Polri menyita aset senilai...</td>
       <td>Otomotif</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>MPV Baru BYD Calon Penantang Toyota Alphard ya...</td>
-      <td>Jakarta - BYD mengenalkan MPV premium terbarun...</td>
-      <td>Kamis, 05 Sep 2024 13:11 WIB</td>
+      <td>Bos Ford Kaget usai Jajal Mobil China: Mereka ...</td>
+      <td>Kamis, 19 Sep 2024 12:33 WIB</td>
+      <td>Jakarta - Chief Executive Officer (CEO) Ford, ...</td>
       <td>Otomotif</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Kesan Mantan Insinyur Ducati setelah 6 Bulan G...</td>
-      <td>Jakarta - Mantan Vehicle Performance Engineer ...</td>
-      <td>Kamis, 05 Sep 2024 12:43 WIB</td>
+      <td>Tarif Tol Dalam Kota Naik Jadi Segini, Berlaku...</td>
+      <td>Kamis, 19 Sep 2024 12:08 WIB</td>
+      <td>Jakarta - Jasa Marga mengumumkan kenaikan tari...</td>
       <td>Otomotif</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Ini Beda Kijang Innova Zenix Tunggangan Jokowi...</td>
-      <td>Daftar Isi\n\n\n\n\r\n\t\t\t\t\t\t\tKijang Inn...</td>
-      <td>Kamis, 05 Sep 2024 12:09 WIB</td>
+      <td>Pak RT Aleix Espargaro Tak Sabar Balapan Terak...</td>
+      <td>Kamis, 19 Sep 2024 11:40 WIB</td>
+      <td>Jakarta - Pebalap Aprilia asal Spanyol, Aleix ...</td>
       <td>Otomotif</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Hyundai Creta Knight Edition Serba Gelap, Harg...</td>
-      <td>Jakarta - Hyundai Creta Knight Edition resmi m...</td>
-      <td>Kamis, 05 Sep 2024 11:31 WIB</td>
+      <td>Angkot Listrik Bakal Diuji Coba di Jakarta</td>
+      <td>Kamis, 19 Sep 2024 11:18 WIB</td>
+      <td>Jakarta - PT Transportasi Jakarta (TransJakart...</td>
       <td>Otomotif</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Jakarta Polusi, Rano Karno Bilang Mobil Listri...</td>
-      <td>Jakarta - Bakal Calon Wakil Gubernur Jakarta, ...</td>
-      <td>Kamis, 05 Sep 2024 11:09 WIB</td>
+      <td>Muncul Kode Diduga HR-V Hybrid di Indonesia, S...</td>
+      <td>Kamis, 19 Sep 2024 10:37 WIB</td>
+      <td>Jakarta - Honda tampaknya sedang menyiapkan pr...</td>
       <td>Otomotif</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>Mobil Beli Pertalite Bakal Dibatasi Pakai cc, ...</td>
-      <td>Jakarta - Mobil dengan kapasitas tertentu baka...</td>
-      <td>Kamis, 05 Sep 2024 10:44 WIB</td>
+      <td>Tiket MotoGP Mandalika Diobral Rp 50 Ribu, Khu...</td>
+      <td>Kamis, 19 Sep 2024 10:07 WIB</td>
+      <td>Jakarta - Meski akan digelar pekan depan, namu...</td>
       <td>Otomotif</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>Catat! Rekayasa Lalu Lintas saat Misa Akbar Pa...</td>
-      <td>Jakarta - Hari ini, Kamis (5/9/2024) akan diad...</td>
-      <td>Kamis, 05 Sep 2024 10:02 WIB</td>
+      <td>Gara-gara Ini Orang Indonesia Masih Banyak yan...</td>
+      <td>Kamis, 19 Sep 2024 09:38 WIB</td>
+      <td>Jakarta - Pesona Kijang Innova belum luntur. M...</td>
       <td>Otomotif</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>Momen Jokowi Pakai Kijang Innova Zenix Hitam B...</td>
-      <td>Jakarta - Selain Mercedes-Benz S600 Guard, Pre...</td>
-      <td>Kamis, 05 Sep 2024 09:31 WIB</td>
+      <td>11 Bus Baru PO Harapan Jaya Lahir dari Garasi ...</td>
+      <td>Kamis, 19 Sep 2024 09:14 WIB</td>
+      <td>Jakarta - PO Harapan Jaya kembali merilis arma...</td>
       <td>Otomotif</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>Kenapa Paus Fransiskus Tak Naik Mobil Listrik ...</td>
-      <td>Jakarta - Paus Fransiskus sudah berada di Indo...</td>
-      <td>Kamis, 05 Sep 2024 09:04 WIB</td>
-      <td>Otomotif</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>Jadwal MotoGP San Marino Akhir Pekan Ini</td>
-      <td>Daftar Isi\n\n\n\n\r\n\t\t\t\t\t\t\tJadwal Mot...</td>
-      <td>Kamis, 05 Sep 2024 08:33 WIB</td>
-      <td>Otomotif</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>Awas! Foto Tanda Tangan Kayak Begini Bisa Biki...</td>
-      <td>Daftar Isi\n\n\n\n\r\n\t\t\t\t\t\t\tCara Perpa...</td>
-      <td>Kamis, 05 Sep 2024 08:08 WIB</td>
-      <td>Otomotif</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>Intip Garasi Franz Theodor, Anggota DPRD Pemat...</td>
-      <td>Jakarta - Franz Theodor Sihaloho resmi dilanti...</td>
-      <td>Kamis, 05 Sep 2024 07:40 WIB</td>
-      <td>Otomotif</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>Ini Deretan Mobil yang Masih Boleh Pakai Perta...</td>
-      <td>Jakarta - Bila jadi dibatasi berdasarkan kapas...</td>
-      <td>Kamis, 05 Sep 2024 07:04 WIB</td>
-      <td>Otomotif</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>Cara 17 Komunitas Bersama-sama Rayakan Hari Ke...</td>
-      <td>Jakarta - Jika satu komunitas bersama-sama mer...</td>
-      <td>Rabu, 04 Sep 2024 20:32 WIB</td>
-      <td>Otomotif</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>Peringati Hari Pelanggan Nasional, SPBU Ini Te...</td>
-      <td>Jakarta - Sejumlah perusahaan memperingati Har...</td>
-      <td>Rabu, 04 Sep 2024 20:18 WIB</td>
-      <td>Otomotif</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>BYD Kenalkan Rival Toyota Alphard, Harga Mulai...</td>
-      <td>Jakarta - BYD baru saja mengenalkan minivan te...</td>
-      <td>Rabu, 04 Sep 2024 20:01 WIB</td>
-      <td>Otomotif</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>Periklindo Gelar Konferensi Kendaraan Listrik ...</td>
-      <td>Jakarta - Periklindo akan menggelar konferensi...</td>
-      <td>Rabu, 04 Sep 2024 19:32 WIB</td>
-      <td>Otomotif</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>Tes Lengkap Haval H6 HEV: Mobil Rp 600 Jutaan,...</td>
-      <td>Tak hanya mendatangkan Tank, GWM Indonesia jug...</td>
-      <td>2,827 Views  |  Rabu, 04 Sep 2024 18:27 WIB</td>
-      <td>Otomotif</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>Melihat Popemobile Buatan Pindad yang Dipakai ...</td>
-      <td>Jakarta - Paus Fransiskus akan menggunakan pop...</td>
-      <td>Rabu, 04 Sep 2024 19:08 WIB</td>
+      <td>Kendaraan Sudah Dijual, Jangan Lupa STNK-nya D...</td>
+      <td>Kamis, 19 Sep 2024 08:53 WIB</td>
+      <td>Jakarta - STNK kendaraan yang sudah dijual waj...</td>
       <td>Otomotif</td>
     </tr>
   </tbody>
@@ -936,7 +943,7 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-213f7625-7e98-4383-be4c-9813ddb04f89')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-bc7bcdc9-e96b-45cb-a547-f5e88783f095')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -988,12 +995,12 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
 
     <script>
       const buttonEl =
-        document.querySelector('#df-213f7625-7e98-4383-be4c-9813ddb04f89 button.colab-df-convert');
+        document.querySelector('#df-bc7bcdc9-e96b-45cb-a547-f5e88783f095 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-213f7625-7e98-4383-be4c-9813ddb04f89');
+        const element = document.querySelector('#df-bc7bcdc9-e96b-45cb-a547-f5e88783f095');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1013,8 +1020,8 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
   </div>
 
 
-<div id="df-81b9a56c-5e8f-4d54-8b7f-3bccee19b7b7">
-  <button class="colab-df-quickchart" onclick="quickchart('df-81b9a56c-5e8f-4d54-8b7f-3bccee19b7b7')"
+<div id="df-cf3dfe9f-9b7c-407c-9d65-eb40cbad0737">
+  <button class="colab-df-quickchart" onclick="quickchart('df-cf3dfe9f-9b7c-407c-9d65-eb40cbad0737')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1133,67 +1140,12 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-81b9a56c-5e8f-4d54-8b7f-3bccee19b7b7 button');
+        document.querySelector('#df-cf3dfe9f-9b7c-407c-9d65-eb40cbad0737 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
-
-  <div id="id_56447496-032d-458f-94a0-7077bae9f40e">
-    <style>
-      .colab-df-generate {
-        background-color: #E8F0FE;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        display: none;
-        fill: #1967D2;
-        height: 32px;
-        padding: 0 0 0 0;
-        width: 32px;
-      }
-
-      .colab-df-generate:hover {
-        background-color: #E2EBFA;
-        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-        fill: #174EA6;
-      }
-
-      [theme=dark] .colab-df-generate {
-        background-color: #3B4455;
-        fill: #D2E3FC;
-      }
-
-      [theme=dark] .colab-df-generate:hover {
-        background-color: #434B5C;
-        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-        fill: #FFFFFF;
-      }
-    </style>
-    <button class="colab-df-generate" onclick="generateWithVariable('df')"
-            title="Generate code using this dataframe."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
-  </svg>
-    </button>
-    <script>
-      (() => {
-      const buttonEl =
-        document.querySelector('#id_56447496-032d-458f-94a0-7077bae9f40e button.colab-df-generate');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      buttonEl.onclick = () => {
-        google.colab.notebook.generateWithVariable('df');
-      }
-      })();
-    </script>
-  </div>
 
     </div>
   </div>
@@ -1202,222 +1154,6 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="penjelasan-code-program-crawling-data-berita-online">
 <h1>PENJELASAN CODE PROGRAM <strong>CRAWLING DATA BERITA ONLINE :</strong><a class="headerlink" href="#penjelasan-code-program-crawling-data-berita-online" title="Link to this heading">#</a></h1>
-<p><strong>Import Libraries</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">time</span>
-
-</pre></div>
-</div>
-<p><strong>requests :</strong> <em>Library ini digunakan untuk mengirimkan HTTP request ke situs web dan mendapatkan respons dalam bentuk HTML.</em></p>
-<p><strong>BeautifulSoup :</strong> <em>Merupakan bagian dari library bs4 yang digunakan untuk mengurai dan mengekstrak data dari dokumen HTML atau XML dengan cara yang mudah dibaca.</em></p>
-<p><strong>pandas :</strong> <em>Library ini digunakan untuk manipulasi dan analisis data. Di sini, kita menggunakannya untuk membuat DataFrame dan menyimpan data dalam format CSV.</em></p>
-<p><strong>time :</strong> <em>Library standar Python yang digunakan untuk mengatur jeda waktu (delay) antara operasi tertentu.</em></p>
-<p><strong>Fungsi get_data</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">kategori</span><span class="p">):</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">return</span>
-
-    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
-    <span class="n">articles</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;article&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;list-content__item&quot;</span><span class="p">)</span>
-
-</pre></div>
-</div>
-<p><strong>def get_data(url, kategori):</strong> <em>Mendefinisikan sebuah fungsi bernama get_data yang menerima dua parameter : url (alamat halaman web yang akan di-crawl) dan kategori (kategori berita, misalnya ‘Otomotif’).</em></p>
-<p><strong>try: response = requests.get(url):</strong> <em>Mengirimkan request HTTP GET ke url yang diberikan untuk mendapatkan halaman web.</em></p>
-<p><strong>response.raise_for_status():</strong> <em>Memeriksa apakah permintaan HTTP berhasil (status kode 200). Jika gagal, exception akan di-raise.</em></p>
-<p><strong>except requests.exceptions.RequestException as e:</strong> <em>Menangkap semua jenis error yang terkait dengan HTTP request, dan menampilkan pesan error jika ada.</em></p>
-<p><strong>soup = BeautifulSoup(response.content, “html.parser”):</strong> <em>Mengurai konten HTML dari respons web menggunakan BeautifulSoup untuk mempermudah ekstraksi data.</em></p>
-<p><strong>articles = soup.find_all(“article”, class_=”list-content__item”):</strong> <em>Mencari semua elemen article dengan class list-content__item, yang kemungkinan besar merupakan elemen HTML yang berisi berita.</em></p>
-<p><strong>Ekstraksi Data dari Setiap Artikel</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># Hentikan jika sudah 10 berita</span>
-            <span class="k">return</span>
-
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">link</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
-            <span class="n">article_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
-            <span class="n">article_response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-        <span class="k">except</span> <span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request for article failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="k">continue</span>
-
-        <span class="n">article_soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">article_response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
-        <span class="n">title_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__title&quot;</span><span class="p">)</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="n">title_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">title_element</span> <span class="k">else</span> <span class="s2">&quot;Title Not Found&quot;</span>
-        <span class="n">date_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__date&quot;</span><span class="p">)</span>
-        <span class="n">date</span> <span class="o">=</span> <span class="n">date_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">date_element</span> <span class="k">else</span> <span class="s2">&quot;Date Not Found&quot;</span>
-        <span class="n">content_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__body-text&quot;</span><span class="p">)</span>
-        <span class="n">content</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">content_element</span> <span class="k">else</span> <span class="s2">&quot;Content Not Found&quot;</span>
-
-        <span class="n">judul</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-        <span class="n">tanggal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
-        <span class="n">isi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
-
-        <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 1 detik antara permintaan artikel</span>
-
-</pre></div>
-</div>
-<p><strong>for article in articles :</strong> <em>Iterasi melalui setiap elemen article yang ditemukan di halaman.</em></p>
-<p><strong>if len(judul) &gt;= 10 :</strong> <em>Mengecek apakah jumlah berita yang di-crawl sudah mencapai 10. Jika ya, fungsi akan berhenti (return).</em></p>
-<p><strong>link = article.find(“a”)[“href”] :</strong> <em>Menemukan elemen a (link) di dalam artikel dan mengambil atribut href yang merupakan URL dari artikel tersebut.</em></p>
-<p><strong>article_response = requests.get(link) :</strong> <em>Mengirimkan request HTTP GET ke URL artikel untuk mendapatkan konten halaman berita.</em></p>
-<p><strong>article_soup = BeautifulSoup(article_response.content, “html.parser”)</strong> <em>Mengurai konten HTML dari halaman artikel.</em></p>
-<p><strong>title_element = article_soup.find(“h1”, class_=”detail__title”) :</strong> <em>Mencari elemen h1 yang memiliki class detail__title untuk mendapatkan judul berita.</em></p>
-<p><strong>title = title_element.text.strip() if title_element else “Title Not Found” :</strong> <em>Jika elemen judul ditemukan, teksnya diekstrak dan dihapus spasi berlebih; jika tidak, akan menggunakan nilai default “Title Not Found”.</em></p>
-<p><strong>date_element = article_soup.find(“div”, class_=”detail__date”) :</strong> <em>Mencari elemen div yang memiliki class detail__date untuk mendapatkan tanggal publikasi berita.</em></p>
-<p><strong>content_element = article_soup.find(“div”, class_=”detail__body-text”) :</strong> <em>Mencari elemen div yang memiliki class detail__body-text untuk mendapatkan isi berita.</em></p>
-<p><strong>judul.append(title), tanggal.append(date), isi.append(content) :</strong> <em>Menambahkan judul, tanggal, dan isi berita ke dalam list yang sesuai.</em></p>
-<p><strong>time.sleep(1) :</strong> <em>Menambahkan jeda waktu 1 detik antara permintaan untuk menghindari terlalu banyak permintaan dalam waktu singkat (rate-limiting).</em></p>
-<p><strong>Inisialisasi URL dan Kategori</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">base_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;https://oto.detik.com/indeks&quot;</span><span class="p">]</span>
-<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Otomotif&quot;</span><span class="p">]</span>
-
-</pre></div>
-</div>
-<p><strong>base_urls :</strong> <em>List yang berisi URL dasar dari halaman indeks berita untuk kategori tertentu (dalam hal ini, Otomotif).</em></p>
-<p><strong>categories :</strong> <em>List yang berisi kategori berita yang akan di-crawl.</em></p>
-<p><strong>Inisialisasi List untuk Menyimpan Data</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">judul</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">tanggal</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">isi</span> <span class="o">=</span> <span class="p">[]</span>
-
-</pre></div>
-</div>
-<p><strong>judul, tanggal, isi:</strong> <em>List kosong yang akan digunakan untuk menyimpan data berita yang di-crawl, seperti judul, tanggal, dan isi berita.</em></p>
-<p><strong>Iterasi Melalui Halaman dan Kategori</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">base_urls</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>  <span class="c1"># Looping untuk beralih halaman</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># Hentikan jika sudah 10 berita</span>
-            <span class="k">break</span>
-
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 2 detik antara permintaan halaman</span>
-
-</pre></div>
-</div>
-<p><strong>for base_url, category in zip(base_urls, categories) :</strong> <em>Iterasi melalui setiap pasangan base_url dan category (meskipun dalam contoh ini hanya ada satu kategori dan URL).</em></p>
-<p><strong>for page in range(1, 4) :</strong> <em>Looping untuk halaman 1 hingga 3, untuk meng-crawl beberapa halaman indeks berita.</em></p>
-<p><strong>if len(judul) &gt;= 10 :</strong> <em>Mengecek apakah sudah ada 10 berita yang di-crawl. Jika ya, iterasi dihentikan (break).</em></p>
-<p><strong>url = f”{base_url}/{page}” :</strong> <em>Menggabungkan base_url dengan nomor halaman untuk membuat URL yang lengkap.</em></p>
-<p><strong>get_data(url, category) :</strong> <em>Memanggil fungsi get_data untuk meng-crawl data dari halaman tersebut.</em></p>
-<p><strong>time.sleep(2) :</strong> <em>Menambahkan jeda waktu 2 detik antara permintaan halaman untuk mencegah rate-limiting.</em></p>
-<p><strong>Membuat DataFrame dan Menyimpan ke CSV</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s2">&quot;judul&quot;</span><span class="p">:</span> <span class="n">judul</span><span class="p">,</span>
-    <span class="s2">&quot;tanggal&quot;</span><span class="p">:</span> <span class="n">tanggal</span><span class="p">,</span>
-    <span class="s2">&quot;isi&quot;</span><span class="p">:</span> <span class="n">isi</span>
-<span class="p">})</span>
-
-<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita-Otomotif.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-</pre></div>
-</div>
-<p><strong>df = pd.DataFrame({“judul”: judul, “tanggal”: tanggal, “isi”: isi}) :</strong> <em>Membuat DataFrame dari list judul, tanggal, dan isi.</em></p>
-<p><strong>df.to_csv(“Crawl-berita-Otomotif.csv”, index=False) :</strong> <em>Menyimpan DataFrame ke dalam file CSV dengan nama Crawl-berita-Otomotif.csv.</em></p>
-<p><em>Parameter index=False digunakan untuk tidak menyimpan indeks DataFrame dalam file CSV.</em></p>
-<p><strong>Membaca dan Menampilkan Data dari CSV</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita-Otomotif.csv&quot;</span><span class="p">)</span>
-<span class="n">df</span>
-</pre></div>
-</div>
-<p><strong>df = pd.read_csv(“Crawl-berita-Otomotif.csv”) :</strong> <em>Membaca kembali data dari file CSV ke dalam DataFrame df.</em></p>
-<p><strong>df :</strong> <em>Menampilkan isi DataFrame df untuk melihat data yang telah di-crawl dan disimpan.</em></p>
-<p><img alt="sv csv.jpg" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAFNAXYDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9Rvt11/0Bbz/vqH/45R9uuv8AoC3n/fUP/wAcq7RQBS+3XX/QFvP++of/AI5R9uuv+gLef99Q/wDxyrtFAFL7ddf9AW8/76h/+OUfbrr/AKAt5/31D/8AHKu0UAUvt11/0Bbz/vqH/wCOUfbrr/oC3n/fUP8A8cq7RQBS+3XX/QFvP++of/jlH266/wCgLef99Q//AByrtFAFL7ddf9AW8/76h/8AjlH266/6At5/31D/APHKu0UAUvt11/0Bbz/vqH/45R9uuv8AoC3n/fUP/wAcq7RQBS+3XX/QFvP++of/AI5R9uuv+gLef99Q/wDxyrtFAFL7ddf9AW8/76h/+OUfbrr/AKAt5/31D/8AHKu0UAUvt11/0Bbz/vqH/wCOUfbrr/oC3n/fUP8A8cq7RQBS+3XX/QFvP++of/jlH266/wCgLef99Q//AByrtFAFL7ddf9AW8/76h/8AjlH266/6At5/31D/APHKu0UAUvt11/0Bbz/vqH/45R9uuv8AoC3n/fUP/wAcq7RQBS+3XX/QFvP++of/AI5R9uuv+gLef99Q/wDxyrtFAFL7ddf9AW8/76h/+OUfbrr/AKAt5/31D/8AHKu0UAUvt11/0Bbz/vqH/wCOUfbrr/oC3n/fUP8A8cq7RQBS+3XX/QFvP++of/jlH266/wCgLef99Q//AByrtFAFL7ddf9AW8/76h/8AjlH266/6At5/31D/APHKu0UAUvt11/0Bbz/vqH/45R9uuv8AoC3n/fUP/wAcq7RQBS+3XX/QFvP++of/AI5R9uuv+gLef99Q/wDxyrtFAFL7ddf9AW8/76h/+OUfbrr/AKAt5/31D/8AHKu0UAUvt11/0Bbz/vqH/wCOUfbrr/oC3n/fUP8A8cq7RQBS+3XX/QFvP++of/jlH266/wCgLef99Q//AByrtFAFL7ddf9AW8/76h/8AjlFXaKACiivKPFH7Rng7wr8YNK+DV9pmqSanqnkqLqKNTBE8ufLU5YMc9yAcZHXnAB6vRXjXiP8Aa0+DPhXXr/w3rGpaql9plw9rcLHpczqHU4OGAwRnuKd4X/aw+DnjDxDp/hfRdS1V7/U51trdZNLmRS7cDLEYA9zQB7HRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFeBftWNqGqTfDrwPDrmpaZp/ifxKljqLafcGGWSErjbuGePmzggjIHHFV/+GJvhz/0PnxC/wDB1H/8ZoA+haK/Ljx18MfjRofjTXNH8O+HPiFe6VY6hPb2Vx9ku5fOhVyEfeqhWyADkcGvrj9hnXPFGqfDHWNP8V32oXFzpGty2aJfM7S26iOMmI7/AJlwxb5T0yaAPo+iiigAorw6T4reMvhR8Sp/DXxkuLefwr4jvGbw94ihgEMNozdLO4A4XHZyfckgnYnij4teLviB4+j+GPwJubYf2VcRy+JPEkkIntbGMNk28YPyySNgggH1AIwWUA9yopFzgbsE96KAFrwTxx8S9U0n9pbwt4Li+DlnqUdzAqJ4iks991Ej53tDNt+SOPneCecn7vGfe68X8Yaj+0dD8etBs/Cum2snw7eOL+0JGSEjBz5rOzHzVdeNoTg8cHnAA7xJ8c/iLouvahpGn/s6eLdVtrO4eGK+t5VEdwqnAkX5eh607wv8cPiJr3iLT9G1L9nfxZo9reXCwzX9zKpitlPV2wvQUniPVf2s4tev4/Cvhj4dTaOtw4sZLy4uRO0OflMgVwA2OuKd4X1T9q6bxDp8fi/wz8PINFadRfSWNxcmdYf4jGGcgt6ZFAHsdFFFAHzB+2d4il0vxJ8I9Bv/AIv638OPDuva5fW2taxpesrpjJClm0ibppAYwPMVR8wP3sDk1h39r8M/Dvwf8Q+IPDf7XHxV8d6Y+saPa3GpaX4ws9Su7CY3SKkUUkaIsayGVfMBJJQcDsfUPjt8L9e+IXxQ+DmrWvhu31fQvDOu395rn2hoTHDBJYyRxs0cjAyZkKjChiOpAHNP/aG+Etx4i+EF74R+F/g/T0vrnV9KvGtbNLezWRIb2GSRySUUlY0Y8nJxgZPFAHP6P8VD4P8Ajp8cLzx14tvIvCXhDRdDvkiuJnkhtA0MplaOPoGcheFGWOO9b/hj9pq21TxF4e0Xxf8ACfxt4JtPGD+V4f1PW4LYW95KVLpC4hmke3ldASqSqpOCOvFcF8SP2cfG/wASvFHx4tXt4tN07xzo+hwaFqE1wjRz3NmGdldI281E3hFJIHDErnFYvw4+C+q6h408Ivrn7J0vhb+w7pdQ1LWNW8fzajbxTwg+W1jBHcyNIxfawMyIFXIIJNAHqXhv9qC38YawP+EZ+D/j3VPCra1LoA8T2dpbzWouY5DFI5gWY3KwK4IMpi2jGTxzXt1fFeqfCP4zN4/fVvAPwNuvh94sn8UpdX3izw/4wjj8P6hpwm3PLc6cZS0sjxZVkNuGLnduAr7UoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPBf2lv+R3+DX/AGOEf8lr3quO+J3wn8F/F7Q4tA8aWM00FtOLm3kgmaKWGUAruVh7EjByPavK/wDhhn4Kf8/Pif8A8Gn/ANhQB9C14L+yj/zU7/setQ/9lqp/wwz8FP8An58T/wDg0/8AsK9a+G3wx8IfCfw7/wAIx4MsZLe0aZriVpZmlkllYAF2ZupwoHGBx0oA6uiiigD5z+Lvia++PmtXfwB+Gtva3NhDIn/CU+IJoVmt9PVWz5MOeGnyOo6EHBGGZaPw5vrr9lPXo/hT44jhbwVrd20mg+JkgWMJO/WC8KjAbgYc9h/d+59Hado+k6R9pOk6XaWZvZ2urj7PCsfnTNjdI+0fMxwMk8mjVNH0nXLUWOtaXaX9sJEm8m5hWVN6MGVtrAjIIBB7EUAWwwYBlIIPQ0UtFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRXMfED4meB/hboo17x1r0OmWrv5cW5WeSZ/7qRqCzn1wOOpwKAOnoryPwR+1L8H/AB1r0Hhix1i903U7wgWdvqlm9t9pz08tjlST2BIJ7A165QAUUUUAFFFFAHyr4F1z9qr40Weq+L/CfxQ8PeH9Mi1a6sIbCXSY5DGImAHzNExPBHJPrWfaftIfET4IfF5vhz8fvElh4g026t4JP7TsbJYDYmTOGKoi70/vDGRwR0IPXfsp+ItE8JfBHxF4j8R6lDYabYeI9TmuLiZsKihk/EknAAHJJAHJqroelfsyftbXWqeNptBurnXbGP7PcW9zfT286QpkRSeXHIFKEdx34PNAH0hZ3lpqFpDf2F1Fc21zGssM0ThkkRhlWVhwQQcgipq8M/Yvkkb4CaVHJK7rDfX0UYZidqC4fCjPQCvc6ACiiigDjPid8XPBPwj0mLVPF2oSLJdP5VlY20fm3V5J/cijHU8jkkKMjJGRXnLftYWel7b/AMZfBn4j+G9FZlVtVvtGbyIQTgNJg5Uc9tx9Aar+D7K28ZftaeONW8RRrcTeDNOsbTRYZeVt1mTfJKgPRic/N/tH2r0L4seFPih4rt7Sz+Hfj3T/AA7Bsmj1CO80mK+W7VgoVcSAgADdkd91AEXwu+NXh/4sa54n0zw3bh7Tw7PBEl+k6yRXiyqWDpgfKOOhr0SvEv2a/gFqHwNj8RpqHiay1d9amhk/0W1MCwlN+RtyQM7+AMYxXttABRRRQB4z8eP2nvC3wI1TTNF1XQdQ1W91K3a62WzKixRBioJZupLBuB/dOccZ5H4f/t1fC/xj4gTQ9d0678LxSxs0d9qE8Zt9452My/cyM4J4yMdSK8Z/4KHf8lN8N/8AYBH/AKUS15d+zL8GZfjP8SbfSrxZ49D0tftuqTxqp2oPuR/MCuXfAwQflDnBwaAP0J/4aF+Bv/RWPDH/AIMY/wDGu6sL+x1Sxt9S027hurS6jWaCeFw6SIwyrKw4IIOcivkD46/C7wz8VPg1eeLPAeg6DB4o8B6hdWesRaHbpFHcCBitwAqDJ4CTICchSw5Jr2v9k1mb9nnwYWYk/ZZhz7XEtAHrlFFFAGd4iutasdB1C88O6ZFqOqQ27yWdpLN5KTyhSVQvg7cnjP8ALrXmfgz9ojTPFfgfU9ej8I63L4k8OkQ634XsoVk1G3mB2nZG7KZEzkgjngjGRiup+M3iDxP4V+FviXxD4NsvtWsWNhJLbKBkof4pAP4ii5fHfbivlHX/AAnpHwy+CfhX9pD4T+Ib+98Vx3EU2saoZmkS/wDtBPnx3MZJ4WTCY4PPOThgAe0SftXDSY2vvF/wM+JehaZH/rb+fRiYoBx80hyNo59z7V6/4P8AG3hX4gaHD4k8Ha5bapp0/CzQt91u6spwyMMjKsARnpXyv4DufCfj86V8ZPgBpE2ieM4dZtl8Y6DbXTGK4tJn2zu0LNtaPnerIB/ESNw46+aw0/4Y/tUaJovwrVFi8YWks3inQrfi3tVQEx3mBxGxJPGBnn+/QB9KUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAV89XFnp/iX9sqSz8YRxzpoPhiO78O21xzGZWkHmzIp4LjLc9RtB7DH0LXnfxY+Cug/FL+z9U/tXUNA8R6MxbS9c02TZcW5PVT/fQ91yO+CMnIBg/tZaL4b1L4H+IdS16OBLnSIBd6ZdNhZYLsMvl+W3UFjhcDqDXoHw7vdW1LwD4b1DXlcajc6TaTXe8YbzWiUtn3yTXi3iP9lPxh4+097b4lftAeINfktY92lpFYRWdvb3AHySyxKzCUj1+VsE8810nwf8Ai9rja5J8HfjBbxab4502P9xMPlt9atx0uIDwC2BllHoSAMMqgHs9FFFABRRRQB8V/B/xf+z+fhfqnw/+M+tafHNB4svNQWwuxMCGVxsY7ByMhgVJwRkEVP8As+69+zd8MdHbWfEXjHw2vi1GvoI7u0adh9llfcin5ApIAxkjIHGcV9T6l8MfhrrF7LqWr/D3wzfXk7bpbi50m3kkkPqzMhJP1qt/wp74R/8ARLfCH/gjtf8A4igDzr9i3P8AwoXTJNpCyahfupIxuU3D4Ir3SoLKxs9NtIrDTrOC1tYFCRQwxhI41HQKo4A9hU9ABRRRQB4v8Vfhj48s/HFt8aPgxNZHxLDa/YdU0m9bZBq9qOVXdkBZBgAEkDgcjGDlXfxS/ae8RW76H4d/Z6j8O6lMPL/tXVNehmtbXPBk2KoMmOoAJ+jdK99ooA4L4M/CuD4T+E20mbUn1TV9RuX1HWNRkGGu7uT77eyjoB7Z6mu9oooAKKKKAPjn9tz4M/Ez4heNNA1/wT4TutYs4NLNnM1sylo5BK74Kkg4IYc9Otc78AbP9oD4NeGvEnhW4+DPiOe3114pYbqyEMdxaP8AclZWbqTH9zJwjLnB3GvuiigD5hu9cmt9JubfQf2IpYbz7O62rT6bYtGJtuEaTA3MM4zzkjNevfALwx4g8G/B/wANeHfFVslvq1tbO91ChXEbySvJt+X5QQHAIHAIIHFegUUAFFFFACMqspVlBBGCD3r5/wDE37OPijw5fanqHwL8TaZpuna4xbVPCeu2xuNGui33iqgM0WR1Cj2BUACvoGigD4q039mr9oLwn4gg8bfD/wAP/D/wpqmk+ZKU0rU9QcamDyYGS4eRNjYwF/djnORgEe2fs9658NPF994i8WaN4XGg+PLqcR+KrC5ZjdW86/KVAc5ERZSRtABPUZGB7TVK20XR7PUrvWLPSrSG/vwi3d1HCqyzhBhA7gZbaCQM9KALtFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABWdfeHdB1LVLDW9Q0azudQ0subK6lhVpbfeMNsYjK5HBxWjRQAUUUUAV7h79XAtba3kTHJknZDn6BD/ADqLzdY/58bP/wAC2/8AjdXaKAKXm6x/z42f/gW3/wAbo83WP+fGz/8AAtv/AI3V2uZ8bfEvwF8OLeC68ceKrDR0umKwC4k+eXGM7VGWbGRkgcZFAGz5usf8+Nn/AOBbf/G6PN1j/nxs/wDwLb/43XJ+Dfjh8J/iBqx0Lwf4407UtQ8syi3jLK7KOpUOBux7V3NAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N0ebrH/AD42f/gW3/xurtFAFLzdY/58bP8A8C2/+N1doooAKKKKACiisS48aeE7XxNbeDJvEFl/b13GZotNWUNcGMAkuUGSq4B+ZsA4OKANuiisO98beEtN8RW3hHUvEFnaaxeoslraXEnlvcBiwHl7sCQ5RuFJIxyOlAG5RRRQAUUUUAFfLP7Sfw90L4qftBfD7wT4nvr610y50fUJpZLOREkTZl8gurKPujPy9K+pq+Pv20vFF54F+InhrxRbxyK0vhvVtPtpVHAmlUx9exUSBqAPF4JP2PfD+rC60nxB8aLe8sZj5N3ZyafGyspI3o4UMPY8Gui/4W38CP8AosH7SX/g6tv/AIqvmCigD9Tv2cPiV4Z+IfgdovCl54t1G00OX7E2oeJfKa7uGI38vGSHKhlGSAcY6nJr1ivJP2VfBDeBPgd4csLiExXeoQnVLoEYO+c7lB9wmwfhXa6k/wASguu/2Pb+GWZZLf8AsP7TNcAOmF8/7VtQ7SDv2bM5+XOOaAOmopBnv1paACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigArwH4Jxx6h+0Z8b9ejCypFc6XYJNj+JIXWRAfYxqD9BXvcsUc8TwzRrJHIpV0Zcqynggg9Qa+cvhEmr+GPiB8efB/w50/T0/sq5sL3RNLuGMdol1PbyM4wvKozImQMDgDI60AXfHXxL+NPgr4zaT8PrWbRtbi8Y6fN/YuNOa0hsrtHOWmYyu8iRxDe+0gtwFVc1lfH3TfGOi/D74b3/wAQdcsNX1fSviFp1xd6pa2Yt4orYvNtJH8IA8oHtkDrjJs+Mfgr8YvEWqeFvi5JqWjXHj7SNWhmbTftMkel2lgFIa3jbBcktl3bBLeYwGQi5sftTW2rf8Kz8CeEfEGtvfNrvjDSdM1p41WFb2NhK8ihFHyp5iIVHJG1MknkgH0MrKyhlYEHkEd6Wqul6Xpuiafb6To+n29jY2kYigt7eMRxxIOiqqjAH0q1QAUUUUAFU9T0fSdat/sms6XZ38AO7yrqBZUz64YEVcooA53/AIVz8Pv+hE8Pf+CuD/4mnw+APAlvMlxb+CdBiljbcjppsKspHcELkGt+igAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigArlU+Gvhi38fTfEqxW8tNbvIEtr5oLp1hvY0UqgliztYr8uGADfKBnBYHqqKACuV8QfDPwr4q8U6R4t8RQXd9c6C6z6dbyXcn2W3uFJK3AhBCGUdAzA4wMYPNdVRQAUUUUAZ+ra/o2hvYx6xqMNodSulsrUyttEs7KxWMHpkhTjPU8DkgVoV86/ty6fqmqfCfStN0W1uLm/ufEVpHbQ26lpHkKShQoHOc+leqfBnS/iFo3w50fT/ihq0GoeIIoQJ5Ix8yr/Ckj5IkkUcM4xk+v3mAO2r5j/bA/aI8d/BvUNA0LwP8AYYJdTt5bq4ubi381gFYKqqCdo/iySD2xivpyvhL/AIKKf8jn4Q/7Bc//AKNFAGT8Pf29PiRpfiSKb4jQ2+taG6lJ4rO1jhuI/R4yMBiP7rHBB6jrXr//AA8L+Ef/AEKXi/8A8B7X/wCP1+ftFAH7AfDj4gaD8UPBuneOPDYuFsdRVikdwgWWNlYqysASAQVPQkV01eG/sW/8m8+Hv+u15/6UPXm/xl0vwvB4y8f/ABG1y10LxnY+HpLRr131SXTfEfhHy4I2C6YWiZHD5Eo2vDvZ2UtJ0AB9dUV8VftEal4e1u0+KXizSfD+jXmr+ELGGNfEHizxO2n3mhXQskmg/siBLWRlJLqxJeIyyll3EAY7+T4b+Cfih8VvHE3xA0C313yvBHh6SJLzc8cUrC+bzkTO1ZgR8sgG9edpGTQB9LUV8d/Dzwzo+j+D/wBnT4oWdvJ/wl/iPUbKz1nXJZnkvdSgn0+4Z4riZiWlTKIVRiVXau0DFZel+H/htpfwh0L4jeG2s0+IsPjtrHT9QtrrzNQknfW3SWxzuLGEwtJug+4F3NtBGaAPrbwX450nx1FrE2k293CNE1i60W4+0Iq7p4CA7JtZsocjBOD6gV0VfGPii+1yLwhqOk2Nrp1zo+s/GjUrHWrfUtWk0yzubchmjt57qOKVo45J1hQjYQ+Qh4c17F+zr4c1nwnq3jTRpdP8HaDo63VpLZ+GvDfiCTU4dHlaE+cuHtoBbrJhJBGqbcliOpyAe2VgeG/Gml+KNX8R6Lp9vdRz+GNQXTbxplUK8rW8U4MZDEldsyjJAOQeMYJ82+O1jofiDx18NfB3jzyZPB2sX18t9Z3TYtL+9S33WtvOCQsik+awjbKs0Y4OBXk0D/DnQNB+JnhvSFlvNB1D4lafo9nY2Os/ZrOaZrO0/wBDnuTv8m03qyOig4UeWq4+SgD6u8TeJdF8H6DeeJvEV79k03T4/NuJvLeTYuQM7UBY8kdAa0lYMoZeh5r4Y1bw34bu/h/8efCOt+DvAlno3htdL1G10LRdRGq6Xo120TCV4mkt4BBKQNzqsShdxOTuJr0n4qaJ8NrvxRZ/D/Tfh74U1m18N+E0vodL8Ra4uj+HdMs3ldRcW0cdrPuuAYyC4QCNQuGUtyAfT9FeYfsxatqOufs/+A9U1bU21G7m0aHzLprhp/OxlQ3mNzJwB8x5PU9a9PoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigCKa1triSGSe3jke3fzImZQTG20ruUnocMRkdifWpaKKACvAf2nv2ZdQ+PFzouraL4lttLvdJilt2S6hZo5Y3YMDlTlSCD2Oc9sV79RQB8F/wDDu/4hf9D94e/79z//ABNA/wCCd/xAzz4+8PY/65z/APxNfelFAHEfBf4ap8I/hxpPgNdS/tB7ASNLc+XsEjvIzthcnABbA57Vrax8O/h/4i16y8U+IPAvh7U9a03H2LUrzTIJrq2wcjy5XUumDz8pFdDRQBzetfDX4c+JNY/4SHxF4A8N6pqv2Z7P7de6VBPcfZ2BDReY6FthBIK5wQTxWpa+H9Bsbia6stDsLea4t4rSaSK2RGkgi3COJiBkogd9qngbjjqa0KKAMmHwj4Ut7HStNt/DOkxWehukml26WUYjsXVSqtAoXERCsygrjAYjoa5H4dfA/wAEeA4bO+m0HQ9T8R2Ul2Y9fbSIY71Y57iSXyxKd0iqBKVwHwcZwM4r0SigDJfwn4Vk03UNFk8M6U2n6tJJNqFo1nGYbuST/WNKm3bIzY+YsCT3rnL74K/DybQbPwxoul3vhTSrGZ54bTwjql14fj3sMMWGnyQ7xx0bIzz1ruaKAOL034P+BbPw7feE9UsdQ8T6RqUglubTxVq11r6OQAAP9Pkm2rwDtGBnnGa0l+HPw+TQ7zwwngTw8uj6jtF5p40uAW1ztVUXzItux8KiKMg4CqOgFdFRQBz+mfD3wDotjc6Xo3gfw/YWd5apY3Fva6ZDFFNbIGCwuqqA0YDuAhGBubjk1WuPhX8L7q10ayuvhv4Wmt/DmP7Ghk0e3ZNNxjH2dSmIcYH3MdK6migCppOkaToOnw6Toel2mnWNuCIba0hWGKMEknaigAZJJ4HUmrdFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFeJ65+0J4j1Lxdqfg/4M/Cm98dS6FIYdUvv7RjsLOCYdYllkBWRhzkZHQ4yOa9rYblKg4JHX0r4SbRreb4f6x8ANf8AiNYfDvxToniifVZptWuGtbbV7Z2JSQTZAbGVZR32Lx3AB9I+Bv2kPCWt3Go+H/iJDF8PvE2kMq3ml63fRRqQ33XhmbasqkdwB1B5BBPXf8Lh+Ef/AEVLwh/4PLX/AOLr5s1LXbX4iXy6T4J+DOi/GBPB+lW2n6j4s1S4S3FzMiksI3k4kHU8EnknkEMeE8Q6/wDC3xx8N/DulfD/AODfglPG3jW4u9L+w2t5GLnS5A22KXnBXd1BfaPegD74tbq1vraK8sriK4t50EkUsTh0kQjIZWHBBHIIqWuf+Huk32g+A/DuiapCIryw0q1triMMG2SJEqsMgkHBB5BxXQUAFFFFABXIfFj4kab8JfAepeO9VsZ7yHTwgW3hIDSu7hFXJ4UZYZPYZ4PSuvrw39tL/k3nxD/12s//AEoSgDyVf+CjVqzBV+EM5LHAA1wc/wDkCvoj4N/Grw78YdJuJrO1m0nW9MkMOq6Ldn/SLKQEjkEAspwcNgdCCAQRX5QwSeTNHNtzsYNj1wc19BeLP2mrDxN8QNA+IXgXwTceEfFdrNFbXV9FqSzRahbHCmOeLylD8YG7Occc4UqAfpBRTY2LRqx6lQa8Ri0zUPjR8TvHel634w8T6RoXgm6tdHsLHQdYuNLaW5e1juJbqaW3ZJJP9eiLGzGMBCSpJoA9worxR/GvxZ+GKeFPhre6DB8QvEmtSaottqB1RbAfZLZlaGW7YwkbzFIqyGND865CkMdt3xN8bfF/hW8l1jVPhPPb+DrPV7fRbrVbjU/KvTLNLHCLiCzMOJbYSyKPMMqMQCyowxkA9eorxXxh+0rZ+CvDur6tqnhGaW90bxb/AMI1NYQXm9jAFWZr3d5fCrZlrgpjopXd/FWT8Z/ipq14uoaH4Za706Hw74w8I6fLqlpfsjXT3d5A89vtUDCCGSMN8xDiUggAcgH0BRXlf7R3iLXvC/gXStV8NrqMl7/wlWhQi3sLgQS3SSahCjw7yyrtdSVYMdpBOeKqr8e7vwz/AMJVZ/FrwUPDeoeGNJTXFj07Uf7Tgv7J3aNfJkMULeb5ihDGyDDOmGYHNAHr1FeK3/x+8U+FbTWV+Ifwvj0TUbbwzfeKdJtrfXBdx30Fqqma3lkEKeROvmRZAWRMPlXbBFNh+JnjrVvFngSLVfBNzoF74gt9XubDTB4ijeCeOK1iki+27LZsMWcjEbHy8ZzJnaAD2yivBvhX8WfjJqXwvk8QeKPAFvruvXPiO+0jTYNL1MvGypezxbrqT7LEttDCI9vmBZGdVVtu9tlegfDH4jal42n8Q6F4k8Mx6D4h8K3yWOpWlvffbbYmSFJo5IZzHGzoySD70aMCCCOhIB3NFeI3Gl6n8ZPit4z8P6t408T6L4f8E/YbC1sdB1WbTJLi8mtxcSXE08DLK4CyRose7Z8rFlbIxxF18VPjh4d8Mp4b8OvpviPUfDvxEi8I3Wq6tqAs5r61ZoXgWQJaTKWeOcRySqFKlN6qxbAAPqWivI9b+NHjJdW1+x8E/C1PEVt4NWNfEU/9trastwYVne2skMLfapEjdCfMMCksoDZyBBcfHfxF4g1yPR/hL8PbXxRFceGLLxTBe3uuf2dC1vcvKqxH9xK4kIiyvylSSwYx4BYA9jorw3w1+0fruvWvg7xXd/C2XTPB/jO/j0m2v59Yja/trx96r5tokZTyTJGyB1nLdCYwDVhv2htYFnJ46X4csfhvDqTaa+v/ANqj7ZhZ/s5uxYiIg2olyN/nCTaN3l4oA9qor54uvil8Wobn44DxVo+n2+g+ENPkn02XSde/02H/AEESoIy1iAGcZkLuX8tztCyKN1VW1n4l+Lv2gvA3huRZ4/Cdp4Th8QfufF1zaT3EheNTPcxQWyrcsrfJ5DOImDM5wcJQB9I0VxPxE+IWoeE73RPDfhjw0uv+JfEcsyafYy3v2O3WOFN8008+yQxxqCoysbsWdQFPJHI6z8efEWh6XpNjqXwxk07xdrGuv4et9P1LVPsumNOsLT+cuoGE+ZA0a/IyQl2fKbAysFAPZKK8y0n4ueIl1jwtonjT4cz+HLjxDfX+kytJfieOG8giMsQiYRgTQzRpKVkPlkFMFMnjovhv46b4h6Le+IIdJNlYx6re2FjIZ/MN3DbzND9o+6Nodkchfm+UA55wADq6KKKACiiigAooooAKKKKACiiigAooooAKwfE3gHwP40aFvF3g/Rdaa3BELahYxTmMHqFLqSB9K3qKAKGlaDoehaWmi6Jo9jp+nxqVS0tbdIoVB6gIoCjP0rntN+Dvwm0XUYNY0j4a+GLK+tZBNBc2+lQxyROOjKwXIPuK7CigAooooAKKKKACvDf20v8Ak3nxD/12s/8A0oSvcq57x94F8O/ErwnfeDPFVvJNp2oKokEchR1KsGVlYdCGAPpxyCKAPx6q7ov/ACGLD/r5i/8AQhX6A/8ADv34J/8AQa8X/wDgdb//ABirmj/sH/BHR9VtdUa78TXv2SZZhb3N9F5UhU5AbZErY+jCgD6Jh/1Mf+6P5V5Vqngj4neEPHev+MvhPH4X1G18XeRNqmm69eXFmILyKIQi6hmhhmLholjVomRcmMEOMkV6uBgYHAFLQB5N4Z+FPjbTPEngvxH4l8YR6/eaLHrUmrXMzSKXmvmjZI7aM7gkEe0oql8hVXqSa8y8Z/sv+PPE2q6xNNovw01i8uPEMet6f4s1qGabW4bdbtJxYp+5ItlRFMaSRysNoAMQJLV9TUUAeP6p8CZta+NWq+O9T1K2l8L6roTWsuklSXOpvGbd7k5XGPsuI/vZ5PHeud0n9nrxtZ/B3TPBOpeItM1HxKvi7TvEWqalI0ix3MdrewuACE3F/s1vGgBUAsOoHNfQVFAHjnxH/Z90W60ea5+D3hXwb4Y8T3mv6XrV5qTaWsQu/s16ly/nmBQ8rNtcgEjLN1Gc1la58CvGXxaXxjf/ABbuPDunXWvaAnhvTLPSGk1C3s4VmM5nleeKIys8ojJj2BQqbdzZJr3iigD5r039mvU18N+KtNt/hP8ABfwdqWqeGb7Q7W/8NWDrPdTzx7BLJL9niNtF/ehUTnkfP8vPqGo/DvWrvx58OfFEd1Yi18IWN/a3yM7+ZI09vHGhiG3BAZDncV4xjNeiUUAfO998DfilN4Dl8E+b4S1Cz03xdd65bWF3eXK2ev6fcT3EzWmoKISYdrXAwFE6MYlLLg7Re+F/7NOiaTB4x0v4kfDf4Zy6D4j1Kz1Sz0DR9JU6dZvFbCJgYZYlRnDAkShQW3E7U6V71RQB5BefDXx98P8AxdqHib4HWnhJtP120tLW+0HWJZrG3t5LaPyobi3lt4pcDygiNCYwCI0w685zLr4H+NbP4deRput6NqnjifxZb+NL+e8EtrYXd4k6O1upRZJIYhEixI212ARSQeRXuVFAHi2ofDz4yeH9W8WSfDi68Iix8eSLfXrapPcLLo181ukE0sCxxMLxCI0YI5gIYHLEHA1/h38HZ/h34qW40++in0W08G6V4YtfMkY3LSWklwzSSDbtwyzJyGJzu4HGfUqKAPD9M+B/iuz+E/w78BzahpDX3hLxHaavfSLLIYZIYriWRljJj3FisgADKoyDyOtUG+CfxSXwpJ8E4dW8NL8PpdQab+1BLONWTT2uftBsRbCPyS2SY/P84fIc+WTXv9FAHjHiv4TeO9UvPivp2kzaAdH+IehfZ7Wa4upo7m0v1szbBHjWJlaEjaxcPuBBGxutbnh/4a69pPxJ0TxlcXVg1npngpPDksaSOZWuVmSTcoKAGPCnkkHOPlr0uigDyvxR4L+J2rzeEviBYjwsPG3hhr2KSykuLhNNvLW5AV4hOI2libEcLh/LfDKw2kHIpeJPA/xm8TeFY4/EU3gTxHc3GoS3GoeFdWs92iz2TIFjtRctbvNujYCTzmhbcxYGNV2hfYaKAPn+L9n/AMb2/wAE9U8G6TrejaP4m/tk6/4bhtZJpNL8PzK6tFawMyiQwAK4OEUfvXCoowtey+CfCtj4H8H6N4P03Jt9HsYbNGPJfYoBYnuSQST6k1t0UAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFIzKv3mAqOaby/lX7x/SqjMzHcxyawqV1DRbmkYcxc8+H+/TlZW+6wNUaASORwayWJl1RTpI0KKghm3fK3Xt71PXVGamroya5dAoooqhBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAUGYsxY968PXxN8bPHnirxLZ+Bdb0DStP0DUGsBHeQszvjPzZ2PnOD6V7fXkfwP/AORq+JX/AGML/wDs9fG5up18Rh8PzyjGblflfK3aLa1XmfT5Q4UMPiMS4RlKCjbmXMtZJPR+RFpvxD+Kngq6udD+IngXVvEkg2yWupeHLAzRSKeqsMKAQfYH26E3J/2gNP05oJNe+HPjfR7SaZIDd32l+VCjMcDLFv5c8dK9Vryb9pr/AJJqn/YVtP8A0I1y4+ljsqwdSvSxDkoJtKUU36OW79dzqwFXA5rjKdCrh1FzaTcZNL1Udl6bHrKt0ZT7g1eVtyhvWs6H/VJ/uir8H+pWvr8K9Wj5WqiSiiiu0wCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAoyKY2K14zefCv4qaH4m1zVvhz4+07TrPXbw300N1Zq7LIc8ZZHyBk9MV7hLEJF9COhqq0bR/eWvBzLKqWM5facy5XdOMnFrS26a6HrZfmdXA83s+VqSs1KKknrfZp9Txv8A4RL9pj/oquhf+C6P/wCM1S1T4TfGjxlHb6R46+JGlXWkLcR3E0dvYKshKHIwRGvv37969vpVVmOFUmvLlw7h6q5KlSpJPdOpNp+TVz0o8Q4ik+enTpxktmqcE15p23ERekaj2FX1XaoX0qOGHy/mblv5VLX1dCnyK73Pm5y5gooorczCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAG+XH/AHF/KlpaKSVguFFFefa946+IH/CwL/wL4F8E+H9U/svR9P1a6utW8RT6f/x9z3kSRokVlcbsfYnJYsv31AHBNMD0GivPv7b/AGgP+iZ/D7/wub3/AOVFH9t/tAf9Ez+H3/hc3v8A8qKAPQaK8+/tv9oD/omfw+/8Lm9/+VFH9t/tAf8ARM/h9/4XN7/8qKAPQaK8+/tv9oD/AKJn8Pv/AAub3/5UUf23+0B/0TP4ff8Ahc3v/wAqKAPQaK8y1nxf8eND0e+1q7+F/gJ4NPtpbqVY/HF4XKRqWIUHSQCcDjJFem0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXn2if8nAeM/wDsTvDP/pbrdeg159on/JwHjP8A7E7wz/6W63QB6DRRXzP8Ftd+Fmvajc/8Jf8AGS+k8br4w1iCDSJ/iLfRSERanOttCNOF2I2Ty1jAj8oqy4yCDTj70uX+un+YpPljzf1s3+h9MUV86fE/VtK1T4c+L00vUvEF41j8StItboatMsiwTrqOnlo7XaTttwGUqp5BL+teleJvjJpug6vq2k6X4O8TeJT4cjSXXbjR4Ldo9MDp5iq/nTRvM/l/OY7dZXClcqC6BojJOCm9L2/9JjK/p72/+ZXK+ZxXS/5tfoeg0VwGpfGPR/tWn2Pgvw3rfja51HSYtdSPQzaKI7CUkQzs93PBGRIQwVVZnO1jtwM13FjdfbrG3vfs09v9oiSXyZ02yR7gDtdezDOCPUGrs9fL/gr8016qxN1/X3/k0/R3MX4if8k/8Tf9ge9/9EvXQ1z3xE/5J/4m/wCwPe/+iXroaQwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK8+0T/k4Dxn/ANid4Z/9Ldbr0GvPtE/5OA8Z/wDYneGf/S3W6APQa8++B3hXXvB/g290nxFY/ZLqbxFrl+kfmpJmC41GeaF8oSPmjkRsZyM4IByK9BooWn9f12B6q3nf8Gv1Pn7Wvhb48u/B/jrS7fQt91rPxIstfso/tUI82wju7GR5cl8LhYJTtYhvl4GSMw6x8LdW0Px14w1C88C+PvFOl+J9QXVbObwt46n0sQFoI4poLm2fULWPIaLcskYk3K+1tuwbvoeipjBQio9kl8kor/21P18tBt3bfdt/Ntv/ANua/wCDqeDePPhvHp+m6PoHgr4O+KY7/QfD8en6D4g8M+JLe0k0w/MBazS3F1FNNAjJC5Ekc8b5JMZYEH2jw3Drlr4d0u28TXkN5rEVnCmoXEC7Y5rkIBK6jAwpfcQMDg9B0rRorTmvfzd/z/z176X2J5dvJW/L/LTtrY574if8k/8AE3/YHvf/AES9dDXPfET/AJJ/4m/7A97/AOiXroakYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFZ0OgaTb+IL3xTDabdU1CzttPuZ/MY74Ld53hTaTtG1rqc5ABO/kkBcaNFABRRRQAUUUUAFFFFAFfUdPtNW0+60vUIfNtbyF7eaPcV3xupVhkEEZBPIOasUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//9k=" /></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="c1"># Baca file CSV yang berada di direktori lokal</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Crawl-berita-Otomotif.csv&#39;</span><span class="p">)</span>
-
-<span class="c1"># Tampilkan DataFrame</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-
-
-<span class="c1">#Penjelasan:</span>
-<span class="c1">#pd.read_csv(&#39;Crawl-berita-Otomotif.csv&#39;): Ini akan membaca file CSV yang ada di direktori lokal tempat Anda bekerja (misalnya di Google Colab). Nama file harus sesuai dengan yang terlihat di panel Files.</span>
-<span class="c1">#print(df): Akan menampilkan DataFrame yang dihasilkan dari file CSV tersebut.</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                judul  \
-0   Pelajaran dari Kecelakaan Datsun Go Tertabrak ...   
-1   MPV Baru BYD Calon Penantang Toyota Alphard ya...   
-2   Kesan Mantan Insinyur Ducati setelah 6 Bulan G...   
-3   Ini Beda Kijang Innova Zenix Tunggangan Jokowi...   
-4   Hyundai Creta Knight Edition Serba Gelap, Harg...   
-5   Jakarta Polusi, Rano Karno Bilang Mobil Listri...   
-6   Mobil Beli Pertalite Bakal Dibatasi Pakai cc, ...   
-7   Catat! Rekayasa Lalu Lintas saat Misa Akbar Pa...   
-8   Momen Jokowi Pakai Kijang Innova Zenix Hitam B...   
-9   Kenapa Paus Fransiskus Tak Naik Mobil Listrik ...   
-10           Jadwal MotoGP San Marino Akhir Pekan Ini   
-11  Awas! Foto Tanda Tangan Kayak Begini Bisa Biki...   
-12  Intip Garasi Franz Theodor, Anggota DPRD Pemat...   
-13  Ini Deretan Mobil yang Masih Boleh Pakai Perta...   
-14  Cara 17 Komunitas Bersama-sama Rayakan Hari Ke...   
-15  Peringati Hari Pelanggan Nasional, SPBU Ini Te...   
-16  BYD Kenalkan Rival Toyota Alphard, Harga Mulai...   
-17  Periklindo Gelar Konferensi Kendaraan Listrik ...   
-18  Tes Lengkap Haval H6 HEV: Mobil Rp 600 Jutaan,...   
-19  Melihat Popemobile Buatan Pindad yang Dipakai ...   
-
-                                                  isi  \
-0   Jakarta - Peristiwa kecelakaan di perlintasan ...   
-1   Jakarta - BYD mengenalkan MPV premium terbarun...   
-2   Jakarta - Mantan Vehicle Performance Engineer ...   
-3   Daftar Isi\n\n\n\n\r\n\t\t\t\t\t\t\tKijang Inn...   
-4   Jakarta - Hyundai Creta Knight Edition resmi m...   
-5   Jakarta - Bakal Calon Wakil Gubernur Jakarta, ...   
-6   Jakarta - Mobil dengan kapasitas tertentu baka...   
-7   Jakarta - Hari ini, Kamis (5/9/2024) akan diad...   
-8   Jakarta - Selain Mercedes-Benz S600 Guard, Pre...   
-9   Jakarta - Paus Fransiskus sudah berada di Indo...   
-10  Daftar Isi\n\n\n\n\r\n\t\t\t\t\t\t\tJadwal Mot...   
-11  Daftar Isi\n\n\n\n\r\n\t\t\t\t\t\t\tCara Perpa...   
-12  Jakarta - Franz Theodor Sihaloho resmi dilanti...   
-13  Jakarta - Bila jadi dibatasi berdasarkan kapas...   
-14  Jakarta - Jika satu komunitas bersama-sama mer...   
-15  Jakarta - Sejumlah perusahaan memperingati Har...   
-16  Jakarta - BYD baru saja mengenalkan minivan te...   
-17  Jakarta - Periklindo akan menggelar konferensi...   
-18  Tak hanya mendatangkan Tank, GWM Indonesia jug...   
-19  Jakarta - Paus Fransiskus akan menggunakan pop...   
-
-                                        tanggal  kategori  
-0                  Kamis, 05 Sep 2024 13:42 WIB  Otomotif  
-1                  Kamis, 05 Sep 2024 13:11 WIB  Otomotif  
-2                  Kamis, 05 Sep 2024 12:43 WIB  Otomotif  
-3                  Kamis, 05 Sep 2024 12:09 WIB  Otomotif  
-4                  Kamis, 05 Sep 2024 11:31 WIB  Otomotif  
-5                  Kamis, 05 Sep 2024 11:09 WIB  Otomotif  
-6                  Kamis, 05 Sep 2024 10:44 WIB  Otomotif  
-7                  Kamis, 05 Sep 2024 10:02 WIB  Otomotif  
-8                  Kamis, 05 Sep 2024 09:31 WIB  Otomotif  
-9                  Kamis, 05 Sep 2024 09:04 WIB  Otomotif  
-10                 Kamis, 05 Sep 2024 08:33 WIB  Otomotif  
-11                 Kamis, 05 Sep 2024 08:08 WIB  Otomotif  
-12                 Kamis, 05 Sep 2024 07:40 WIB  Otomotif  
-13                 Kamis, 05 Sep 2024 07:04 WIB  Otomotif  
-14                  Rabu, 04 Sep 2024 20:32 WIB  Otomotif  
-15                  Rabu, 04 Sep 2024 20:18 WIB  Otomotif  
-16                  Rabu, 04 Sep 2024 20:01 WIB  Otomotif  
-17                  Rabu, 04 Sep 2024 19:32 WIB  Otomotif  
-18  2,827 Views  |  Rabu, 04 Sep 2024 18:27 WIB  Otomotif  
-19                  Rabu, 04 Sep 2024 19:08 WIB  Otomotif  
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1464,7 +1200,7 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tugas 02 : <strong>Membuat Vector Space Model dengan Bobot TFIDF Dari Hasil Tugas 1 Crawling Berita</strong></p>
+        <p class="prev-next-title">Tugas 02 : <strong>Membuat Vector Space Model dengan Bobot TFID</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1486,7 +1222,7 @@ Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halama
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas 01 : <strong>Crawling Berita</strong></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-isi-dan-kategori-berita-dari-sebuah-halaman-website-berita-online">Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong>, <strong>Isi</strong> dan <strong>Kategori Berita</strong> dari sebuah halaman website berita online</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-program-crawling-berita-online">Code Program <strong>Crawling Berita Online :</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-program-proses-crawling-berita-online">Code Program Proses <strong>Crawling Berita Online :</strong></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-code-program-crawling-data-berita-online">PENJELASAN CODE PROGRAM <strong>CRAWLING DATA BERITA ONLINE :</strong></a></li>
 </ul>
 

@@ -30,8 +30,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['import requests', 'from bs4 import BeautifulSoup', 'import pandas as pd', 'import time', '']
+['# Fungsi untuk mengambil data dari halaman web Detik.com', 'def get_data(url, kategori, min_articles_per_category):', '    try:', '        response = requests.get(url)', '        response.raise_for_status()']
 ...
-['    "kategori": kategori_list', '})', '', '# Menyimpan dataframe ke file CSV', 'df.to_csv("Crawl-berita-Otomotif.csv", index=False)']
+['# Membuat dataframe dari list data', 'df = pd.DataFrame({"judul": judul, "tanggal": tanggal, "isi": isi, "kategori": kategori_list})', '', '# Menyimpan dataframe ke file csv', 'df.to_csv("Crawl-berita-Otomotif&Finance.csv", index=False)']
 -------------------
 

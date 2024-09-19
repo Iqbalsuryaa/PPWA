@@ -30,8 +30,7 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['import requests', 'from bs4 import BeautifulSoup', 'import pandas as pd', 'import time', '']
-...
-['# Menyimpan dataframe ke file csv', 'df.to_csv("data_berita_Otomotif_Finance_detik.csv", index=False)', '', '# Menampilkan dataframe', 'print(df)']
+from google.colab import drive
+drive.mount('/content/drive')
 -------------------
 
