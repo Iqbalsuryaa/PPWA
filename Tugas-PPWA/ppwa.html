@@ -1,0 +1,3425 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tugas 4 : Centrality &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas-PPWA/ppwa';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/PROFIL.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="../_static/PROFIL.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to my website!
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tugas-1.html">Membuat Sebuah Webstatis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas01.html">Tugas 01 : <strong>Crawling Berita</strong></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Tugas02.html">Tugas 02 : <strong>Membuat Vector Space Model dengan Bobot TFID</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas03.html">Tugas 03 : <strong>Melakukan Pengujian dan Deploy</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas04.html">Melakukan <strong>Ekplorasi Mandiri Skip gram</strong></a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/Iqbalsuryaa/PPWA/blob/gh-pages/_sources/Tugas-PPWA/ppwa.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Iqbalsuryaa/PPWA" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Iqbalsuryaa/PPWA/issues/new?title=Issue%20on%20page%20%2FTugas-PPWA/ppwa.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Tugas-PPWA/ppwa.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tugas 4 : Centrality</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Tugas 4 : Centrality</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data"><strong>Split Data</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-weighting"><strong>TF-IDF Weighting</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ke-2-ambil-1-berita">Ke 2 : Ambil 1 Berita</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tugas-4-centrality">
+<h1><strong>Tugas 4 : Centrality</strong><a class="headerlink" href="#tugas-4-centrality" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">files</span>
+
+<span class="c1"># Upload file  dari komputer</span>
+<span class="n">uploaded_preprosessing</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+     <input type="file" id="files-3a28581c-87f7-4a0b-8856-ae8350ad5479" name="files[]" multiple disabled
+        style="border:none" />
+     <output id="result-3a28581c-87f7-4a0b-8856-ae8350ad5479">
+      Upload widget is only available when the cell has been executed in the
+      current browser session. Please rerun this cell to enable.
+      </output>
+      <script>// Copyright 2017 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Helpers for google.colab Python module.
+ */
+(function(scope) {
+function span(text, styleAttributes = {}) {
+  const element = document.createElement('span');
+  element.textContent = text;
+  for (const key of Object.keys(styleAttributes)) {
+    element.style[key] = styleAttributes[key];
+  }
+  return element;
+}
+
+// Max number of bytes which will be uploaded at a time.
+const MAX_PAYLOAD_SIZE = 100 * 1024;
+
+function _uploadFiles(inputId, outputId) {
+  const steps = uploadFilesStep(inputId, outputId);
+  const outputElement = document.getElementById(outputId);
+  // Cache steps on the outputElement to make it available for the next call
+  // to uploadFilesContinue from Python.
+  outputElement.steps = steps;
+
+  return _uploadFilesContinue(outputId);
+}
+
+// This is roughly an async generator (not supported in the browser yet),
+// where there are multiple asynchronous steps and the Python side is going
+// to poll for completion of each step.
+// This uses a Promise to block the python side on completion of each step,
+// then passes the result of the previous step as the input to the next step.
+function _uploadFilesContinue(outputId) {
+  const outputElement = document.getElementById(outputId);
+  const steps = outputElement.steps;
+
+  const next = steps.next(outputElement.lastPromiseValue);
+  return Promise.resolve(next.value.promise).then((value) => {
+    // Cache the last promise value to make it available to the next
+    // step of the generator.
+    outputElement.lastPromiseValue = value;
+    return next.value.response;
+  });
+}
+
+/**
+ * Generator function which is called between each async step of the upload
+ * process.
+ * @param {string} inputId Element ID of the input file picker element.
+ * @param {string} outputId Element ID of the output display.
+ * @return {!Iterable<!Object>} Iterable of next steps.
+ */
+function* uploadFilesStep(inputId, outputId) {
+  const inputElement = document.getElementById(inputId);
+  inputElement.disabled = false;
+
+  const outputElement = document.getElementById(outputId);
+  outputElement.innerHTML = '';
+
+  const pickedPromise = new Promise((resolve) => {
+    inputElement.addEventListener('change', (e) => {
+      resolve(e.target.files);
+    });
+  });
+
+  const cancel = document.createElement('button');
+  inputElement.parentElement.appendChild(cancel);
+  cancel.textContent = 'Cancel upload';
+  const cancelPromise = new Promise((resolve) => {
+    cancel.onclick = () => {
+      resolve(null);
+    };
+  });
+
+  // Wait for the user to pick the files.
+  const files = yield {
+    promise: Promise.race([pickedPromise, cancelPromise]),
+    response: {
+      action: 'starting',
+    }
+  };
+
+  cancel.remove();
+
+  // Disable the input element since further picks are not allowed.
+  inputElement.disabled = true;
+
+  if (!files) {
+    return {
+      response: {
+        action: 'complete',
+      }
+    };
+  }
+
+  for (const file of files) {
+    const li = document.createElement('li');
+    li.append(span(file.name, {fontWeight: 'bold'}));
+    li.append(span(
+        `(${file.type || 'n/a'}) - ${file.size} bytes, ` +
+        `last modified: ${
+            file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() :
+                                    'n/a'} - `));
+    const percent = span('0% done');
+    li.appendChild(percent);
+
+    outputElement.appendChild(li);
+
+    const fileDataPromise = new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        resolve(e.target.result);
+      };
+      reader.readAsArrayBuffer(file);
+    });
+    // Wait for the data to be ready.
+    let fileData = yield {
+      promise: fileDataPromise,
+      response: {
+        action: 'continue',
+      }
+    };
+
+    // Use a chunked sending to avoid message size limits. See b/62115660.
+    let position = 0;
+    do {
+      const length = Math.min(fileData.byteLength - position, MAX_PAYLOAD_SIZE);
+      const chunk = new Uint8Array(fileData, position, length);
+      position += length;
+
+      const base64 = btoa(String.fromCharCode.apply(null, chunk));
+      yield {
+        response: {
+          action: 'append',
+          file: file.name,
+          data: base64,
+        },
+      };
+
+      let percentDone = fileData.byteLength === 0 ?
+          100 :
+          Math.round((position / fileData.byteLength) * 100);
+      percent.textContent = `${percentDone}% done`;
+
+    } while (position < fileData.byteLength);
+  }
+
+  // All done.
+  yield {
+    response: {
+      action: 'complete',
+    }
+  };
+}
+
+scope.google = scope.google || {};
+scope.google.colab = scope.google.colab || {};
+scope.google.colab._files = {
+  _uploadFiles,
+  _uploadFilesContinue,
+};
+})(self);
+</script> </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-1-a72b7e0c6bf1&gt;</span> in <span class="ni">&lt;cell line: 4&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Upload file  dari komputer</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">uploaded_preprosessing</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/files.py</span> in <span class="ni">upload</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span>   <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span><span class="s2"> </span>
+<span class="ne">---&gt; </span><span class="mi">69</span><span class="s2">   uploaded_files = _upload_files(multiple=True)</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span><span class="s2">   # Mapping from original filename to filename as saved locally.</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span><span class="s2">   local_filenames = dict()</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/files.py</span> in <span class="ni">_upload_files</span><span class="nt">(multiple)</span>
+<span class="g g-Whitespace">    </span><span class="mi">154</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">155</span><span class="s2">   # First result is always an indication that the file picker has completed.</span>
+<span class="ne">--&gt; </span><span class="mi">156</span><span class="s2">   result = _output.eval_js(</span>
+<span class="g g-Whitespace">    </span><span class="mi">157</span><span class="s2">       &#39;google.colab._files._uploadFiles(&quot;</span><span class="si">{input_id}</span><span class="s2">&quot;, &quot;</span><span class="si">{output_id}</span><span class="s2">&quot;)&#39;.format(</span>
+<span class="g g-Whitespace">    </span><span class="mi">158</span><span class="s2">           input_id=input_id, output_id=output_id</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/output/_js.py</span> in <span class="ni">eval_js</span><span class="nt">(script, ignore_result, timeout_sec)</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span><span class="s2">   if ignore_result:</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span><span class="s2">     return</span>
+<span class="ne">---&gt; </span><span class="mi">40</span><span class="s2">   return _message.read_reply_from_input(request_id, timeout_sec)</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span><span class="s2"> </span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">read_reply_from_input</span><span class="nt">(message_id, timeout_sec)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span><span class="s2">     reply = _read_next_input_message()</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span><span class="s2">     if reply == _NOT_READY or not isinstance(reply, dict):</span>
+<span class="ne">---&gt; </span><span class="mi">96</span><span class="s2">       time.sleep(0.025)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span><span class="s2">       continue</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span><span class="s2">     if (</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">io</span>
+
+<span class="c1"># Membaca file CSV yang diunggah dan menyimpannya ke dalam DataFrame dengan variabel df_trans</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">uploaded_preprosessing</span><span class="p">[</span><span class="s1">&#39;data_preprosessing.csv&#39;</span><span class="p">]))</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># Menampilkan 5 baris pertama dari DataFrame</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-1034fa6d-3a17-4ea1-8779-ce21ab9aed8a" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>judul</th>
+      <th>tanggal</th>
+      <th>isi</th>
+      <th>kategori</th>
+      <th>cleaned_text</th>
+      <th>norm_text</th>
+      <th>token_text</th>
+      <th>swremove_text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Badan Kurus Tak Berarti Bebas dari Kolesterol ...</td>
+      <td>Kamis, 05 Sep 2024 11:03 WIB</td>
+      <td>Jakarta - Tak sedikit yang beranggapan bahwa o...</td>
+      <td>Kesehatan</td>
+      <td>Jakarta Tak sedikit yang beranggapan bahwa ora...</td>
+      <td>jakarta tidak sedikit yang beranggapan bahwa o...</td>
+      <td>['jakarta', 'tidak', 'sedikit', 'yang', 'beran...</td>
+      <td>['jakarta', 'sedikit', 'beranggapan', 'orang',...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Budaya Kerja Toksik di Jepang Picu 54 Karyawan...</td>
+      <td>Kamis, 05 Sep 2024 10:38 WIB</td>
+      <td>Jakarta -\n        \n        Istilah 'bekerja ...</td>
+      <td>Kesehatan</td>
+      <td>Jakarta Istilah bekerja sampai mati nampaknya ...</td>
+      <td>jakarta istilah bekerja sampai mati nampaknya ...</td>
+      <td>['jakarta', 'istilah', 'bekerja', 'sampai', 'm...</td>
+      <td>['jakarta', 'istilah', 'bekerja', 'mati', 'nam...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Menyoal Serangan Jantung yang Dialami Faisal B...</td>
+      <td>Kamis, 05 Sep 2024 10:03 WIB</td>
+      <td>Jakarta - Faisal Basri meninggal dunia. Ekonom...</td>
+      <td>Kesehatan</td>
+      <td>Jakarta Faisal Basri meninggal dunia Ekonom Un...</td>
+      <td>jakarta faisal basri meninggal dunia ekonom un...</td>
+      <td>['jakarta', 'faisal', 'basri', 'meninggal', 'd...</td>
+      <td>['jakarta', 'faisal', 'basri', 'meninggal', 'd...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Nyeri Kronis yang Bikin Paus Fransiskus Tak Bi...</td>
+      <td>Kamis, 05 Sep 2024 09:37 WIB</td>
+      <td>Jakarta - Pemimpin tertinggi Gereja Katolik se...</td>
+      <td>Kesehatan</td>
+      <td>Jakarta Pemimpin tertinggi Gereja Katolik sedu...</td>
+      <td>jakarta pemimpin tertinggi gereja katolik sedu...</td>
+      <td>['jakarta', 'pemimpin', 'tertinggi', 'gereja',...</td>
+      <td>['jakarta', 'pemimpin', 'tertinggi', 'gereja',...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Perundungan PPDS Tak Cuma Terjadi di Undip, Be...</td>
+      <td>Kamis, 05 Sep 2024 08:35 WIB</td>
+      <td>Jakarta - Aksi bullying atau perundungan di ma...</td>
+      <td>Kesehatan</td>
+      <td>Jakarta Aksi bullying atau perundungan di masa...</td>
+      <td>jakarta aksi bullying atau perundungan di masa...</td>
+      <td>['jakarta', 'aksi', 'bullying', 'atau', 'perun...</td>
+      <td>['jakarta', 'aksi', 'bullying', 'perundungan',...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-1034fa6d-3a17-4ea1-8779-ce21ab9aed8a')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-1034fa6d-3a17-4ea1-8779-ce21ab9aed8a button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-1034fa6d-3a17-4ea1-8779-ce21ab9aed8a');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-f026d5d9-0bff-4d40-9d18-aa1cfb281e34">
+  <button class="colab-df-quickchart" onclick="quickchart('df-f026d5d9-0bff-4d40-9d18-aa1cfb281e34')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-f026d5d9-0bff-4d40-9d18-aa1cfb281e34 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ast</span>
+
+<span class="n">df_doc</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="c1"># Mengonversi string menjadi list jika perlu</span>
+<span class="n">df_doc</span><span class="p">[</span><span class="s1">&#39;swremove_text&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_doc</span><span class="p">[</span><span class="s1">&#39;swremove_text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Membuat kolom baru &#39;clean_text&#39; dengan menggabungkan list dalam &#39;swremove_text&#39; menjadi kalimat biasa</span>
+<span class="n">df_doc</span><span class="p">[</span><span class="s1">&#39;clean_text&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_doc</span><span class="p">[</span><span class="s1">&#39;swremove_text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]))</span>
+
+<span class="n">df_doc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-3586aa93-cc2f-412a-88d8-90d720644fdc" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>judul</th>
+      <th>tanggal</th>
+      <th>isi</th>
+      <th>kategori</th>
+      <th>cleaned_text</th>
+      <th>norm_text</th>
+      <th>token_text</th>
+      <th>swremove_text</th>
+      <th>clean_text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Badan Kurus Tak Berarti Bebas dari Kolesterol ...</td>
+      <td>Kamis, 05 Sep 2024 11:03 WIB</td>
+      <td>Jakarta - Tak sedikit yang beranggapan bahwa o...</td>
+      <td>Kesehatan</td>
+      <td>Jakarta Tak sedikit yang beranggapan bahwa ora...</td>
+      <td>jakarta tidak sedikit yang beranggapan bahwa o...</td>
+      <td>['jakarta', 'tidak', 'sedikit', 'yang', 'beran...</td>
+      <td>[jakarta, sedikit, beranggapan, orang, berbada...</td>
+      <td>jakarta sedikit beranggapan orang berbadan kur...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Budaya Kerja Toksik di Jepang Picu 54 Karyawan...</td>
+      <td>Kamis, 05 Sep 2024 10:38 WIB</td>
+      <td>Jakarta -\n        \n        Istilah 'bekerja ...</td>
+      <td>Kesehatan</td>
+      <td>Jakarta Istilah bekerja sampai mati nampaknya ...</td>
+      <td>jakarta istilah bekerja sampai mati nampaknya ...</td>
+      <td>['jakarta', 'istilah', 'bekerja', 'sampai', 'm...</td>
+      <td>[jakarta, istilah, bekerja, mati, nampaknya, s...</td>
+      <td>jakarta istilah bekerja mati nampaknya ssudah ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Menyoal Serangan Jantung yang Dialami Faisal B...</td>
+      <td>Kamis, 05 Sep 2024 10:03 WIB</td>
+      <td>Jakarta - Faisal Basri meninggal dunia. Ekonom...</td>
+      <td>Kesehatan</td>
+      <td>Jakarta Faisal Basri meninggal dunia Ekonom Un...</td>
+      <td>jakarta faisal basri meninggal dunia ekonom un...</td>
+      <td>['jakarta', 'faisal', 'basri', 'meninggal', 'd...</td>
+      <td>[jakarta, faisal, basri, meninggal, dunia, eko...</td>
+      <td>jakarta faisal basri meninggal dunia ekonom un...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Nyeri Kronis yang Bikin Paus Fransiskus Tak Bi...</td>
+      <td>Kamis, 05 Sep 2024 09:37 WIB</td>
+      <td>Jakarta - Pemimpin tertinggi Gereja Katolik se...</td>
+      <td>Kesehatan</td>
+      <td>Jakarta Pemimpin tertinggi Gereja Katolik sedu...</td>
+      <td>jakarta pemimpin tertinggi gereja katolik sedu...</td>
+      <td>['jakarta', 'pemimpin', 'tertinggi', 'gereja',...</td>
+      <td>[jakarta, pemimpin, tertinggi, gereja, katolik...</td>
+      <td>jakarta pemimpin tertinggi gereja katolik sedu...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Perundungan PPDS Tak Cuma Terjadi di Undip, Be...</td>
+      <td>Kamis, 05 Sep 2024 08:35 WIB</td>
+      <td>Jakarta - Aksi bullying atau perundungan di ma...</td>
+      <td>Kesehatan</td>
+      <td>Jakarta Aksi bullying atau perundungan di masa...</td>
+      <td>jakarta aksi bullying atau perundungan di masa...</td>
+      <td>['jakarta', 'aksi', 'bullying', 'atau', 'perun...</td>
+      <td>[jakarta, aksi, bullying, perundungan, masa, p...</td>
+      <td>jakarta aksi bullying perundungan masa program...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>Iwh, Pekerja Speedboat Thailand Pamer BAB ke L...</td>
+      <td>Rabu, 04 Sep 2024 05:01 WIB</td>
+      <td>Jakarta - Warga Thailand dibuat jijik dengan k...</td>
+      <td>Pariwisata</td>
+      <td>Jakarta Warga Thailand dibuat jijik dengan kel...</td>
+      <td>jakarta warga thailand dibuat jijik dengan kel...</td>
+      <td>['jakarta', 'warga', 'thailand', 'dibuat', 'ji...</td>
+      <td>[jakarta, warga, thailand, dibuat, jijik, kela...</td>
+      <td>jakarta warga thailand dibuat jijik kelakuan s...</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>Ogah Bayar Layanan, 3 Turis Palestina Keroyok ...</td>
+      <td>Selasa, 03 Sep 2024 21:05 WIB</td>
+      <td>Taba - Seorang staf hotel di Mesir tewas usai ...</td>
+      <td>Pariwisata</td>
+      <td>Taba Seorang staf hotel di Mesir tewas usai be...</td>
+      <td>taba seorang staf hotel di mesir tewas usai be...</td>
+      <td>['taba', 'seorang', 'staf', 'hotel', 'di', 'me...</td>
+      <td>[taba, seorang, staf, hotel, mesir, tewas, usa...</td>
+      <td>taba seorang staf hotel mesir tewas usai berke...</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>Licik, Keluarga Taruh Kecoa di Piring Agar Mak...</td>
+      <td>Selasa, 03 Sep 2024 20:37 WIB</td>
+      <td>Jakarta - Keluarga asal Meksiko dituduh melaku...</td>
+      <td>Pariwisata</td>
+      <td>Jakarta Keluarga asal Meksiko dituduh melakuka...</td>
+      <td>jakarta keluarga asal meksiko dituduh melakuka...</td>
+      <td>['jakarta', 'keluarga', 'asal', 'meksiko', 'di...</td>
+      <td>[jakarta, keluarga, asal, meksiko, dituduh, me...</td>
+      <td>jakarta keluarga asal meksiko dituduh melakuka...</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>Terulang Lagi, Triatlon Paralimpiade Ditunda g...</td>
+      <td>Selasa, 03 Sep 2024 20:05 WIB</td>
+      <td>Paris - Saat Olimpiade Paris 2024 lalu, kompet...</td>
+      <td>Pariwisata</td>
+      <td>Paris Saat Olimpiade Paris lalu kompetisi tria...</td>
+      <td>paris saat olimpiade paris lalu kompetisi tria...</td>
+      <td>['paris', 'saat', 'olimpiade', 'paris', 'lalu'...</td>
+      <td>[paris, olimpiade, paris, lalu, kompetisi, tri...</td>
+      <td>paris olimpiade paris lalu kompetisi triatlon ...</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>Wow, Super Air Jet Buka 8 Rute Baru dari Semar...</td>
+      <td>Selasa, 03 Sep 2024 19:37 WIB</td>
+      <td>Jakarta - Super Air Jet membuka delapan rute b...</td>
+      <td>Pariwisata</td>
+      <td>Jakarta Super Air Jet membuka delapan rute bar...</td>
+      <td>jakarta super air jet membuka delapan rute bar...</td>
+      <td>['jakarta', 'super', 'air', 'jet', 'membuka', ...</td>
+      <td>[jakarta, super, air, jet, membuka, delapan, r...</td>
+      <td>jakarta super air jet membuka delapan rute bar...</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 9 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-3586aa93-cc2f-412a-88d8-90d720644fdc')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-3586aa93-cc2f-412a-88d8-90d720644fdc button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-3586aa93-cc2f-412a-88d8-90d720644fdc');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-95c66683-3aa0-43a2-b2be-5d53c248fd4a">
+  <button class="colab-df-quickchart" onclick="quickchart('df-95c66683-3aa0-43a2-b2be-5d53c248fd4a')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-95c66683-3aa0-43a2-b2be-5d53c248fd4a button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_5858fef2-7bd5-438e-bc38-facdf52d6b3c">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('df_doc')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_5858fef2-7bd5-438e-bc38-facdf52d6b3c button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('df_doc');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cek jumlah missing values di setiap kolom</span>
+<span class="n">missing_values</span> <span class="o">=</span> <span class="n">df_doc</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah missing values per kolom:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">missing_values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah missing values per kolom:
+judul            0
+tanggal          0
+isi              0
+kategori         0
+cleaned_text     0
+norm_text        0
+token_text       0
+swremove_text    0
+clean_text       0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+
+<span class="c1"># Transformasi data kategorik</span>
+<span class="n">label_encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">df_doc</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;kategori_encoded&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_doc</span><span class="p">[</span><span class="s1">&#39;kategori&#39;</span><span class="p">])</span>
+
+<span class="c1"># Menampilkan nilai sebelum dan sesudah konversi</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Nilai sebelum dan sesudah konversi:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">))))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DataFrame setelah Label Encoding:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_doc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nilai sebelum dan sesudah konversi:
+{&#39;Kesehatan&#39;: 0, &#39;Pariwisata&#39;: 1}
+
+DataFrame setelah Label Encoding:
+                                                judul  \
+0   Badan Kurus Tak Berarti Bebas dari Kolesterol ...   
+1   Budaya Kerja Toksik di Jepang Picu 54 Karyawan...   
+2   Menyoal Serangan Jantung yang Dialami Faisal B...   
+3   Nyeri Kronis yang Bikin Paus Fransiskus Tak Bi...   
+4   Perundungan PPDS Tak Cuma Terjadi di Undip, Be...   
+..                                                ...   
+95  Iwh, Pekerja Speedboat Thailand Pamer BAB ke L...   
+96  Ogah Bayar Layanan, 3 Turis Palestina Keroyok ...   
+97  Licik, Keluarga Taruh Kecoa di Piring Agar Mak...   
+98  Terulang Lagi, Triatlon Paralimpiade Ditunda g...   
+99  Wow, Super Air Jet Buka 8 Rute Baru dari Semar...   
+
+                          tanggal  \
+0    Kamis, 05 Sep 2024 11:03 WIB   
+1    Kamis, 05 Sep 2024 10:38 WIB   
+2    Kamis, 05 Sep 2024 10:03 WIB   
+3    Kamis, 05 Sep 2024 09:37 WIB   
+4    Kamis, 05 Sep 2024 08:35 WIB   
+..                            ...   
+95    Rabu, 04 Sep 2024 05:01 WIB   
+96  Selasa, 03 Sep 2024 21:05 WIB   
+97  Selasa, 03 Sep 2024 20:37 WIB   
+98  Selasa, 03 Sep 2024 20:05 WIB   
+99  Selasa, 03 Sep 2024 19:37 WIB   
+
+                                                  isi    kategori  \
+0   Jakarta - Tak sedikit yang beranggapan bahwa o...   Kesehatan   
+1   Jakarta -\n        \n        Istilah &#39;bekerja ...   Kesehatan   
+2   Jakarta - Faisal Basri meninggal dunia. Ekonom...   Kesehatan   
+3   Jakarta - Pemimpin tertinggi Gereja Katolik se...   Kesehatan   
+4   Jakarta - Aksi bullying atau perundungan di ma...   Kesehatan   
+..                                                ...         ...   
+95  Jakarta - Warga Thailand dibuat jijik dengan k...  Pariwisata   
+96  Taba - Seorang staf hotel di Mesir tewas usai ...  Pariwisata   
+97  Jakarta - Keluarga asal Meksiko dituduh melaku...  Pariwisata   
+98  Paris - Saat Olimpiade Paris 2024 lalu, kompet...  Pariwisata   
+99  Jakarta - Super Air Jet membuka delapan rute b...  Pariwisata   
+
+                                         cleaned_text  \
+0   Jakarta Tak sedikit yang beranggapan bahwa ora...   
+1   Jakarta Istilah bekerja sampai mati nampaknya ...   
+2   Jakarta Faisal Basri meninggal dunia Ekonom Un...   
+3   Jakarta Pemimpin tertinggi Gereja Katolik sedu...   
+4   Jakarta Aksi bullying atau perundungan di masa...   
+..                                                ...   
+95  Jakarta Warga Thailand dibuat jijik dengan kel...   
+96  Taba Seorang staf hotel di Mesir tewas usai be...   
+97  Jakarta Keluarga asal Meksiko dituduh melakuka...   
+98  Paris Saat Olimpiade Paris lalu kompetisi tria...   
+99  Jakarta Super Air Jet membuka delapan rute bar...   
+
+                                            norm_text  \
+0   jakarta tidak sedikit yang beranggapan bahwa o...   
+1   jakarta istilah bekerja sampai mati nampaknya ...   
+2   jakarta faisal basri meninggal dunia ekonom un...   
+3   jakarta pemimpin tertinggi gereja katolik sedu...   
+4   jakarta aksi bullying atau perundungan di masa...   
+..                                                ...   
+95  jakarta warga thailand dibuat jijik dengan kel...   
+96  taba seorang staf hotel di mesir tewas usai be...   
+97  jakarta keluarga asal meksiko dituduh melakuka...   
+98  paris saat olimpiade paris lalu kompetisi tria...   
+99  jakarta super air jet membuka delapan rute bar...   
+
+                                           token_text  \
+0   [&#39;jakarta&#39;, &#39;tidak&#39;, &#39;sedikit&#39;, &#39;yang&#39;, &#39;beran...   
+1   [&#39;jakarta&#39;, &#39;istilah&#39;, &#39;bekerja&#39;, &#39;sampai&#39;, &#39;m...   
+2   [&#39;jakarta&#39;, &#39;faisal&#39;, &#39;basri&#39;, &#39;meninggal&#39;, &#39;d...   
+3   [&#39;jakarta&#39;, &#39;pemimpin&#39;, &#39;tertinggi&#39;, &#39;gereja&#39;,...   
+4   [&#39;jakarta&#39;, &#39;aksi&#39;, &#39;bullying&#39;, &#39;atau&#39;, &#39;perun...   
+..                                                ...   
+95  [&#39;jakarta&#39;, &#39;warga&#39;, &#39;thailand&#39;, &#39;dibuat&#39;, &#39;ji...   
+96  [&#39;taba&#39;, &#39;seorang&#39;, &#39;staf&#39;, &#39;hotel&#39;, &#39;di&#39;, &#39;me...   
+97  [&#39;jakarta&#39;, &#39;keluarga&#39;, &#39;asal&#39;, &#39;meksiko&#39;, &#39;di...   
+98  [&#39;paris&#39;, &#39;saat&#39;, &#39;olimpiade&#39;, &#39;paris&#39;, &#39;lalu&#39;...   
+99  [&#39;jakarta&#39;, &#39;super&#39;, &#39;air&#39;, &#39;jet&#39;, &#39;membuka&#39;, ...   
+
+                                        swremove_text  \
+0   [jakarta, sedikit, beranggapan, orang, berbada...   
+1   [jakarta, istilah, bekerja, mati, nampaknya, s...   
+2   [jakarta, faisal, basri, meninggal, dunia, eko...   
+3   [jakarta, pemimpin, tertinggi, gereja, katolik...   
+4   [jakarta, aksi, bullying, perundungan, masa, p...   
+..                                                ...   
+95  [jakarta, warga, thailand, dibuat, jijik, kela...   
+96  [taba, seorang, staf, hotel, mesir, tewas, usa...   
+97  [jakarta, keluarga, asal, meksiko, dituduh, me...   
+98  [paris, olimpiade, paris, lalu, kompetisi, tri...   
+99  [jakarta, super, air, jet, membuka, delapan, r...   
+
+                                           clean_text  kategori_encoded  
+0   jakarta sedikit beranggapan orang berbadan kur...                 0  
+1   jakarta istilah bekerja mati nampaknya ssudah ...                 0  
+2   jakarta faisal basri meninggal dunia ekonom un...                 0  
+3   jakarta pemimpin tertinggi gereja katolik sedu...                 0  
+4   jakarta aksi bullying perundungan masa program...                 0  
+..                                                ...               ...  
+95  jakarta warga thailand dibuat jijik kelakuan s...                 1  
+96  taba seorang staf hotel mesir tewas usai berke...                 1  
+97  jakarta keluarga asal meksiko dituduh melakuka...                 1  
+98  paris olimpiade paris lalu kompetisi triatlon ...                 1  
+99  jakarta super air jet membuka delapan rute bar...                 1  
+
+[100 rows x 10 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menyimpan DataFrame ke file CSV</span>
+<span class="n">df_doc</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;teks beneran bersih rill cuy.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="split-data">
+<h1><strong>Split Data</strong><a class="headerlink" href="#split-data" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># Split data</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">df_doc</span><span class="p">[</span><span class="s1">&#39;clean_text&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_doc</span><span class="p">[</span><span class="s1">&#39;kategori_encoded&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah data latih:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_train</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah data uji:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     jakarta sedikit beranggapan orang berbadan kur...
+1     jakarta istilah bekerja mati nampaknya ssudah ...
+2     jakarta faisal basri meninggal dunia ekonom un...
+3     jakarta pemimpin tertinggi gereja katolik sedu...
+4     jakarta aksi bullying perundungan masa program...
+                            ...                        
+95    jakarta warga thailand dibuat jijik kelakuan s...
+96    taba seorang staf hotel mesir tewas usai berke...
+97    jakarta keluarga asal meksiko dituduh melakuka...
+98    paris olimpiade paris lalu kompetisi triatlon ...
+99    jakarta super air jet membuka delapan rute bar...
+Name: clean_text, Length: 100, dtype: object
+0     0
+1     0
+2     0
+3     0
+4     0
+     ..
+95    1
+96    1
+97    1
+98    1
+99    1
+Name: kategori_encoded, Length: 100, dtype: int64
+==================================================
+Jumlah data latih: 80
+Jumlah data uji: 20
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tf-idf-weighting">
+<h1><strong>TF-IDF Weighting</strong><a class="headerlink" href="#tf-idf-weighting" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="c1"># Inisialisasi TF-IDF Vectorizer</span>
+<span class="n">tfidf</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+
+<span class="c1"># Fit dan transform pada data training</span>
+<span class="n">x_train_tfidf</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+
+<span class="c1"># Mendapatkan nama fitur dari TF-IDF</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+
+<span class="c1"># Konversi TF-IDF hasil training ke DataFrame</span>
+<span class="n">df_train_tfidf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">x_train_tfidf</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
+
+<span class="n">df_train_tfidf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-cc8e065b-b8d1-4a3d-abae-2091fd05244d" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>aachen</th>
+      <th>abad</th>
+      <th>abang</th>
+      <th>abdalmasih</th>
+      <th>abidin</th>
+      <th>abror</th>
+      <th>absen</th>
+      <th>abuabu</th>
+      <th>ac</th>
+      <th>academic</th>
+      <th>...</th>
+      <th>yura</th>
+      <th>zainoel</th>
+      <th>zaitunalpukatselain</th>
+      <th>zaman</th>
+      <th>zat</th>
+      <th>zealand</th>
+      <th>zenix</th>
+      <th>zero</th>
+      <th>zulies</th>
+      <th>zurich</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.095311</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.075569</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.03387</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>77</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>78</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+      <td>0.057369</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>80 rows × 5350 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-cc8e065b-b8d1-4a3d-abae-2091fd05244d')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-cc8e065b-b8d1-4a3d-abae-2091fd05244d button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-cc8e065b-b8d1-4a3d-abae-2091fd05244d');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-677a4a7a-b7e4-4e8b-a97f-b11459b96750">
+  <button class="colab-df-quickchart" onclick="quickchart('df-677a4a7a-b7e4-4e8b-a97f-b11459b96750')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-677a4a7a-b7e4-4e8b-a97f-b11459b96750 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_0f93b128-91d0-4e58-b080-06da8904049c">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('df_train_tfidf')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_0f93b128-91d0-4e58-b080-06da8904049c button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('df_train_tfidf');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ubah nilai TF-IDF di bawah 0.5 menjadi 0, dan di atas atau sama dengan 0.5 menjadi 1</span>
+<span class="n">df_train_tfidf_binary</span> <span class="o">=</span> <span class="n">df_train_tfidf</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">col</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># Menampilkan DataFrame dengan nilai biner</span>
+<span class="n">df_train_tfidf_binary</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-df634613-1fb8-48b5-9d2d-2f1ef4bf49b2" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>aachen</th>
+      <th>abad</th>
+      <th>abang</th>
+      <th>abdalmasih</th>
+      <th>abidin</th>
+      <th>abror</th>
+      <th>absen</th>
+      <th>abuabu</th>
+      <th>ac</th>
+      <th>academic</th>
+      <th>...</th>
+      <th>yura</th>
+      <th>zainoel</th>
+      <th>zaitunalpukatselain</th>
+      <th>zaman</th>
+      <th>zat</th>
+      <th>zealand</th>
+      <th>zenix</th>
+      <th>zero</th>
+      <th>zulies</th>
+      <th>zurich</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>77</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>78</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>80 rows × 5350 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-df634613-1fb8-48b5-9d2d-2f1ef4bf49b2')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-df634613-1fb8-48b5-9d2d-2f1ef4bf49b2 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-df634613-1fb8-48b5-9d2d-2f1ef4bf49b2');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-2cefe125-af25-406d-9c55-52f25a507d60">
+  <button class="colab-df-quickchart" onclick="quickchart('df-2cefe125-af25-406d-9c55-52f25a507d60')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-2cefe125-af25-406d-9c55-52f25a507d60 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_05e660c6-64f6-41f6-88fa-34277ae741db">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('df_train_tfidf_binary')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_05e660c6-64f6-41f6-88fa-34277ae741db button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('df_train_tfidf_binary');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Membuat graf berdasarkan co-occurrence fitur</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+
+<span class="c1"># Menambahkan node ke graf</span>
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">df_train_tfidf_binary</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+<span class="c1"># Menambahkan edge berdasarkan co-occurrence</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_train_tfidf_binary</span><span class="p">)):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">df_train_tfidf_binary</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">active_features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">features</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">active_features</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">active_features</span><span class="p">)):</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">active_features</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">active_features</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+
+<span class="c1"># Hitung degree centrality</span>
+<span class="n">degree_centrality</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">degree_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="c1"># Konversi hasil degree centrality ke DataFrame untuk lebih mudah dilihat</span>
+<span class="n">df_degree_centrality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">degree_centrality</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Node&#39;</span><span class="p">,</span> <span class="s1">&#39;Degree Centrality&#39;</span><span class="p">])</span>
+
+<span class="c1"># Mengurutkan DataFrame dari yang terbesar sampai terkecil</span>
+<span class="n">df_degree_centrality_sorted</span> <span class="o">=</span> <span class="n">df_degree_centrality</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Degree Centrality&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Tampilkan hasil degree centrality yang sudah diurutkan</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_degree_centrality_sorted</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            Node  Degree Centrality
+791     citilink           0.000187
+3652   pelanggan           0.000187
+0         aachen           0.000000
+3564     pangdam           0.000000
+3571       panik           0.000000
+...          ...                ...
+1783     insulin           0.000000
+1782  institutes           0.000000
+1781    institut           0.000000
+1780   institusi           0.000000
+5349      zurich           0.000000
+
+[5350 rows x 2 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menghapus fitur di bawah top 10 terbaik</span>
+<span class="n">top_10_features</span> <span class="o">=</span> <span class="n">df_degree_centrality_sorted</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="s1">&#39;Node&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">filtered_df_train_tfidf_binary</span> <span class="o">=</span> <span class="n">df_train_tfidf_binary</span><span class="p">[</span><span class="n">top_10_features</span><span class="p">]</span>
+
+<span class="c1"># Tampilkan hasil DataFrame yang sudah difilter</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DataFrame setelah menghapus fitur di bawah top 10:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">filtered_df_train_tfidf_binary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DataFrame setelah menghapus fitur di bawah top 10:
+    citilink  pelanggan  aachen  pangdam  panik  pangrangohunian  panggung  \
+0          0          0       0        0      0                0         0   
+1          0          0       0        0      0                0         0   
+2          0          0       0        0      0                0         0   
+3          0          0       0        0      0                0         0   
+4          0          0       0        0      0                0         0   
+..       ...        ...     ...      ...    ...              ...       ...   
+75         0          0       0        0      0                0         0   
+76         0          0       0        0      0                0         0   
+77         0          0       0        0      0                0         0   
+78         0          0       0        0      0                0         0   
+79         0          0       0        0      0                0         0   
+
+    panggulnyeri  panggul  panggil  
+0              0        0        0  
+1              0        0        0  
+2              0        0        0  
+3              0        0        0  
+4              0        0        0  
+..           ...      ...      ...  
+75             0        0        0  
+76             0        0        0  
+77             0        0        0  
+78             0        0        0  
+79             0        0        0  
+
+[80 rows x 10 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Membuat graf baru hanya untuk fitur teratas</span>
+<span class="n">G_top_10</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+
+<span class="c1"># Menambahkan node teratas ke graf</span>
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">top_10_features</span><span class="p">:</span>
+    <span class="n">G_top_10</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+<span class="c1"># Menambahkan edge berdasarkan co-occurrence dari fitur teratas</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_train_tfidf_binary</span><span class="p">)):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">df_train_tfidf_binary</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">active_features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">features</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">active_top_10_features</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">active_features</span> <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">top_10_features</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">active_top_10_features</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">active_top_10_features</span><span class="p">)):</span>
+            <span class="n">G_top_10</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">active_top_10_features</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">active_top_10_features</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+
+<span class="c1"># Mengatur ukuran figure untuk visualisasi graf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Menggambar graf fitur teratas</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G_top_10</span><span class="p">)</span>  <span class="c1"># Menggunakan layout spring</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G_top_10</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>  <span class="c1"># Menggambar node</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G_top_10</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Menggambar edge</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G_top_10</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">font_family</span><span class="o">=</span><span class="s1">&#39;sans-serif&#39;</span><span class="p">)</span>  <span class="c1"># Menggambar label</span>
+
+<span class="c1"># Menampilkan graf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Graf untuk 10 Fitur Teratas&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>  <span class="c1"># Menyembunyikan sumbu</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bb71725c8dcacb7c528f8551df94117c34ad3274eb85e8e52f138de723b2d6ab.png" src="../_images/bb71725c8dcacb7c528f8551df94117c34ad3274eb85e8e52f138de723b2d6ab.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menghitung closeness centrality</span>
+<span class="n">closeness_centrality</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">G_top_10</span><span class="p">)</span>
+
+<span class="c1"># Menghitung betweenness centrality</span>
+<span class="n">betweenness_centrality</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">betweenness_centrality</span><span class="p">(</span><span class="n">G_top_10</span><span class="p">)</span>
+
+<span class="c1"># Konversi hasil centrality ke DataFrame untuk lebih mudah dilihat</span>
+<span class="n">df_closeness_centrality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">closeness_centrality</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Node&#39;</span><span class="p">,</span> <span class="s1">&#39;Closeness Centrality&#39;</span><span class="p">])</span>
+<span class="n">df_betweenness_centrality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">betweenness_centrality</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Node&#39;</span><span class="p">,</span> <span class="s1">&#39;Betweenness Centrality&#39;</span><span class="p">])</span>
+
+<span class="c1"># Menggabungkan semua centrality ke dalam satu DataFrame</span>
+<span class="n">df_centrality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_degree_centrality_sorted</span><span class="p">,</span> <span class="n">df_closeness_centrality</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;Node&#39;</span><span class="p">)</span>
+<span class="n">df_centrality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_centrality</span><span class="p">,</span> <span class="n">df_betweenness_centrality</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;Node&#39;</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan hasil centrality</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_centrality</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              Node  Degree Centrality  Closeness Centrality  \
+0         citilink           0.000187              0.111111   
+1        pelanggan           0.000187              0.111111   
+2           aachen           0.000000              0.000000   
+3          pangdam           0.000000              0.000000   
+4            panik           0.000000              0.000000   
+5  pangrangohunian           0.000000              0.000000   
+6         panggung           0.000000              0.000000   
+7     panggulnyeri           0.000000              0.000000   
+8          panggul           0.000000              0.000000   
+9          panggil           0.000000              0.000000   
+
+   Betweenness Centrality  
+0                     0.0  
+1                     0.0  
+2                     0.0  
+3                     0.0  
+4                     0.0  
+5                     0.0  
+6                     0.0  
+7                     0.0  
+8                     0.0  
+9                     0.0  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">cosine_similarity</span>
+
+<span class="c1"># Menghitung cosine similarity</span>
+<span class="n">cosine_sim_matrix</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">df_train_tfidf_binary</span><span class="p">[</span><span class="n">top_10_features</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+<span class="c1"># Membuat DataFrame untuk cosine similarity</span>
+<span class="n">df_cosine_sim</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cosine_sim_matrix</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">top_10_features</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">top_10_features</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan hasil cosine similarity</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cosine Similarity antara Fitur Teratas:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_cosine_sim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cosine Similarity antara Fitur Teratas:
+                 citilink  pelanggan  aachen  pangdam  panik  pangrangohunian  \
+citilink              1.0        1.0     0.0      0.0    0.0              0.0   
+pelanggan             1.0        1.0     0.0      0.0    0.0              0.0   
+aachen                0.0        0.0     0.0      0.0    0.0              0.0   
+pangdam               0.0        0.0     0.0      0.0    0.0              0.0   
+panik                 0.0        0.0     0.0      0.0    0.0              0.0   
+pangrangohunian       0.0        0.0     0.0      0.0    0.0              0.0   
+panggung              0.0        0.0     0.0      0.0    0.0              0.0   
+panggulnyeri          0.0        0.0     0.0      0.0    0.0              0.0   
+panggul               0.0        0.0     0.0      0.0    0.0              0.0   
+panggil               0.0        0.0     0.0      0.0    0.0              0.0   
+
+                 panggung  panggulnyeri  panggul  panggil  
+citilink              0.0           0.0      0.0      0.0  
+pelanggan             0.0           0.0      0.0      0.0  
+aachen                0.0           0.0      0.0      0.0  
+pangdam               0.0           0.0      0.0      0.0  
+panik                 0.0           0.0      0.0      0.0  
+pangrangohunian       0.0           0.0      0.0      0.0  
+panggung              0.0           0.0      0.0      0.0  
+panggulnyeri          0.0           0.0      0.0      0.0  
+panggul               0.0           0.0      0.0      0.0  
+panggil               0.0           0.0      0.0      0.0  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ke-2-ambil-1-berita">
+<h1>Ke 2 : Ambil 1 Berita<a class="headerlink" href="#ke-2-ambil-1-berita" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mengimpor library yang diperlukan</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Teks berita yang telah dirapikan</span>
+<span class="n">news_text_1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Jakarta sedikit beranggapan orang berbadan kurus bebas risiko kolesterol tinggi dibandingkan orang berbadan gemuk. Sudah punya kolesterol tinggi, sebenarnya anggapan tersebut benar. Spesialis penyakit, dr. Aru Ariadno, SPPDKGEH menjelaskan pernyataan tersebut sepenuhnya tepat. Ia mengatakan sebenarnya banyak faktor yang membuat kadar kolesterol tubuh seseorang naik. Pola makan buruk dan kurangnya olahraga memang menjadi faktor utama kolesterol tinggi. Faktor seperti genetik seseorang berpengaruh. Kolesterol hubungannya genetik. Orang kurus juga mengalami gangguan kolesterol, kata dr. Aru dihubungi detikcom, Rabu. Orang dengan badan gemuk (obesitas) memang lebih rentan terhadap masalah kolesterol tinggi. Hanya hipertensi dan masalah obesitas bisa berdampak pada kesehatan manusia. Obesitas dapat ditangani baik. Baca sederet gejala kolesterol tinggi yang bisa muncul pada pria. Selain berat badan berlebih, kerap dikaitkan dengan pola makan tinggi lemak dan kurangnya aktivitas fisik, yang semakin memperbesar risiko tingginya kolesterol darah. Ketika seseorang mengalami obesitas, bisa menyebabkan sindrom metabolik, termasuk diabetes, kolesterol tinggi, dan hipertensi, ujarnya. Dr. Aru mengingatkan kolesterol tinggi paling banyak diakibatkan pola makan buruk dan jarang berolahraga. Ini berpengaruh pada semua orang, tidak melihat apakah orang tersebut memiliki badan kurus atau gemuk. Menurutnya, pola hidup sehat menjadi kunci utama pengelolaan kadar kolesterol tubuh. Jangan lupa menjaga tingkat stres dan berhenti merokok untuk membantu mencegah masalah kolesterol timbul. Baca juga sering sakit bagian belakang kepala bisa jadi tanda kolesterol tinggi. Dokter spesialis saraf stroke bisa dicegah.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">news_text_2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Jakarta, Super Air Jet membuka delapan rute baru Semarang menuju berbagai destinasi di Indonesia. Penerbangan ini disebut menunjang traveler bisnis trip ataupun mengkoneksikan masyarakat keluarga. Semarang adalah kota sejarah kaya budaya dan gerbang penting berbagai destinasi eksotis di Indonesia. Terhubungnya rute baru Super Air Jet membawa lebih banyak traveler untuk menikmati berbagai sisi Indonesia secara langsung dari Semarang, ujar Direktur Utama Super Air Jet, Ari Azhari, dalam rilisnya detiktravel, Selasa. Rute penerbangan tersebut mulai dijalankan pada bulan September. Berikut adalah rute dan jadwal penerbangannya:</span>
+<span class="s2">- Semarang - Balikpapan PP, jadwal terbang Senin, Rabu, dan Jumat.</span>
+<span class="s2">- Semarang - Pekanbaru PP, jadwal terbang Rabu dan Minggu.</span>
+<span class="s2">- Semarang - Lombok PP, jadwal terbang Rabu dan Minggu.</span>
+<span class="s2">- Semarang - Makassar PP, jadwal terbang Senin sampai Sabtu.</span>
+<span class="s2">- Semarang - Medan Kualanamu, jadwal terbang Senin dan Jumat.</span>
+<span class="s2">- Semarang - Palembang, jadwal terbang Senin dan Rabu.</span>
+<span class="s2">- Semarang - Banjarmasin, jadwal terbang Selasa, Kamis, dan Sabtu.</span>
+<span class="s2">- Semarang - Padang, jadwal terbang Selasa dan Kamis.</span>
+<span class="s2">Baca juga catat rute Dieng - Jakarta naik kereta, waktu tempuhnya. Lion Group pastikan kondisi awak pesawat prima antar pemudik pulang kampung.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># Mengubah teks menjadi DataFrame</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">news_text_1</span><span class="p">,</span> <span class="n">news_text_2</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+
+<span class="c1"># Menampilkan DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                text
+0  \nJakarta sedikit beranggapan orang berbadan k...
+1  \nJakarta, Super Air Jet membuka delapan rute ...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mengimpor library yang diperlukan</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="c1"># Menghitung TF-IDF</span>
+<span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+
+<span class="c1"># Mengambil nama fitur (kata) dari TF-IDF</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+
+<span class="c1"># Menghitung skor TF-IDF untuk setiap fitur</span>
+<span class="n">tfidf_scores</span> <span class="o">=</span> <span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="n">df_tfidf_scores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tfidf_scores</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
+
+<span class="c1"># Mengurutkan DataFrame berdasarkan skor TF-IDF dari terbesar ke terkecil</span>
+<span class="n">df_top_features</span> <span class="o">=</span> <span class="n">df_tfidf_scores</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_top_features</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Feature&#39;</span><span class="p">,</span> <span class="s1">&#39;Score&#39;</span><span class="p">]</span>
+
+<span class="c1"># Pastikan kolom &#39;Score&#39; adalah tipe data numerik</span>
+<span class="n">df_top_features</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df_top_features</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+
+<span class="c1"># Mengurutkan berdasarkan skor</span>
+<span class="n">df_top_features</span> <span class="o">=</span> <span class="n">df_top_features</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Score&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Mengambil 10 fitur terbaik</span>
+<span class="n">top_10_features</span> <span class="o">=</span> <span class="n">df_top_features</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan 10 fitur terbaik</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;10 Fitur Terbaik:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">top_10_features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10 Fitur Terbaik:
+         Feature     Score
+99   kolesterol  0.548083
+186    semarang  0.474600
+41          dan  0.443413
+81       jadwal  0.388309
+212      tinggi  0.352339
+205     terbang  0.345163
+147       orang  0.234893
+172        rute  0.215727
+34         bisa  0.195744
+188       senin  0.172582
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mengimpor library yang diperlukan</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">cosine_similarity</span>
+
+<span class="c1"># Mengambil hanya nama fitur dari 10 fitur teratas</span>
+<span class="n">top_10_feature_names</span> <span class="o">=</span> <span class="n">top_10_features</span><span class="p">[</span><span class="s1">&#39;Feature&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Mengambil indeks fitur di vocabulary</span>
+<span class="n">top_10_feature_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">top_10_feature_names</span><span class="p">]</span>
+
+<span class="c1"># Mengambil kolom TF-IDF untuk 10 fitur teratas</span>
+<span class="n">top_10_tfidf_matrix</span> <span class="o">=</span> <span class="n">tfidf_matrix</span><span class="p">[:,</span> <span class="n">top_10_feature_indices</span><span class="p">]</span>
+
+<span class="c1"># Menghitung cosine similarity</span>
+<span class="n">cosine_sim</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">top_10_tfidf_matrix</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+<span class="c1"># Mengubah hasil cosine similarity menjadi DataFrame untuk kemudahan analisis</span>
+<span class="n">cosine_sim_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cosine_sim</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">top_10_feature_names</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">top_10_feature_names</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan cosine similarity</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cosine Similarity Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">cosine_sim_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cosine Similarity Matrix:
+             kolesterol  semarang       dan    jadwal    tinggi   terbang  \
+kolesterol    1.000000  0.000000  0.517583  0.000000  1.000000  0.000000   
+semarang      0.000000  1.000000  0.855633  1.000000  0.000000  1.000000   
+dan           0.517583  0.855633  1.000000  0.855633  0.517583  0.855633   
+jadwal        0.000000  1.000000  0.855633  1.000000  0.000000  1.000000   
+tinggi        1.000000  0.000000  0.517583  0.000000  1.000000  0.000000   
+terbang       0.000000  1.000000  0.855633  1.000000  0.000000  1.000000   
+orang         1.000000  0.000000  0.517583  0.000000  1.000000  0.000000   
+rute          0.000000  1.000000  0.855633  1.000000  0.000000  1.000000   
+bisa          1.000000  0.000000  0.517583  0.000000  1.000000  0.000000   
+senin         0.000000  1.000000  0.855633  1.000000  0.000000  1.000000   
+
+               orang      rute      bisa     senin  
+kolesterol  1.000000  0.000000  1.000000  0.000000  
+semarang    0.000000  1.000000  0.000000  1.000000  
+dan         0.517583  0.855633  0.517583  0.855633  
+jadwal      0.000000  1.000000  0.000000  1.000000  
+tinggi      1.000000  0.000000  1.000000  0.000000  
+terbang     0.000000  1.000000  0.000000  1.000000  
+orang       1.000000  0.000000  1.000000  0.000000  
+rute        0.000000  1.000000  0.000000  1.000000  
+bisa        1.000000  0.000000  1.000000  0.000000  
+senin       0.000000  1.000000  0.000000  1.000000  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menambahkan klasifikasi berdasarkan nilai cosine similarity</span>
+<span class="n">classification</span> <span class="o">=</span> <span class="p">(</span><span class="n">cosine_sim_df</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan DataFrame klasifikasi</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Classification Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">classification</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Classification Matrix:
+             kolesterol  semarang  dan  jadwal  tinggi  terbang  orang  rute  \
+kolesterol           1         0    1       0       1        0      1     0   
+semarang             0         1    1       1       0        1      0     1   
+dan                  1         1    1       1       1        1      1     1   
+jadwal               0         1    1       1       0        1      0     1   
+tinggi               1         0    1       0       1        0      1     0   
+terbang              0         1    1       1       0        1      0     1   
+orang                1         0    1       0       1        0      1     0   
+rute                 0         1    1       1       0        1      0     1   
+bisa                 1         0    1       0       1        0      1     0   
+senin                0         1    1       1       0        1      0     1   
+
+            bisa  senin  
+kolesterol     1      0  
+semarang       0      1  
+dan            1      1  
+jadwal         0      1  
+tinggi         1      0  
+terbang        0      1  
+orang          1      0  
+rute           0      1  
+bisa           1      0  
+senin          0      1  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Membuat graf dari matriks klasifikasi</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_pandas_adjacency</span><span class="p">(</span><span class="n">classification</span><span class="p">)</span>
+
+<span class="c1"># Menghitung degree</span>
+<span class="n">degree</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Degree:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">degree</span><span class="p">)</span>
+
+<span class="c1"># Menghitung closeness centrality</span>
+<span class="n">closeness</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Closeness Centrality:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">closeness</span><span class="p">)</span>
+
+<span class="c1"># Menghitung betweenness centrality</span>
+<span class="n">betweenness</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">betweenness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Betweenness Centrality:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">betweenness</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree:
+ {&#39;kolesterol&#39;: 6, &#39;semarang&#39;: 7, &#39;dan&#39;: 11, &#39;jadwal&#39;: 7, &#39;tinggi&#39;: 6, &#39;terbang&#39;: 7, &#39;orang&#39;: 6, &#39;rute&#39;: 7, &#39;bisa&#39;: 6, &#39;senin&#39;: 7}
+
+Closeness Centrality:
+ {&#39;kolesterol&#39;: 0.6428571428571429, &#39;semarang&#39;: 0.6923076923076923, &#39;dan&#39;: 1.0, &#39;jadwal&#39;: 0.6923076923076923, &#39;tinggi&#39;: 0.6428571428571429, &#39;terbang&#39;: 0.6923076923076923, &#39;orang&#39;: 0.6428571428571429, &#39;rute&#39;: 0.6923076923076923, &#39;bisa&#39;: 0.6428571428571429, &#39;senin&#39;: 0.6923076923076923}
+
+Betweenness Centrality:
+ {&#39;kolesterol&#39;: 0.0, &#39;semarang&#39;: 0.0, &#39;dan&#39;: 0.5555555555555556, &#39;jadwal&#39;: 0.0, &#39;tinggi&#39;: 0.0, &#39;terbang&#39;: 0.0, &#39;orang&#39;: 0.0, &#39;rute&#39;: 0.0, &#39;bisa&#39;: 0.0, &#39;senin&#39;: 0.0}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+
+<span class="c1"># Mengubah hasil cosine similarity menjadi DataFrame untuk kemudahan analisis</span>
+<span class="n">cosine_sim_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cosine_sim</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">top_10_feature_names</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">top_10_feature_names</span><span class="p">)</span>
+
+<span class="c1"># Menambahkan klasifikasi berdasarkan nilai cosine similarity</span>
+<span class="n">classification</span> <span class="o">=</span> <span class="p">(</span><span class="n">cosine_sim_df</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Membuat graf dari matriks klasifikasi</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_pandas_adjacency</span><span class="p">(</span><span class="n">classification</span><span class="p">)</span>
+
+<span class="c1"># Menggambar graf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>  <span class="c1"># Menggunakan spring layout untuk penempatan node</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Graf Klasifikasi Fitur&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/27abf74c568bc57478184993baf986185e262526d23e845843559073bb1a384b.png" src="../_images/27abf74c568bc57478184993baf986185e262526d23e845843559073bb1a384b.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Tugas-PPWA"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Tugas 4 : Centrality</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data"><strong>Split Data</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-weighting"><strong>TF-IDF Weighting</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ke-2-ambil-1-berita">Ke 2 : Ambil 1 Berita</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 210411100002 - Mohammad Iqbal Surya Ramadhan
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
