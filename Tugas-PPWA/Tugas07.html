@@ -1,0 +1,1104 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tugas 5 : Query dengan kalimat &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas-PPWA/Tugas07';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/PROFIL.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <img src="../_static/PROFIL.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to my website!
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tugas-1.html">Membuat Sebuah Webstatis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas01.html">Tugas 01 : <strong>Crawling Berita</strong></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Tugas02.html">Tugas 02 : <strong>Membuat Vector Space Model dengan Bobot TFID</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas03.html">Tugas 03 : <strong>Melakukan Pengujian dan Deploy</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas05.html">Tugas 04 : <strong>Centrality</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas06.html">Tugas 05 : <strong>keyword extraction</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas08.html">Tugas 6 :  Sistem pencarian Query dengan kalimat dalam dokumen dengan penerapan Singular Value Decomposition (SVD)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/Iqbalsuryaa/PPWA/blob/gh-pages/_sources/Tugas-PPWA/Tugas07.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Iqbalsuryaa/PPWA" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Iqbalsuryaa/PPWA/issues/new?title=Issue%20on%20page%20%2FTugas-PPWA/Tugas07.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Tugas-PPWA/Tugas07.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tugas 5 : Query dengan kalimat</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tugas-5-query-dengan-kalimat">
+<h1>Tugas 5 : Query dengan kalimat<a class="headerlink" href="#tugas-5-query-dengan-kalimat" title="Link to this heading">#</a></h1>
+<p>NAMA : Mohammad Iqbal Surya Ramadhan</p>
+<p>NIM  : 210411100002</p>
+<p>MATA KULIAH : Pencarian dan Penambangan Web - A</p>
+<p>mencari 100 dokumen itu (masukkan 1 kalimat, ketemunya dokumen yg mana)</p>
+<p>data tfidf ditransofrmasi menjadi sdikit dimensi menggunakan svd
+yg diambil v dan sigma (v tdk diambil smua)(Sebagian dri v)
+mentransformasi supaya dikit kolom</p>
+<p>cosinus similtas (mirip mendekati 1) boleh pke euclidean</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-1-d5df0069828e&gt;</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/drive.py</span> in <span class="ni">mount</span><span class="nt">(mountpoint, force_remount, timeout_ms, readonly)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span> <span class="k">def</span> <span class="nf">mount</span><span class="p">(</span><span class="n">mountpoint</span><span class="p">,</span> <span class="n">force_remount</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">120000</span><span class="p">,</span> <span class="n">readonly</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span><span class="w">   </span><span class="sd">&quot;&quot;&quot;Mount your Google Drive at the specified mountpoint path.&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">100</span>   <span class="k">return</span> <span class="n">_mount</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span>       <span class="n">mountpoint</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span>       <span class="n">force_remount</span><span class="o">=</span><span class="n">force_remount</span><span class="p">,</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/drive.py</span> in <span class="ni">_mount</span><span class="nt">(mountpoint, force_remount, timeout_ms, ephemeral, readonly)</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span>   <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>   <span class="k">if</span> <span class="n">ephemeral</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">137</span>     <span class="n">_message</span><span class="o">.</span><span class="n">blocking_request</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span>         <span class="s1">&#39;request_auth&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span>         <span class="n">request</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;authType&#39;</span><span class="p">:</span> <span class="s1">&#39;dfs_ephemeral&#39;</span><span class="p">},</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">blocking_request</span><span class="nt">(request_type, request, timeout_sec, parent)</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span>       <span class="n">request_type</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">,</span> <span class="n">expect_reply</span><span class="o">=</span><span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">175</span>   <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">176</span>   <span class="k">return</span> <span class="n">read_reply_from_input</span><span class="p">(</span><span class="n">request_id</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">read_reply_from_input</span><span class="nt">(message_id, timeout_sec)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="n">reply</span> <span class="o">=</span> <span class="n">_read_next_input_message</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">if</span> <span class="n">reply</span> <span class="o">==</span> <span class="n">_NOT_READY</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reply</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">96</span>       <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.025</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>       <span class="k">continue</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>     <span class="k">if</span> <span class="p">(</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/PPWA/report/Tugas-PPWA/Hasil_Prepros.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-af090a90-9c3a-4b27-b92a-d9d79507f2dc" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>judul</th>
+      <th>tanggal</th>
+      <th>isi</th>
+      <th>kategori</th>
+      <th>cleansing</th>
+      <th>case_folding</th>
+      <th>tokenize</th>
+      <th>stopword_removal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Nunggak 8 Bulan, Segini Pajak Ford Mustang Mil...</td>
+      <td>Kamis, 19 Sep 2024 13:05 WIB</td>
+      <td>Jakarta - Bareskrim Polri menyita aset senilai...</td>
+      <td>Otomotif</td>
+      <td>Jakarta  Bareskrim Polri menyita aset senilai ...</td>
+      <td>jakarta  bareskrim polri menyita aset senilai ...</td>
+      <td>['jakarta', 'bareskrim', 'polri', 'menyita', '...</td>
+      <td>jakarta bareskrim polri menyita aset senilai r...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bos Ford Kaget usai Jajal Mobil China: Mereka ...</td>
+      <td>Kamis, 19 Sep 2024 12:33 WIB</td>
+      <td>Jakarta - Chief Executive Officer (CEO) Ford, ...</td>
+      <td>Otomotif</td>
+      <td>Jakarta  Chief Executive Officer CEO Ford Jim ...</td>
+      <td>jakarta  chief executive officer ceo ford jim ...</td>
+      <td>['jakarta', 'chief', 'executive', 'officer', '...</td>
+      <td>jakarta chief executive officer ceo ford jim f...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Tarif Tol Dalam Kota Naik Jadi Segini, Berlaku...</td>
+      <td>Kamis, 19 Sep 2024 12:08 WIB</td>
+      <td>Jakarta - Jasa Marga mengumumkan kenaikan tari...</td>
+      <td>Otomotif</td>
+      <td>Jakarta  Jasa Marga mengumumkan kenaikan tarif...</td>
+      <td>jakarta  jasa marga mengumumkan kenaikan tarif...</td>
+      <td>['jakarta', 'jasa', 'marga', 'mengumumkan', 'k...</td>
+      <td>jakarta jasa marga mengumumkan kenaikan tarif ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Pak RT Aleix Espargaro Tak Sabar Balapan Terak...</td>
+      <td>Kamis, 19 Sep 2024 11:40 WIB</td>
+      <td>Jakarta - Pebalap Aprilia asal Spanyol, Aleix ...</td>
+      <td>Otomotif</td>
+      <td>Jakarta  Pebalap Aprilia asal Spanyol Aleix Es...</td>
+      <td>jakarta  pebalap aprilia asal spanyol aleix es...</td>
+      <td>['jakarta', 'pebalap', 'aprilia', 'asal', 'spa...</td>
+      <td>jakarta pebalap aprilia spanyol aleix espargar...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Angkot Listrik Bakal Diuji Coba di Jakarta</td>
+      <td>Kamis, 19 Sep 2024 11:18 WIB</td>
+      <td>Jakarta - PT Transportasi Jakarta (TransJakart...</td>
+      <td>Otomotif</td>
+      <td>Jakarta  PT Transportasi Jakarta TransJakarta ...</td>
+      <td>jakarta  pt transportasi jakarta transjakarta ...</td>
+      <td>['jakarta', 'pt', 'transportasi', 'jakarta', '...</td>
+      <td>jakarta pt transportasi jakarta transjakarta k...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-af090a90-9c3a-4b27-b92a-d9d79507f2dc')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-af090a90-9c3a-4b27-b92a-d9d79507f2dc button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-af090a90-9c3a-4b27-b92a-d9d79507f2dc');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-f2ed6970-111f-46d9-a1df-3ca210686f20">
+  <button class="colab-df-quickchart" onclick="quickchart('df-f2ed6970-111f-46d9-a1df-3ca210686f20')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-f2ed6970-111f-46d9-a1df-3ca210686f20 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. Preprocessing sederhana (contoh: lowercasing)</span>
+<span class="n">berita_preprocessed</span> <span class="o">=</span> <span class="p">[</span><span class="n">kalimat</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">kalimat</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">cleansing</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3. TF-IDF</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">berita_preprocessed</span><span class="p">)</span>
+
+<span class="c1"># Mendapatkan fitur (kata-kata) dari TF-IDF</span>
+<span class="n">tfidf_features</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+
+<span class="c1"># Mengonversi matriks TF-IDF menjadi DataFrame agar lebih mudah dibaca</span>
+<span class="n">tfidf_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">tfidf_features</span><span class="p">)</span>
+
+<span class="c1"># Tampilkan hasil TF-IDF</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Hasil TF-IDF dalam bentuk DataFrame:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tfidf_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil TF-IDF dalam bentuk DataFrame:
+    abang  abdullah  abs  absen        ac  acara  acaraacara  acc  accord  \
+0     0.0       0.0  0.0    0.0  0.000000    0.0         0.0  0.0     0.0   
+1     0.0       0.0  0.0    0.0  0.000000    0.0         0.0  0.0     0.0   
+2     0.0       0.0  0.0    0.0  0.000000    0.0         0.0  0.0     0.0   
+3     0.0       0.0  0.0    0.0  0.000000    0.0         0.0  0.0     0.0   
+4     0.0       0.0  0.0    0.0  0.107294    0.0         0.0  0.0     0.0   
+..    ...       ...  ...    ...       ...    ...         ...  ...     ...   
+95    0.0       0.0  0.0    0.0  0.000000    0.0         0.0  0.0     0.0   
+96    0.0       0.0  0.0    0.0  0.000000    0.0         0.0  0.0     0.0   
+97    0.0       0.0  0.0    0.0  0.000000    0.0         0.0  0.0     0.0   
+98    0.0       0.0  0.0    0.0  0.000000    0.0         0.0  0.0     0.0   
+99    0.0       0.0  0.0    0.0  0.000000    0.0         0.0  0.0     0.0   
+
+    acdkil  ...  zenix      zero  zhejiang  ziko  zimbabwe  zona  zoning   zs  \
+0      0.0  ...    0.0  0.000000       0.0   0.0       0.0   0.0     0.0  0.0   
+1      0.0  ...    0.0  0.000000       0.0   0.0       0.0   0.0     0.0  0.0   
+2      0.0  ...    0.0  0.000000       0.0   0.0       0.0   0.0     0.0  0.0   
+3      0.0  ...    0.0  0.000000       0.0   0.0       0.0   0.0     0.0  0.0   
+4      0.0  ...    0.0  0.000000       0.0   0.0       0.0   0.0     0.0  0.0   
+..     ...  ...    ...       ...       ...   ...       ...   ...     ...  ...   
+95     0.0  ...    0.0  0.000000       0.0   0.0       0.0   0.0     0.0  0.0   
+96     0.0  ...    0.0  0.000000       0.0   0.0       0.0   0.0     0.0  0.0   
+97     0.0  ...    0.0  0.000000       0.0   0.0       0.0   0.0     0.0  0.0   
+98     0.0  ...    0.0  0.000000       0.0   0.0       0.0   0.0     0.0  0.0   
+99     0.0  ...    0.0  0.031358       0.0   0.0       0.0   0.0     0.0  0.0   
+
+    zulkifli   zz  
+0   0.000000  0.0  
+1   0.000000  0.0  
+2   0.000000  0.0  
+3   0.000000  0.0  
+4   0.000000  0.0  
+..       ...  ...  
+95  0.000000  0.0  
+96  0.000000  0.0  
+97  0.074101  0.0  
+98  0.000000  0.0  
+99  0.000000  0.0  
+
+[100 rows x 5925 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menggunakan SVD untuk reduksi dimensi</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> <span class="c1"># import matplotlib for visualization</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span> <span class="c1"># Import TruncatedSVD</span>
+
+<span class="c1"># Menggunakan SVD untuk reduksi dimensi</span>
+<span class="n">n_components</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Jumlah komponen yang ingin digunakan</span>
+<span class="n">svd</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">)</span>
+<span class="n">svd_matrix</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="p">)</span>
+
+<span class="c1"># Mengubah hasil SVD menjadi DataFrame untuk kemudahan</span>
+<span class="n">svd_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">svd_matrix</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Component </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_components</span><span class="p">)])</span>
+
+<span class="c1"># Menampilkan hasil</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hasil reduksi dimensi dengan SVD:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">svd_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>  <span class="c1"># Menampilkan 5 baris pertama dari hasil SVD</span>
+
+<span class="c1"># Visualisasi hasil untuk 2 komponen pertama</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">svd_df</span><span class="p">[</span><span class="s1">&#39;Component 1&#39;</span><span class="p">],</span> <span class="n">svd_df</span><span class="p">[</span><span class="s1">&#39;Component 2&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Hasil Reduksi Dimensi dengan SVD (2 Komponen Pertama)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Component 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Component 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil reduksi dimensi dengan SVD:
+   Component 1  Component 2  Component 3  Component 4  Component 5  \
+0     0.288823    -0.161579     0.159360    -0.102536     0.012820   
+1     0.271996    -0.151075     0.039268     0.122868     0.023846   
+2     0.208471     0.057110    -0.038819    -0.445492     0.560430   
+3     0.258440    -0.053829    -0.294340    -0.057445    -0.225661   
+4     0.231934    -0.048862    -0.038915     0.066702     0.016492   
+
+   Component 6  Component 7  Component 8  Component 9  Component 10  
+0    -0.004076     0.150679     0.141640    -0.210013      0.240326  
+1     0.058164     0.067774     0.141800    -0.121283      0.050399  
+2     0.541190     0.009041    -0.060198     0.074419     -0.051876  
+3     0.106812     0.009572    -0.163505    -0.005372     -0.114899  
+4     0.016621    -0.090944     0.107947    -0.009786     -0.046015  
+</pre></div>
+</div>
+<img alt="../_images/941e3f87ccf85f62af38667980a186432cdf62e832c57a71159742db869f9902.png" src="../_images/941e3f87ccf85f62af38667980a186432cdf62e832c57a71159742db869f9902.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="c1"># Kalimat query</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;jakarta sedikit beranggapan orang berbadan kurus bebas risiko kolesterol tinggi dibandingkan orang berbadan gemuk ssudah punya kolesterol tinggi sebenarnya anggapan tersebut benar adanyaspesialis penyakit dr aru ariadno sppdkgeh menjelaskan pernyataan tersebut sepenuhnya tepat mengatidakan sebenarnya banyak faktor membuat kadar kolesterol tubuh seseorang naik pola makan buruk kurangnya olahraga memang menjadi faktor utama kolesterol tinggi faktor seperti genetik seseorang berpengaruh advertisement scroll to continue with content kolesterol hubungannya genetik orang kurus mengalami gangguan kolesterol kata dr aru dihubungi detikcom rabu orang memiliki badan gemuk obesitas memang lebih rentan masalah kolesterol tinggi hanya hipertensi masalah obesitas bisa berdampak kesehatan manusia umum ditangani baik baca sederet gejala kolesterol tinggi bisa muncul priaselain berat badan berlebih kerap dikaitkan pola makan tinggi lemak kurangnya aktivitas fisik mana semakin memperbesar risiko tingginya kolesterol darahketika seseorang mengalami obese bisa menyebabkan sindrom metabolik termasuk diabetes kolesterol tinggi hipertensi ujarnya dr aru mengingatkan kolesterol tinggi paling banyak diakibatkan pola makan buruk jarang berolahraga ini berpengaruh pada semua orang tidak melihat orang tersebut memiliki badan kurus gemuk menurutnya pola hidup sehat menjadi kunci utama pengelolaan kadar kolesterol tubuh jangan lupa menjaga tingkat stres berhenti merokok untuk membantu mencegah masalah kolesterol timbul baca juga sering sakit bagian belakang kepala bisa jadi tanda kolesterol tinggi dokter spesialis saraf stroke bisa dicegah dokter spesialis saraf stroke bisa dicegah avksuc kolesterol tinggi badan kurus gaya hidup sehat sindrom metabolik&quot;&quot;&quot;</span>
+
+<span class="c1"># Preprocessing: menghapus karakter yang tidak perlu dan merapikan spasi</span>
+<span class="n">query_preprocessed</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>  <span class="c1"># Menghapus spasi berlebih</span>
+<span class="n">query_preprocessed</span> <span class="o">=</span> <span class="n">query_preprocessed</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>  <span class="c1"># Menghapus spasi di awal dan akhir</span>
+<span class="n">query_preprocessed</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\n+&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">query_preprocessed</span><span class="p">)</span>  <span class="c1"># Menghapus newline</span>
+<span class="n">query_preprocessed</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;-+&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">query_preprocessed</span><span class="p">)</span>  <span class="c1"># Mengganti banyak dash menjadi satu</span>
+
+<span class="c1"># Mengubah ke huruf kecil</span>
+<span class="n">query_preprocessed</span> <span class="o">=</span> <span class="n">query_preprocessed</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="c1"># Menampilkan hasil</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Berita yang sudah dirapikan:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">query_preprocessed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Berita yang sudah dirapikan:
+jakarta sedikit beranggapan orang berbadan kurus bebas risiko kolesterol tinggi dibandingkan orang berbadan gemuk ssudah punya kolesterol tinggi sebenarnya anggapan tersebut benar adanyaspesialis penyakit dr aru ariadno sppdkgeh menjelaskan pernyataan tersebut sepenuhnya tepat mengatidakan sebenarnya banyak faktor membuat kadar kolesterol tubuh seseorang naik pola makan buruk kurangnya olahraga memang menjadi faktor utama kolesterol tinggi faktor seperti genetik seseorang berpengaruh advertisement scroll to continue with content kolesterol hubungannya genetik orang kurus mengalami gangguan kolesterol kata dr aru dihubungi detikcom rabu orang memiliki badan gemuk obesitas memang lebih rentan masalah kolesterol tinggi hanya hipertensi masalah obesitas bisa berdampak kesehatan manusia umum ditangani baik baca sederet gejala kolesterol tinggi bisa muncul priaselain berat badan berlebih kerap dikaitkan pola makan tinggi lemak kurangnya aktivitas fisik mana semakin memperbesar risiko tingginya kolesterol darahketika seseorang mengalami obese bisa menyebabkan sindrom metabolik termasuk diabetes kolesterol tinggi hipertensi ujarnya dr aru mengingatkan kolesterol tinggi paling banyak diakibatkan pola makan buruk jarang berolahraga ini berpengaruh pada semua orang tidak melihat orang tersebut memiliki badan kurus gemuk menurutnya pola hidup sehat menjadi kunci utama pengelolaan kadar kolesterol tubuh jangan lupa menjaga tingkat stres berhenti merokok untuk membantu mencegah masalah kolesterol timbul baca juga sering sakit bagian belakang kepala bisa jadi tanda kolesterol tinggi dokter spesialis saraf stroke bisa dicegah dokter spesialis saraf stroke bisa dicegah avksuc kolesterol tinggi badan kurus gaya hidup sehat sindrom metabolik
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Transformasi query ke bentuk TF-IDF</span>
+<span class="n">query_tfidf</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">query_preprocessed</span><span class="p">])</span>
+
+<span class="c1"># Transformasi TF-IDF ke SVD</span>
+<span class="n">query_svd</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">query_tfidf</span><span class="p">)</span>
+
+<span class="c1"># Mengubah hasil query SVD menjadi DataFrame untuk kemudahan</span>
+<span class="n">query_svd_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">query_svd</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Component </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_components</span><span class="p">)])</span>
+<span class="c1"># Menampilkan hasil</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hasil transformasi query ke SVD:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">query_svd_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil transformasi query ke SVD:
+   Component 1  Component 2  Component 3  Component 4  Component 5  \
+0     0.110525     0.003002    -0.025577     0.021044    -0.003255   
+
+   Component 6  Component 7  Component 8  Component 9  Component 10  
+0    -0.010442    -0.036171    -0.001775     0.025773      0.006688  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the required function</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">cosine_similarity</span>
+
+<span class="c1"># Menghitung cosine similarity antara query dan setiap berita</span>
+<span class="n">similarity_scores</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">query_svd</span><span class="p">,</span> <span class="n">svd_matrix</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan nilai cosine similarity</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nilai Cosine Similarity antara query dan setiap berita:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">similarity_scores</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nilai Cosine Similarity antara query dan setiap berita:
+[[0.23431795 0.50392525 0.07525794 0.52440764 0.83381217 0.53180754
+  0.16115862 0.77921403 0.85435738 0.50450592 0.43434048 0.87842297
+  0.17008989 0.84533558 0.92489272 0.53805371 0.43758062 0.02651346
+  0.36004142 0.61814649 0.62386315 0.58157614 0.69350141 0.77142697
+  0.32948809 0.48526096 0.56888344 0.34965772 0.73182254 0.30743925
+  0.64601562 0.62638615 0.92175318 0.76462997 0.35904103 0.6130384
+  0.76174096 0.86385949 0.31399973 0.70120864 0.33136643 0.78909764
+  0.83775895 0.79592138 0.28219097 0.78542045 0.37663736 0.49380686
+  0.23221917 0.63683738 0.07303506 0.67240308 0.64186854 0.26661958
+  0.73126931 0.74337283 0.4353221  0.18370777 0.78817062 0.28760935
+  0.84059094 0.33143923 0.76687448 0.76417021 0.77296383 0.7007708
+  0.407326   0.81643739 0.09587248 0.82922628 0.90605028 0.73911003
+  0.85854522 0.81799612 0.19569107 0.33220652 0.8214174  0.79680992
+  0.59416097 0.37782211 0.59557434 0.84937822 0.55565898 0.9610515
+  0.40115841 0.08160528 0.84278492 0.37364228 0.65086915 0.74940985
+  0.36860636 0.6989857  0.76547992 0.84576474 0.66962437 0.36209181
+  0.76813385 0.27699573 0.81779157 0.75786228]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">cosine_similarity</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> <span class="c1"># Import the numpy library</span>
+
+<span class="c1"># Mengurutkan indeks berdasarkan skor similarity (descending)</span>
+<span class="n">most_relevant_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">similarity_scores</span><span class="p">[</span><span class="mi">0</span><span class="p">])[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Memastikan indeks tidak melebihi panjang list berita</span>
+<span class="n">num_top_results</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">top_5_relevant_berita</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">cleansing</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">similarity_scores</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">most_relevant_indices</span><span class="p">[:</span><span class="n">num_top_results</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">cleansing</span><span class="p">)]</span>
+
+<span class="c1"># Cetak hasil dengan nilai cosine similarity</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Berita yang paling relevan dengan query beserta nilai cosine similarity:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">original_index</span><span class="p">,</span> <span class="n">berita_text</span><span class="p">,</span> <span class="n">similarity</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top_5_relevant_berita</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="c1"># Hanya menampilkan teks berita tanpa karakter yang tidak diinginkan</span>
+    <span class="n">cleaned_text</span> <span class="o">=</span> <span class="n">berita_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">. (Nomor Asli: </span><span class="si">{</span><span class="n">original_index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">) </span><span class="si">{</span><span class="n">cleaned_text</span><span class="si">}</span><span class="s2"> - Cosine Similarity: </span><span class="si">{</span><span class="n">similarity</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Berita yang paling relevan dengan query beserta nilai cosine similarity:
+1. (Nomor Asli: 84) Jk  Poduen wdh penyimpnn mknn ikonik beui  Thun Tuppewe encm bngku dn gulung ik Kini peuhn edng mempeipkn pengjun pili ecepny wlupun encn ini mih belum finl dn bi j beubh Melni BBC Rbu  Peiden dn CEO Tuppewe Bnd Copoion Luie Ann Goldmn mengkn bhw meek kn memin izin pengdiln unuk memuli poe penjuln bininy dn ingin peuhn eu beopei elm poe kebngkun belngung Tep ehun yng llu peuhn udh mempeingkn bhw meek mungkin kn bngku keculi jik Tuppewe behil mendpkn pendnn bu dengn cep Tuppewe jug udh beuh unuk mengekn penjuln ke pelnggn yng lebih mud Kmi beencn unuk eu melyni p pelnggn kmi yng behg dengn podukpoduk bekuli inggi yng meek uki dn pecyi elm poe ini uj Luie dikuip di BBC juh lebih di  di minggu ini eelh d lpon bhw meek beencn unuk mengjukn kebngkun Tuppewe elh bejung elm behunhun dlm membendung penuunn penjuln podukny Pemilik Tuppewe Melni di iu emi peuhn Tuppewe pem kli didiikn oleh El Sil Tuppe eki  hun yng llu I meupkn eong hli kimi yng lhi pd  ilm Sejk beui  hun Tuppe begbung dengn peuhn yng bebi inovi dn melkukn bebgi ie Di n i behil menemukn meode unuk memunikn mp biji him polyehylene bhn d pembu plik menjdi plik yng flekibel ku idk beminyk bening mn ingn dn idk bebu Kemudin pd  khiny Tuppe mendiikn uh plik milikny endii benm El S Tuppe Compny Mellui peuhn iu Tuppe memenkn podukny dengn nm PolyT Bebep hun beelng Tuppe kembli mendp ide unuk membu wdh kedp ud epei kleng c di plik unuk menyimpn mknn Di nlh i kemudin meluncukn poduk Wondelie Bowl dn Bell Tumble dengn meek Tuppewe pd  Kini kepemilikn Tuppewe udh ebgi dlm benuk hm Sehingg peuhn ikonik pembu wdh mknn eebu udh dimiliki oleh bnyk ong u peuhn Menuu iu Ndq  ini eidkny d eki  lembgpeuhn yng memegng hm di Tuppewe Bnd Copoion TUP Kepemilikn iniuionl ini menckup  hm peuhn dengn nili US  ju Simk Video Shm Tuppewe Meoo Hingg  GmbVideo deik fdlfdl - Cosine Similarity: 0.9611
+2. (Nomor Asli: 15) Jk  Pencin edn Toyo Vio yng egbung dlm Toyo Vio Club Indonei TVCI menginjk ui  dekde TVCI meykn hi jdiny yng ke hun dengn menggel jmboe nionl jmn Komuni yng bedii pd  Aguu  ini elh memiliki nggo hmpi  membe dengn ol  chpe di eluuh Indonei Jmn TVCI digel eip du hun ekli D hun  ini Jmboe Nionl dielenggkn di Bndung Bndung dlh lh u Chpe di Toyo Vio Club Indonei yng mendpkn wd Chpe Tebik pd  Jmboe Nionl ebelumny yng dilknkn pd hun  di Bli k Bey Sifuddin Keu Umum TVCI Toyo Vio Club Indonei mengimplemenikn vii di Toyo yiu I Time Fo Eveyone Vii ini diujukn bgi ip pun khuuny membe TVCI unuk bi iku bekonibui bem mencpi neli kbon Jmboe Nionl Toyo Vio Club Indonei Foo Dok TVCI Bukn ekd ilhuhmi dn kumpulkumpul pd kegin Jm keemp ini TVCI meykn ui du dekde  hun Kmi jug mendukung pemulihn ud beih khuuny di Ko Bndung dengn c cbon neul TVCI mendukung kegin eebu dengn c mennm pohon di eki e emp kmi mengdkn c uj Fid Hum TVCI Jmboe Nionl keemp TVCI ini diikui oleh eluuh membe TVCI Nionl dn kelugny Kegin ini jug eui dengn gline TVCI yiu DARONTUKA Di Oleh dn Unuk Ki Komuni ini memiliki pedomn mengendi kendn dengn eib bellu lin ehingg kegin dp mempee kekelugn TVCI dn membeikn conoh bik dlm bekend Di ui  Dekde ini TVCI ingin menjdi klub oomoif yng emkin be TVCI membuk keempn kepd ip pun pemilik Vio unuk menjdi nggony Pendfn bi lew jlu online di lmn emi TVCI Syny hny memiliki Toyo Vio dn puny SIM Klu nni Vio iu dijul kenggon meek idk kn kmi cbu Tpi unuk y egii menjdi nggo hu puny Vio uj Fid gdy - Cosine Similarity: 0.9249
+3. (Nomor Asli: 33) Jk  PT Plz Auo Meg elku gen pemegng meek Subu di Indonei bkl menyelenggkn Subu XMode Xpeience Nniny c eebu kn diii oleh le moopo yng kn mendein ck off od dn on od unuk membukikn keungguln eknologi Symmeicl AllWheel Dive SAWD dn memikn kemnn eip pelnggn Subu Teknologi Symmeicl AllWheel Dive SAWD yng dipdukn dengn iem XMODE dn mein BOXER ejk  Subu menghdikn penglmn bekend eendii dn ng bebed dibndingkn kendn mnpun Kombini mein Boxe dn iem AWD yng imei eebu benben unik menjdi keungguln Subu dn dp lngung dikn mellui edive di ck offod Penglmn menyei Subu iu ng bebed kombini mein Boxe dn Symmeicl AllWheel Dive di Subu benben unik dn menjdi keungguln Subu Ki dlh pbikn yng menggunkn eknologi ini ejk hun  dn eu menyempunknny hingg kini lh uny dengn penggunn fungi XMODE yng mkin pin dlm membnu pengemudi menklukn bebgi medn dengn ingk Sfey einggi k Chief Execuive Office Subu Indonei Aie Chiophe dlm keengn euli Rbu  Subu XMode Xpeience Foo Subu Di menjelkn c eebu beujun unuk membeikn penglmn bekend ebik kepd clon konumen Subu Unuk iu pening ny kmi menyelenggkn even edive dengn dein ck offod dn onod g clon pelnggn dp mekn kenikmn bekend Subu di emu emu kenio bem le moopo yng memiliki jm ebng di even inenionl uuny Di menjelkn nniny di c yng dielenggkn pd  Sepembe  di PT Plz Auo Meg bkl diii ejumlh le moopo lly Meek bkl bebgi penglmn kepd ejumlh pengunjung di c eebu Pd Subu XMode Xpeience  Sepembe  ini PT Plz Auo Meg bekej m dengn Julin John Ziko Hndi dn Dipo Dwiki yng meupkn le moopo lly dn jug dif unuk mendein ue edive yng eu nmun ep mengumkn unu fey unuk emu pee XMode Xpeience jelny Subu XMode Xpeience Foo Subu Aie Chiophe menjelkn c eebu bkl menghdikn ejumlh pogm kepemilikn kendn khuu P pee jug bi mendpkn penwn menik epei vouche MAP dn linny Ac Subu XMode Xpeience kn dilknkn pd khi pekn ini nggl  Sepembe  dengn iik kumpul di Bule Sek BSD Ciy Tedp pogm kepemilikn kendn khuu bgi pee yng mengikui kel offod bem Julin John epei pke pelengkpn oudoo di KZM enili Rp  vouche MAP enili Rp  u penwn khuu unuk dein dengn Subu Oubck enili Rp  uupny ncmeg - Cosine Similarity: 0.9218
+4. (Nomor Asli: 71) Jk  Menei Keengkejn Id Fuziyh bebep wku llu memin peuhn Indonei unuk mewujudkn kenymnn bekej np dikimini eui dengn pl  dn  UU Nomo  Thun  UU eebu enng Keengkejn yng mengu pelindungn kepd emu pekej lkilki mupun peempun dengn membeikn keempn dn pelkun yng m dlm bekej Id menyebu hl ini elh ejln dengn konep kej lyk unuk emu di mn lh u hk d bgi pekej dlh idk dipelkukn dikiminif dn idk dilecehkn Menuuny bedkn d menunjukkn mih dny nngn dn dikimini bgi pekej peempun di emp kej Unuk iu Id menyebu Kemnke kn membu Pedomn Penceghn dn penngnn keken ekul di emp kej Mellui un eebu nniny peuhn dp menyedikn fili yng mendukung pembedyn peempun di emp kej Sel dengn iu PT Gunbue Nickel Indui GNI jug uu mendoong penyepn eng kej peempun di Moowli U Sulwei Tengg e bebgi upy unuk pembedyn wni di lingkungn kej Bebep wku llu PT GNI mengikui oilii Keehn Kej dn Gekn Pekej Peempun Seh Podukif GPSP yng dielenggkn oleh Din Keehn Kbupen Moowli U Pogm ini beujun ebgi upy peuhn dengn bebgi pihk epei pemeinh myk dn pekej dlm meningkkn kepedulin dn mewujudkn p pekej wni yng eh khuuny di deh Kbupen Moowli U Hed of Copoe Communicion PT GNI Melly Tnoyo menjelkn pihkny mendukung pogm eebu dlm hl keehn dn keelmn kej ken meupkn lh u komimen pening peuhn Sejln dengn pemeinh keehn dn keelmn kej K menjdi lh u pioi kmi Kmi jug mendukung pogm pemeinh yng bekin dengn keehn Kegin ini menjdi buki ny bhw PT Gunbue Nickel Induy memiliki pehin be ehdp pembngunn myk yng bekelnjun dimuli dengn meningkkn kedn eng kej eki keehn ucp Melly dlm keengn dikuip Kmi  PT GNI jug kep kli menggel kegin yng behubungn dengn peempun epei  Hi Peempun Inenionl pd Me llu Ini menjdi lh u benuk buki peuhn eebu dlm mendukung pembedyn peempun di indui mele Ac ini meupkn lh u benuk upy peuhn unuk dp ellu mempehikn dn menghgi pen p pekej wni di PT GNI Peuhn mellui kebijknkebijkn dn filiny jug beupy unuk membeikn ung bgi pegwi peempun ehingg dp ecip lingkungn kej yng mn dn nymn jel Melly Peuhn mele nikel memiliki pen pening dlm mendukung keempn kej wni Dengn membuk pelung bgi pekej wni peuhn idk hny mempelu bi lenny epi jug bekonibui pd pembngunn oil dn ekonomi yng lebih inkluif Peneimn pekej wni dlm indui ini jug menjdi indiko pening dlm menili komimen peuhn ehdp kebegmn dn inklui S ini lebih di  kywn peempun bekej di PT GNI dn eeb di bebgi poii Slh uny dlh Foemn Anli Lb Poduki PT GNI Helen Fid Tomnd yng menyebu diiny dlh pengw wni pem yng ebelumny didomini pi Sy begbung di PT GNI pd Sepembe  di Depemen Lb Poduki S iu kywn Lb Poduki didomini oleh kywn lkilki Nmun eelh menjlni poii ini kung lebih  buln y dingk oleh n unuk menjdi pengw peempun yng eny dlh pengw peempun pem ucp Helen Menuuny hl iu jug menndkn ingk kepecyn peuhn kepd peempun bik di egi pekejn kepemimpinn e pengmbiln kepuun Tk hny iu hl ini jug menndkn peempun memiliki pelung yng m dengn lkilki dlm mengembngkn ki Pekejn yng duluny hny dilkukn oleh lkilki nmun di GNI peempun jug mendp keempn yng m Conohny epei opeo excvo dn eong upevio kmi dlh peempun pungkny kneg - Cosine Similarity: 0.9061
+5. (Nomor Asli: 12) Jk  Pepnjng SIM bi dilkukn di Gei SIM Keliling Simk loki SIM keliling  Sepembe di Jbodebek beiku Ad bebep opi unuk melkukn pepnjngn SIM bu kmu yng inggl di kwn Jbodebek Slh uny mellui gei SIM Keliling yng eeb di ejumlh wilyh Loki SIM Keliling Jbodebek Nh bgi kmu yng ingin melkukn pepnjngn SIM di SIM keliling enu hu mengehui lokiny Beiku ini loki SIM keliling di Jbodebek Loki SIM Keliling Jk  Jk Timu Mll Gnd Ckung jm   Jk U LTC Glodok jm   Jk Seln Kmpu Tilogi Klib jm   Jk B Mll Cilnd jm   Jk Pu Kno Po Lpngn Bneng jm  Loki SIM Keliling Beki  Senin Mcd Hpn Indh jm   Sel Pizz Hu Komen Jiih   Rbu Meopolin Mll Beki jm   Kmi Beki Cybe Pk jm   Jum Mi  Jimkmu jm   Sbu Kno Kecmn Beki B jm  Loki SIM Keliling Depok  Senin Hond Moo Ce Jl Ry Swngn Pncon M dn Buge King JlRy Bojongi no Depok  Sel Po Llu Lin Kukun JlGoong Royong Kukun Beji dn ExRmyn JlRy Bogo Cimnggi Depok  Rbu Hyfeh Bojongi JlBojongi no Depok dn Ruko Din Plz JlMeuyung Ko Depok  Kmi Seko Meli GDC JlBoulevd Gnd Depok Ciy dn Po Ln Bmbu Kuning JlKmpung Swh Bojonggede  Jum Cimnggi Sque JlRy Bogo Cimnggi dn Podo Moo Golf JlRy Bojong Nngk  Sbu Po Ln Bmbu Kuning JlKmpung Swh Bojonggede dn Mgo Ciu JlMgond Ry no Depok Loki SIM Keliling Bogo wku pendfn jm   Senin Mll BTM  Sel Loe Goi Sholeh Iknd  Rbu Mll BTW  Kmi Mll Boxie Tju  Jum Mll Jmbu Du  Sbu Mll Jmbu Du  Minggu Buge King Pjjn Loki SIM Keliling Tngeng Bu   SeninSel Lobi Timu Mll Cipu jm   RbuSbu Po Pol Telg Bei jm  Bu   SeninSel Po Pol Kubumi jm   Rbu Lobi Timu Mll Cipu jm   Kmi Lobi Timu Mll Cipu jm  dn Smne Suvn Sue jm   Jum Mi  Biung Jy Jm  dn Rmyn Cikup jm   Sbu P Pui Sm P Kemi jm  Sy Pepnjng SIM Unuk pepnjngn SIM d bebep peyn yng hu dibw beiku incinny KTP li dn du lemb fookopi SIM li yng hendk dipepnjng dn  lemb fookopi Su keengn keehn Bi dibu di loki pepnjng SIM Hil keengn lulu e pikologi Te ini jug bi dilkukn ec online mellui iu ePPi SIM u pliki ePPSi SIM Fomuli pengjun pepnjngn SIM yng elh diii lengkp dyg - Cosine Similarity: 0.8784
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Tugas-PPWA"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 210411100002 - Mohammad Iqbal Surya Ramadhan
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

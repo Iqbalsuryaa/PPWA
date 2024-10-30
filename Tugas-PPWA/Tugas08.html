@@ -1,0 +1,2507 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tugas 6 : Sistem pencarian Query dengan kalimat dalam dokumen dengan penerapan Singular Value Decomposition (SVD) &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas-PPWA/Tugas08';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Tugas 05 : keyword extraction" href="Tugas06.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/PROFIL.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <img src="../_static/PROFIL.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to my website!
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tugas-1.html">Membuat Sebuah Webstatis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas01.html">Tugas 01 : <strong>Crawling Berita</strong></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Tugas02.html">Tugas 02 : <strong>Membuat Vector Space Model dengan Bobot TFID</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas03.html">Tugas 03 : <strong>Melakukan Pengujian dan Deploy</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas05.html">Tugas 04 : <strong>Centrality</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas06.html">Tugas 05 : <strong>keyword extraction</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 6 :  Sistem pencarian Query dengan kalimat dalam dokumen dengan penerapan Singular Value Decomposition (SVD)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/Iqbalsuryaa/PPWA/blob/gh-pages/_sources/Tugas-PPWA/Tugas08.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Iqbalsuryaa/PPWA" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Iqbalsuryaa/PPWA/issues/new?title=Issue%20on%20page%20%2FTugas-PPWA/Tugas08.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Tugas-PPWA/Tugas08.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tugas 6 :  Sistem pencarian Query dengan kalimat dalam dokumen dengan penerapan Singular Value Decomposition (SVD)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tugas-6-sistem-pencarian-query-dengan-kalimat-dalam-dokumen-dengan-penerapan-singular-value-decomposition-svd">
+<h1>Tugas 6 :  Sistem pencarian Query dengan kalimat dalam dokumen dengan penerapan Singular Value Decomposition (SVD)<a class="headerlink" href="#tugas-6-sistem-pencarian-query-dengan-kalimat-dalam-dokumen-dengan-penerapan-singular-value-decomposition-svd" title="Link to this heading">#</a></h1>
+<p>NAMA : Mohammad Iqbal Surya Ramadhan</p>
+<p>NIM  : 210411100002</p>
+<p>MATA KULIAH : Pencarian dan Penambangan Web - A</p>
+<p>mencari 100 dokumen itu (masukkan 1 kalimat, ketemunya dokumen yg mana)</p>
+<p>data tfidf ditransofrmasi menjadi sdikit dimensi menggunakan svd
+yg diambil v dan sigma (v tdk diambil smua)(Sebagian dri v)
+mentransformasi supaya dikit kolom</p>
+<p>cosinus similtas (mirip mendekati 1) boleh pke euclidean</p>
+<ul class="simple">
+<li><p>membuat sistem pencarian dokumen</p></li>
+<li><p>reduksi dimensi SVD</p></li>
+<li><p>data baru juga di reduksi</p></li>
+<li><p>mencari kemiripan ecludian distance</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-1-d5df0069828e&gt;</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/drive.py</span> in <span class="ni">mount</span><span class="nt">(mountpoint, force_remount, timeout_ms, readonly)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span> <span class="k">def</span> <span class="nf">mount</span><span class="p">(</span><span class="n">mountpoint</span><span class="p">,</span> <span class="n">force_remount</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">120000</span><span class="p">,</span> <span class="n">readonly</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span><span class="w">   </span><span class="sd">&quot;&quot;&quot;Mount your Google Drive at the specified mountpoint path.&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">100</span>   <span class="k">return</span> <span class="n">_mount</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span>       <span class="n">mountpoint</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span>       <span class="n">force_remount</span><span class="o">=</span><span class="n">force_remount</span><span class="p">,</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/drive.py</span> in <span class="ni">_mount</span><span class="nt">(mountpoint, force_remount, timeout_ms, ephemeral, readonly)</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span>   <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>   <span class="k">if</span> <span class="n">ephemeral</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">137</span>     <span class="n">_message</span><span class="o">.</span><span class="n">blocking_request</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span>         <span class="s1">&#39;request_auth&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span>         <span class="n">request</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;authType&#39;</span><span class="p">:</span> <span class="s1">&#39;dfs_ephemeral&#39;</span><span class="p">},</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">blocking_request</span><span class="nt">(request_type, request, timeout_sec, parent)</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span>       <span class="n">request_type</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">,</span> <span class="n">expect_reply</span><span class="o">=</span><span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">175</span>   <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">176</span>   <span class="k">return</span> <span class="n">read_reply_from_input</span><span class="p">(</span><span class="n">request_id</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">read_reply_from_input</span><span class="nt">(message_id, timeout_sec)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="n">reply</span> <span class="o">=</span> <span class="n">_read_next_input_message</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">if</span> <span class="n">reply</span> <span class="o">==</span> <span class="n">_NOT_READY</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reply</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">96</span>       <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.025</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>       <span class="k">continue</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>     <span class="k">if</span> <span class="p">(</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">data_path</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/PPWA/report/Tugas-PPWA/Hasil_Prepros.csv&quot;</span><span class="p">)</span>
+<span class="n">news_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+
+<span class="n">news_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-990472f7-d37e-49f5-85ec-7d2d6517e2ce" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>judul</th>
+      <th>tanggal</th>
+      <th>isi</th>
+      <th>kategori</th>
+      <th>cleansing</th>
+      <th>case_folding</th>
+      <th>tokenize</th>
+      <th>stopword_removal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Nunggak 8 Bulan, Segini Pajak Ford Mustang Mil...</td>
+      <td>Kamis, 19 Sep 2024 13:05 WIB</td>
+      <td>Jakarta - Bareskrim Polri menyita aset senilai...</td>
+      <td>Otomotif</td>
+      <td>Jakarta  Bareskrim Polri menyita aset senilai ...</td>
+      <td>jakarta  bareskrim polri menyita aset senilai ...</td>
+      <td>['jakarta', 'bareskrim', 'polri', 'menyita', '...</td>
+      <td>jakarta bareskrim polri menyita aset senilai r...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bos Ford Kaget usai Jajal Mobil China: Mereka ...</td>
+      <td>Kamis, 19 Sep 2024 12:33 WIB</td>
+      <td>Jakarta - Chief Executive Officer (CEO) Ford, ...</td>
+      <td>Otomotif</td>
+      <td>Jakarta  Chief Executive Officer CEO Ford Jim ...</td>
+      <td>jakarta  chief executive officer ceo ford jim ...</td>
+      <td>['jakarta', 'chief', 'executive', 'officer', '...</td>
+      <td>jakarta chief executive officer ceo ford jim f...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Tarif Tol Dalam Kota Naik Jadi Segini, Berlaku...</td>
+      <td>Kamis, 19 Sep 2024 12:08 WIB</td>
+      <td>Jakarta - Jasa Marga mengumumkan kenaikan tari...</td>
+      <td>Otomotif</td>
+      <td>Jakarta  Jasa Marga mengumumkan kenaikan tarif...</td>
+      <td>jakarta  jasa marga mengumumkan kenaikan tarif...</td>
+      <td>['jakarta', 'jasa', 'marga', 'mengumumkan', 'k...</td>
+      <td>jakarta jasa marga mengumumkan kenaikan tarif ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Pak RT Aleix Espargaro Tak Sabar Balapan Terak...</td>
+      <td>Kamis, 19 Sep 2024 11:40 WIB</td>
+      <td>Jakarta - Pebalap Aprilia asal Spanyol, Aleix ...</td>
+      <td>Otomotif</td>
+      <td>Jakarta  Pebalap Aprilia asal Spanyol Aleix Es...</td>
+      <td>jakarta  pebalap aprilia asal spanyol aleix es...</td>
+      <td>['jakarta', 'pebalap', 'aprilia', 'asal', 'spa...</td>
+      <td>jakarta pebalap aprilia spanyol aleix espargar...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Angkot Listrik Bakal Diuji Coba di Jakarta</td>
+      <td>Kamis, 19 Sep 2024 11:18 WIB</td>
+      <td>Jakarta - PT Transportasi Jakarta (TransJakart...</td>
+      <td>Otomotif</td>
+      <td>Jakarta  PT Transportasi Jakarta TransJakarta ...</td>
+      <td>jakarta  pt transportasi jakarta transjakarta ...</td>
+      <td>['jakarta', 'pt', 'transportasi', 'jakarta', '...</td>
+      <td>jakarta pt transportasi jakarta transjakarta k...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>Suku Bunga BI Dipangkas Jadi 6% Dinilai Berani</td>
+      <td>Rabu, 18 Sep 2024 21:15 WIB</td>
+      <td>Jakarta - Bank Indonesia (BI) memutuskan untuk...</td>
+      <td>Keuangan</td>
+      <td>Jakarta  Bank Indonesia BI memutuskan untuk me...</td>
+      <td>jakarta  bank indonesia bi memutuskan untuk me...</td>
+      <td>['jakarta', 'bank', 'indonesia', 'bi', 'memutu...</td>
+      <td>jakarta bank indonesia bi memutuskan menurunka...</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>Prabowo Ingatkan Perang Makin Marak hingga Sal...</td>
+      <td>Rabu, 18 Sep 2024 21:00 WIB</td>
+      <td>Jakarta - Presiden terpilih Prabowo Subianto m...</td>
+      <td>Keuangan</td>
+      <td>Jakarta  Presiden terpilih Prabowo Subianto me...</td>
+      <td>jakarta  presiden terpilih prabowo subianto me...</td>
+      <td>['jakarta', 'presiden', 'terpilih', 'prabowo',...</td>
+      <td>jakarta presiden terpilih prabowo subianto men...</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>Ditjen Pajak Respons Kabar 6 Juta NPWP Bocor, ...</td>
+      <td>Rabu, 18 Sep 2024 20:36 WIB</td>
+      <td>Jakarta - Direktorat Jenderal Pajak (DJP) Keme...</td>
+      <td>Keuangan</td>
+      <td>Jakarta  Direktorat Jenderal Pajak DJP Kemente...</td>
+      <td>jakarta  direktorat jenderal pajak djp kemente...</td>
+      <td>['jakarta', 'direktorat', 'jenderal', 'pajak',...</td>
+      <td>jakarta direktorat jenderal pajak djp kementer...</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>Buruh Waswas Kisruh di Kadin Pengaruhi Penetap...</td>
+      <td>Rabu, 18 Sep 2024 20:30 WIB</td>
+      <td>Jakarta - Presiden Partai Buruh yang juga Pres...</td>
+      <td>Keuangan</td>
+      <td>Jakarta  Presiden Partai Buruh yang juga Presi...</td>
+      <td>jakarta  presiden partai buruh yang juga presi...</td>
+      <td>['jakarta', 'presiden', 'partai', 'buruh', 'ya...</td>
+      <td>jakarta presiden partai buruh presiden konfede...</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>PIS Beberkan Rencana Tekan Emisi Karbon di Mas...</td>
+      <td>Rabu, 18 Sep 2024 20:19 WIB</td>
+      <td>Jakarta - Bisnis berkelanjutan dengan emisi ka...</td>
+      <td>Keuangan</td>
+      <td>Jakarta  Bisnis berkelanjutan dengan emisi kar...</td>
+      <td>jakarta  bisnis berkelanjutan dengan emisi kar...</td>
+      <td>['jakarta', 'bisnis', 'berkelanjutan', 'dengan...</td>
+      <td>jakarta bisnis berkelanjutan emisi karbon rend...</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 8 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-990472f7-d37e-49f5-85ec-7d2d6517e2ce')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-990472f7-d37e-49f5-85ec-7d2d6517e2ce button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-990472f7-d37e-49f5-85ec-7d2d6517e2ce');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-73bbd4e4-57d0-48df-885c-187c41a67cc6">
+  <button class="colab-df-quickchart" onclick="quickchart('df-73bbd4e4-57d0-48df-885c-187c41a67cc6')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-73bbd4e4-57d0-48df-885c-187c41a67cc6 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_950219d5-5667-453d-996a-4812ef8805ce">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('news_data')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_950219d5-5667-453d-996a-4812ef8805ce button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('news_data');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ambil kolom dokumen berita</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="n">news_data</span><span class="p">[</span><span class="s1">&#39;stopword_removal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">euclidean_distances</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>TfidfVectorizer adalah alat dari pustaka scikit-learn untuk mengubah kumpulan teks menjadi representasi vektor berbasis Term Frequency-Inverse Document Frequency (TF-IDF)</p></li>
+<li><p>from sklearn.feature_extraction.text adalah modul dalam pustaka scikit-learn yang menyediakan berbagai alat untuk mengekstraksi fitur atau informasi numerik dari data teks (seperti dokumen atau kalimat) agar bisa digunakan dalam model pembelajaran mesin. Salah satu alat penting yang disediakan modul ini adalah TfidfVectorizer, yang digunakan untuk mengonversi teks menjadi representasi numerik berbasis frekuensi.</p></li>
+<li><p>from sklearn.decomposition import TruncatedSVD adalah bagian dari pustaka scikit-learn yang menyediakan alat untuk melakukan reduksi dimensi pada data numerik, terutama matriks besar, dengan menggunakan teknik Truncated Singular Value Decomposition (Truncated SVD). Truncated SVD biasanya diterapkan pada data yang telah diproses menjadi bentuk matriks dengan representasi TF-IDF atau lainnya, terutama pada data teks untuk analisis Latent Semantic Analysis (LSA).</p></li>
+<li><p>Truncated SVD adalah varian dari Singular Value Decomposition (SVD), yang menguraikan matriks menjadi tiga matriks komponen, tetapi dengan hanya menyimpan komponen terbesar. Dalam konteks pembelajaran mesin dan pemrosesan data teks, tujuan utamanya adalah untuk mereduksi dimensi data agar menjadi lebih sederhana, namun tetap mempertahankan informasi penting.</p></li>
+<li><p>from sklearn.metrics.pairwise import euclidean_distances adalah bagian dari pustaka scikit-learn yang digunakan untuk menghitung jarak Euclidean antara pasangan data dalam matriks. Jarak Euclidean adalah ukuran jarak “lurus” antara dua titik dalam ruang dimensi. Di dalam konteks pemrosesan teks atau data numerik, ini sering digunakan untuk mengukur seberapa dekat atau jauh dua dokumen atau dua sampel dalam ruang vektor.</p></li>
+<li><p>euclidean_distances digunakan untuk menghitung jarak Euclidean antara setiap pasangan baris dalam dua matriks. Jika hanya ada satu matriks yang diberikan, euclidean_distances akan menghitung jarak Euclidean antara semua baris dalam matriks tersebut, sehingga menghasilkan matriks jarak.</p></li>
+</ul>
+<p>Matriks jarak Euclidean menunjukkan jarak antara setiap dokumen:</p>
+<ul class="simple">
+<li><p>Nilai yang lebih kecil mengindikasikan bahwa dua dokumen tersebut lebih mirip secara semantik.</p></li>
+<li><p>Nilai yang lebih besar menunjukkan bahwa dua dokumen memiliki perbedaan yang lebih jauh.</p></li>
+<li><p>pandas adalah pustaka Python yang digunakan untuk manipulasi dan analisis data. Dengan menggunakan pandas, Anda dapat dengan mudah bekerja dengan data yang terstruktur dalam bentuk tabel (DataFrame) serta melakukan operasi seperti pemfilteran, pengelompokan, agregasi, dan transformasi data.</p></li>
+<li><p>numpy adalah pustaka Python yang digunakan untuk komputasi numerik. Pustaka ini menyediakan dukungan untuk array multidimensi dan berbagai fungsi matematis yang efisien untuk memanipulasi data tersebut.</p></li>
+<li><p>Digunakan untuk menyimpan dan memuat objek Python, joblib adalah pustaka Python yang digunakan untuk serialisasi (menyimpan) dan deserialisasi (memuat) objek Python, khususnya yang besar, seperti model machine learning.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+
+<span class="c1"># Mendapatkan fitur (kata-kata) dari TF-IDF</span>
+<span class="n">tfidf_features</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+
+<span class="c1"># Mengonversi matriks TF-IDF menjadi DataFrame</span>
+<span class="n">tfidf_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">tfidf_features</span><span class="p">)</span>
+
+<span class="c1"># Tampilkan hasil TF-IDF</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Hasil TF-IDF dalam bentuk DataFrame:&quot;</span><span class="p">)</span>
+<span class="n">tfidf_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil TF-IDF dalam bentuk DataFrame:
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-e548473b-094f-48b5-aba9-019ce5f99c4e" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>abang</th>
+      <th>abdullah</th>
+      <th>abs</th>
+      <th>absen</th>
+      <th>ac</th>
+      <th>acara</th>
+      <th>acaraacara</th>
+      <th>acc</th>
+      <th>accord</th>
+      <th>acdkil</th>
+      <th>...</th>
+      <th>zenix</th>
+      <th>zero</th>
+      <th>zhejiang</th>
+      <th>ziko</th>
+      <th>zimbabwe</th>
+      <th>zona</th>
+      <th>zoning</th>
+      <th>zs</th>
+      <th>zulkifli</th>
+      <th>zz</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.114233</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.078399</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.033205</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 5471 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-e548473b-094f-48b5-aba9-019ce5f99c4e')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-e548473b-094f-48b5-aba9-019ce5f99c4e button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-e548473b-094f-48b5-aba9-019ce5f99c4e');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-5050f5a1-1337-4bde-837f-28e7c613b66a">
+  <button class="colab-df-quickchart" onclick="quickchart('df-5050f5a1-1337-4bde-837f-28e7c613b66a')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-5050f5a1-1337-4bde-837f-28e7c613b66a button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_fa489078-7636-4eca-9c7e-a7f68bca6a6c">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('tfidf_df')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_fa489078-7636-4eca-9c7e-a7f68bca6a6c button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('tfidf_df');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<ol class="arabic simple">
+<li><p>membuat sebuah objek TfidfVectorizer. Ini adalah langkah pertama untuk mengonversi kumpulan dokumen teks menjadi representasi numerik berdasarkan frekuensi kata dengan mempertimbangkan seberapa umum atau jarang kata tersebut dalam koleksi dokumen.</p></li>
+<li><p>TfidfVectorizer mengubah teks menjadi matriks TF-IDF, yang merupakan representasi numerik dari kata-kata dalam dokumen.</p></li>
+<li><p>menggunakan metode fit_transform() pada objek tfidf_vectorizer untuk menerapkan TF-IDF ke kumpulan dokumen yang disimpan dalam variabel documents.</p></li>
+<li><p>Hasilnya, tfidf_matrix adalah matriks yang menyimpan nilai TF-IDF untuk setiap kata dalam setiap dokumen. Setiap baris mewakili satu dokumen, dan setiap kolom mewakili satu kata (fitur) dari kumpulan dokumen.</p></li>
+<li><p>Dengan menggunakan get_feature_names_out(), kita dapat mengambil daftar kata (fitur) yang telah diidentifikasi oleh TfidfVectorizer. Ini adalah kata-kata unik yang ada dalam kumpulan dokumen.</p></li>
+<li><p>Variabel tfidf_features sekarang berisi daftar semua kata yang digunakan dalam analisis TF-IDF.</p></li>
+<li><p>mengonversi matriks TF-IDF (yang awalnya dalam bentuk sparse matrix) menjadi DataFrame menggunakan pd.DataFrame().</p></li>
+<li><p>Metode toarray() digunakan untuk mengubah sparse matrix menjadi array NumPy, yang kemudian dapat dengan mudah dimasukkan ke dalam DataFrame.</p></li>
+<li><p>columns=tfidf_features memberikan nama kolom pada DataFrame sesuai dengan kata-kata (fitur) yang ada.</p></li>
+<li><p>menampilkan DataFrame tfidf_df yang berisi nilai TF-IDF untuk setiap kata di setiap dokumen.</p></li>
+</ol>
+<p><strong>Singular Value Decomposition (SVD)</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menggunakan SVD untuk reduksi dimensi</span>
+<span class="n">n_components</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">svd</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">)</span>
+<span class="n">svd_matrix</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="p">)</span>
+
+<span class="c1"># Mengubah hasil SVD menjadi DataFrame</span>
+<span class="n">svd_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">svd_matrix</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;feature </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_components</span><span class="p">)])</span>
+
+<span class="c1"># Menampilkan hasil</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hasil reduksi dimensi dengan SVD:&quot;</span><span class="p">)</span>
+<span class="n">svd_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil reduksi dimensi dengan SVD:
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-99473f18-83b1-46e5-97f8-66a2c8db301a" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature 1</th>
+      <th>feature 2</th>
+      <th>feature 3</th>
+      <th>feature 4</th>
+      <th>feature 5</th>
+      <th>feature 6</th>
+      <th>feature 7</th>
+      <th>feature 8</th>
+      <th>feature 9</th>
+      <th>feature 10</th>
+      <th>...</th>
+      <th>feature 91</th>
+      <th>feature 92</th>
+      <th>feature 93</th>
+      <th>feature 94</th>
+      <th>feature 95</th>
+      <th>feature 96</th>
+      <th>feature 97</th>
+      <th>feature 98</th>
+      <th>feature 99</th>
+      <th>feature 100</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.316538</td>
+      <td>-0.134168</td>
+      <td>-0.027742</td>
+      <td>-0.068346</td>
+      <td>0.032257</td>
+      <td>-0.037286</td>
+      <td>0.093471</td>
+      <td>0.258179</td>
+      <td>-0.027594</td>
+      <td>-0.032902</td>
+      <td>...</td>
+      <td>-0.002018</td>
+      <td>-0.033002</td>
+      <td>-0.006155</td>
+      <td>-0.021286</td>
+      <td>0.011730</td>
+      <td>0.000611</td>
+      <td>-0.002164</td>
+      <td>-0.011582</td>
+      <td>0.001889</td>
+      <td>0.000812</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.231510</td>
+      <td>-0.131316</td>
+      <td>-0.092982</td>
+      <td>0.137206</td>
+      <td>-0.001500</td>
+      <td>0.012837</td>
+      <td>0.014578</td>
+      <td>0.151100</td>
+      <td>0.060886</td>
+      <td>-0.046418</td>
+      <td>...</td>
+      <td>0.005756</td>
+      <td>0.000824</td>
+      <td>0.015479</td>
+      <td>0.004884</td>
+      <td>-0.015367</td>
+      <td>0.011901</td>
+      <td>0.002442</td>
+      <td>-0.000014</td>
+      <td>-0.000725</td>
+      <td>-0.000748</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.221785</td>
+      <td>0.019340</td>
+      <td>0.224015</td>
+      <td>-0.131731</td>
+      <td>0.618516</td>
+      <td>0.553204</td>
+      <td>0.167706</td>
+      <td>-0.141715</td>
+      <td>0.054393</td>
+      <td>-0.037489</td>
+      <td>...</td>
+      <td>0.012262</td>
+      <td>-0.002920</td>
+      <td>-0.003075</td>
+      <td>-0.003878</td>
+      <td>0.010500</td>
+      <td>0.009039</td>
+      <td>0.004980</td>
+      <td>-0.000812</td>
+      <td>0.045954</td>
+      <td>0.176552</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.120050</td>
+      <td>-0.031297</td>
+      <td>0.347339</td>
+      <td>0.103173</td>
+      <td>-0.236697</td>
+      <td>0.080723</td>
+      <td>0.003682</td>
+      <td>-0.095835</td>
+      <td>-0.027000</td>
+      <td>-0.053518</td>
+      <td>...</td>
+      <td>-0.023483</td>
+      <td>-0.003203</td>
+      <td>0.008976</td>
+      <td>-0.000348</td>
+      <td>0.004533</td>
+      <td>-0.000595</td>
+      <td>0.009531</td>
+      <td>0.000037</td>
+      <td>0.001314</td>
+      <td>-0.001483</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.141949</td>
+      <td>-0.042113</td>
+      <td>-0.002574</td>
+      <td>0.086886</td>
+      <td>0.034181</td>
+      <td>0.021903</td>
+      <td>-0.108858</td>
+      <td>0.087057</td>
+      <td>0.036474</td>
+      <td>-0.040637</td>
+      <td>...</td>
+      <td>-0.001531</td>
+      <td>-0.000369</td>
+      <td>-0.014043</td>
+      <td>-0.008642</td>
+      <td>0.000920</td>
+      <td>-0.006803</td>
+      <td>0.001787</td>
+      <td>-0.000661</td>
+      <td>-0.000705</td>
+      <td>0.001094</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>0.253979</td>
+      <td>0.615201</td>
+      <td>-0.141088</td>
+      <td>-0.002460</td>
+      <td>-0.137124</td>
+      <td>0.081352</td>
+      <td>0.093642</td>
+      <td>0.015520</td>
+      <td>-0.033857</td>
+      <td>0.058014</td>
+      <td>...</td>
+      <td>0.039634</td>
+      <td>-0.072717</td>
+      <td>0.020862</td>
+      <td>-0.021014</td>
+      <td>0.060300</td>
+      <td>0.038089</td>
+      <td>0.003063</td>
+      <td>0.000433</td>
+      <td>-0.002443</td>
+      <td>-0.000326</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>0.134244</td>
+      <td>0.040500</td>
+      <td>0.052717</td>
+      <td>0.058221</td>
+      <td>0.080514</td>
+      <td>-0.123454</td>
+      <td>-0.094995</td>
+      <td>-0.060807</td>
+      <td>0.034049</td>
+      <td>-0.064869</td>
+      <td>...</td>
+      <td>-0.001463</td>
+      <td>0.013231</td>
+      <td>0.012004</td>
+      <td>0.009068</td>
+      <td>-0.002444</td>
+      <td>-0.004308</td>
+      <td>-0.001379</td>
+      <td>-0.001922</td>
+      <td>0.001588</td>
+      <td>0.000008</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>0.267603</td>
+      <td>-0.052670</td>
+      <td>0.167202</td>
+      <td>-0.270071</td>
+      <td>0.125769</td>
+      <td>-0.405008</td>
+      <td>0.155715</td>
+      <td>-0.173776</td>
+      <td>-0.296645</td>
+      <td>0.150403</td>
+      <td>...</td>
+      <td>0.004413</td>
+      <td>0.002951</td>
+      <td>-0.005031</td>
+      <td>0.001398</td>
+      <td>0.013459</td>
+      <td>-0.036855</td>
+      <td>0.001530</td>
+      <td>-0.308102</td>
+      <td>0.002074</td>
+      <td>0.000282</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>0.069874</td>
+      <td>0.030880</td>
+      <td>0.017691</td>
+      <td>0.008420</td>
+      <td>0.029645</td>
+      <td>-0.044422</td>
+      <td>-0.045202</td>
+      <td>-0.031068</td>
+      <td>0.010769</td>
+      <td>-0.031522</td>
+      <td>...</td>
+      <td>-0.003466</td>
+      <td>-0.004614</td>
+      <td>0.002227</td>
+      <td>0.000221</td>
+      <td>0.000430</td>
+      <td>0.001409</td>
+      <td>0.000314</td>
+      <td>0.002692</td>
+      <td>-0.000407</td>
+      <td>-0.000714</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>0.117357</td>
+      <td>0.025382</td>
+      <td>0.034103</td>
+      <td>0.072624</td>
+      <td>0.050075</td>
+      <td>-0.053358</td>
+      <td>-0.259389</td>
+      <td>0.094414</td>
+      <td>0.143557</td>
+      <td>-0.152855</td>
+      <td>...</td>
+      <td>-0.024915</td>
+      <td>-0.003082</td>
+      <td>-0.005224</td>
+      <td>-0.001553</td>
+      <td>0.002198</td>
+      <td>0.001583</td>
+      <td>0.001549</td>
+      <td>-0.001047</td>
+      <td>-0.001152</td>
+      <td>0.000398</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 100 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-99473f18-83b1-46e5-97f8-66a2c8db301a')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-99473f18-83b1-46e5-97f8-66a2c8db301a button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-99473f18-83b1-46e5-97f8-66a2c8db301a');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-d6a0f543-ec61-461e-9dcd-b0834b40443f">
+  <button class="colab-df-quickchart" onclick="quickchart('df-d6a0f543-ec61-461e-9dcd-b0834b40443f')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-d6a0f543-ec61-461e-9dcd-b0834b40443f button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_cfa2e2dd-4f60-4259-8562-b8c8be81b8a7">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('svd_df')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_cfa2e2dd-4f60-4259-8562-b8c8be81b8a7 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('svd_df');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<ul class="simple">
+<li><p>menggunakan SVD (Singular Value Decomposition) untuk reduksi dimensi pada matriks TF-IDF.</p></li>
+<li><p>n_components: Di sini, kita menentukan jumlah komponen utama yang ingin kita ambil dari matriks TF-IDF. Dalam hal ini, kita ingin mengurangi dimensi ke 100 komponen. Jumlah ini bisa disesuaikan tergantung pada data dan tujuan analisis.</p></li>
+<li><p>TruncatedSVD: Ini adalah kelas dari pustaka sklearn.decomposition yang digunakan untuk melakukan SVD dengan cara yang efisien pada data besar dan sparse (seperti matriks TF-IDF). TruncatedSVD melakukan reduksi dimensi dengan cara menyimpan informasi penting dari data dengan mengurangi jumlah dimensi.</p></li>
+<li><p>fit_transform(): Metode ini melakukan dua langkah :</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>Fit: Menyesuaikan model SVD ke matriks TF-IDF untuk menemukan struktur dan pola.</p></li>
+<li><p>Transform: Mengubah matriks TF-IDF menjadi bentuk baru (matriks SVD) dengan dimensi yang lebih rendah.</p></li>
+</ol>
+<ul class="simple">
+<li><p>svd_matrix: Hasil dari fit_transform() adalah matriks baru yang memiliki dimensi n_samples x n_components. Setiap baris di svd_matrix merepresentasikan dokumen dalam ruang dimensi yang lebih rendah.</p></li>
+<li><p>mengonversi hasil matriks SVD (yang merupakan array NumPy) menjadi sebuah DataFrame menggunakan pandas.</p></li>
+<li><p>pd.DataFrame(svd_matrix, …): Ini menciptakan DataFrame baru dengan baris yang sama dengan jumlah dokumen dan kolom yang sesuai dengan jumlah komponen yang telah ditentukan (100).</p></li>
+<li><p>daftar komprehensif yang membuat nama kolom sebagai feature 1, feature 2, …, hingga feature 100. Ini memberikan label pada kolom-kolom baru berdasarkan jumlah komponen.</p></li>
+</ul>
+<p><strong>Implementasi</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package stopwords to /root/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+[nltk_data] Downloading package punkt to /root/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>import re: Memungkinkan kita menggunakan modul reguler ekspresi (regex) untuk pencarian dan manipulasi string. Ini berguna untuk membersihkan teks, seperti menghapus karakter yang tidak diinginkan.</p></li>
+<li><p>import string: Digunakan untuk mengakses sekumpulan konstanta string, seperti daftar karakter alfabet, digit, dan tanda baca. Ini berguna untuk memfilter atau menghapus karakter tertentu dari teks.</p></li>
+<li><p>from nltk.corpus import stopwords: Mengimpor daftar kata yang umum (stopwords) dari pustaka NLTK. Stopwords adalah kata-kata yang sering muncul dalam bahasa tetapi tidak memiliki makna penting untuk analisis, seperti “dan”, “di”, “yang”, dll.</p></li>
+<li><p>from nltk.tokenize import word_tokenize: Mengimpor fungsi untuk memisahkan (tokenisasi) teks menjadi kata-kata. Tokenisasi adalah langkah awal penting dalam pemrosesan teks.</p></li>
+<li><p>import nltk: Mengimpor pustaka NLTK itu sendiri. Ini adalah pustaka yang sangat kuat untuk  menyediakan berbagai alat dan sumber daya.</p></li>
+<li><p>nltk.download(‘stopwords’): Mengunduh daftar stopwords yang diperlukan dari repositori NLTK. Ini akan memungkinkan Anda menggunakan daftar kata yang umum dalam bahasa Inggris (atau bahasa lain) untuk membersihkan teks.</p></li>
+<li><p>nltk.download(‘punkt’): Mengunduh tokenizer yang digunakan untuk memisahkan teks menjadi kata dan kalimat. punkt adalah model untuk memisahkan kalimat dan kata, yang dapat menangani berbagai jenis teks dengan baik.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># Cleaning: Menghapus angka dan tanda baca</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">))</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1"># Stopword removal</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;indonesian&quot;</span><span class="p">))</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">search_similar_documents</span><span class="p">(</span><span class="n">query_text</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">query_text</span> <span class="o">=</span> <span class="n">preprocess_text</span><span class="p">(</span><span class="n">query_text</span><span class="p">)</span>
+
+    <span class="c1"># Transformasi query text</span>
+    <span class="n">query_tfidf</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">query_text</span><span class="p">])</span>
+    <span class="n">query_svd</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">query_tfidf</span><span class="p">)</span>
+
+    <span class="c1"># Hitung jarak Euclidean antara query dan dokumen</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">euclidean_distances</span><span class="p">(</span><span class="n">query_svd</span><span class="p">,</span> <span class="n">svd_matrix</span><span class="p">)</span>
+
+    <span class="c1"># Ambil indeks dokumen terdekat</span>
+    <span class="n">closest_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distances</span><span class="p">[</span><span class="mi">0</span><span class="p">])[:</span><span class="n">top_k</span><span class="p">]</span>
+    <span class="n">similarities</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">closest_indices</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">closest_indices</span><span class="p">,</span> <span class="n">similarities</span>
+
+<span class="c1"># Input teks dan preprocessing</span>
+<span class="n">query_text</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Masukkan teks: &quot;</span><span class="p">)</span>
+<span class="n">processed_query_text</span> <span class="o">=</span> <span class="n">preprocess_text</span><span class="p">(</span><span class="n">query_text</span><span class="p">)</span>
+
+<span class="c1"># Melakukan pencarian dengan teks yang telah dipreproses</span>
+<span class="n">top_k</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">indices</span><span class="p">,</span> <span class="n">distances</span> <span class="o">=</span> <span class="n">search_similar_documents</span><span class="p">(</span><span class="n">processed_query_text</span><span class="p">,</span> <span class="n">top_k</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan hasil pencarian</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Hasil pencarian untuk query:&quot;</span><span class="p">,</span> <span class="n">processed_query_text</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">distance</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">distances</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dokumen ke-</span><span class="si">{</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">documents</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jarak Euclidean: </span><span class="si">{</span><span class="n">distance</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Masukkan teks: kendaraan listrik
+
+Hasil pencarian untuk query: kendaraan listrik
+Dokumen ke-42: jakarta menteri investasikepala badan koordinasi penanaman modal rosan roeslani bicara potensi indonesia dilirik investor produsen mobil listrik zaman investor asing ragu berinvestasi ekosistem green energy rendah rosan roslani mengungkap potensi energi terbarukan ebt dimilki indonesia mencapai target net zero emmision energi berpotensi indonesia terbarukan nilainya gigawatt potensi bicara potensi berasal tenaga surya angin hydro arus laut biomass panas bumi lainlainnya detikcom leaders forum indonesia hijau inovasi energi sumber daya manusia hotel st regis jakarta selatan selasa senada direktur riset institute for development of economics and finance indef berly martawardaya menyebut pabrikan mundur lantaran indonesia tertinggal negara kawasan asean penggunaan ebt lihat enggan investasi masuk indonesia supply energi terbarukan berly hadir kesempatan manajemen human capital pln yusuf didi setiarto mengungkap pln berencana membangun asetaset energi hijau indonesia disesuaikan masingmasing wilayah menjemput energi hijau pusatpusat pembangkitan sumatera hydro power aceh sumatera utara sumatera barat asetaset geothermal sulawesi selatan sumatera utara sumatera barat rosan mewantiwanti investor batal menanamkan modalnya indonesia garagara sumber ebt memadai berinvestasi berhubungan tata kelola berkelanjutan berkesinambungan lingkungan hidup salah prioritas utama contohnya bikin ev car manufaktur inginnya ya tenaga energinya energi bersih rosan vice chairman perkumpulan industri kendaraan listrik indonesia periklindo achmad rofiqi kondisi pasar mobil listrik indonesia tahap perkembangan semodern china pemerintah indonesia paket kebijakan infrastruktur mengakomodir investor at least asia tertinggal kondisi combustion engine thailand unggul dibanding indonesia ev open book rofiqi area terdekat head to headnya thailand pemerintah paket menarik investor indonesia mobil listrik china kian mendominasi penjualan mobil asap tanah air merek china kian agresif mengenalkan produk mobil listrik indonesia wuling seres chery dfsk byd disusul merek korea selatan hyundai byd merek jepang bicara produk toyota menyajikan model mobil listrik bzx nissan mengenalkan leaf mobil listrik karpet merah indonesia jenis mobil dikenakan pengenaan tarif penjualan barang mewah ppnbm tertuang peraturan pemerintah nomor pemerintah menaikkan tarif pajak pertambahan nilai ppn dikenakan mobil indonesia harga jual tarif ppn harga on the road otr pemerintah relaksasi mobil listrik dikenakan tarif ppn persen pemerintah insentif luas kendaraan listrik keringanan meliputi pembebasan pajak kendaraan bermotor pkb bea nama kendaraan bermotor bbnkb motor mobil listrik berbasis baterai battery electric vehicles bev dikenakan pajak insentif fiskal insentif nonfiskal kendaraan listrik salah satunya mobil listrik dibebaskan aturan pembatasan kendaraan ganjil genap riardin
+Jarak Euclidean: 0.8262
+
+Dokumen ke-2: jakarta chief executive officer ceo ford jim farley chief financial officer ceo ford john lawler mengunjungi china melihatlihat pabrik changan automobile menjajal mobil listrik buatan merek lokal disitat carscoops kamis detail mobil listrik changan tipe dicoba bos ford china kendaraan berjenis sport utility vehicle alias suv lawler duduk kursi kemudi farley kursi penumpang lawler benarbenar terkejut mengemudikan mobil listrik besutan changan farley betapa canggihnya kendaraan jim mobil lawler farley produsen china maju mobil listrik china buatan changan foto doc carscoops farley setuju lawler betapa canggihnya mobil buatan china kabarnya anggota dewan ford mantan eksekutif goldman sachs john thornton fakta ancaman eksistensial farley laporan wall street journal wsj catatan ford bertahuntahun salah brand digemari china penjualan mengalami kenaikan menjalin kemitraan joint venture changan jiangling juli farlet mengumumkan menjual mobil listrik murah rp jutaan china kendaraan entrylevel kabarnya meluncur menantang mobil listrik mungil buatan merek lokal logo ford foto francois lenoirreuters ford merek menolak gagasan mobil full listrik menjual mobil bensin hybrid ford dikabarkan meluncurkan suv truk listrik rencana dibatalkan diundur sfndry
+Jarak Euclidean: 0.9067
+
+Dokumen ke-5: jakarta pt transportasi jakarta transjakarta kalinya menguji coba mikro trans alias angkot bertenaga listrik membuktikan perusahaan benarbenar serius beralih kendaraan konvensional kendaraan ramah lingkungan kepala departemen humas csr pt transjakarta ayu wardhani uji coba tahap unit armada mikro trans mengurai detail rute angkot listrik detail tanggal pelaksanaan upaya mewujudkan target pemerintah provinsi dki jakarta persen armada transjakarta bus listrik elektrifikasi transportasi publik ayu wardhani dikutip kamis ayu angkot listrik diuji coba kapasitas penumpang orang kapasitas angkot konvensional dilengkapi air conditioner ac pendingin udara angkot listrik dioperasikan transjakarta basis dfsk gelora e blind van elektrik transjakarta menandatangani nota kesepahaman pt sokonindo automobile agen pemegang merek dfsk indonesia angkutan ramah lingkungan disematkan baterai berkapasitas kwh daya tempuh maksimum km pengecasannya jam fitur fast charging ayu mengklaim berinovasi menghadirkan layanan mikro trans terbaik pelanggan unit mikro trans ac beroperasi delapan rute angkot listrik transjakarta berencana menambah unit armada bus listrik mengoperasikan unit sfnrgr
+Jarak Euclidean: 0.9121
+
+Dokumen ke-26: jakarta kemacetan parah puncak bogor jawa barat libur pekan kemarin sorotan pemicu kemacetan kendaraan bermotor membludak jalan menampung kendaraan korlantas polri menilai kemacetan puncak pekan kemarin disebabkan kendaraan melintas ruas jalan puncak melebihi kapasitas korlantas mohon maaf masyarakat berlibur bahagia kemarin tersendat jauhjauh korlantas direktur lintas jajaran indonesia daerahdaerah wisata jawa barat jawa jawa timur diy rencanakan rupa petunjuk arahan bertindak dirgakkum korlantas polri brigjen pol raden slamet santoso dikutip korlantas polri slamet kapasitas rasio penggal jalan gadog perbatasan cianjur km menampung kendaraan melntas rasio jalan ribu kendaraan tanggal kemarin kendaraan melintas jalan raya puncak bogor jawa barat pekan minggu senin total kendaraan masuk kendaraan kendaraan wisata kendaraan masyarakat lokal kendaraan kemacetan puncak kepolisian memprediksi menempatkan ratusan personel polres bogor polda jawa barat korlantas backup personel polres cianjur korlantas menempatkan personel lintas fungsi terkait tim urai tim penjaga pengaturan tim taa tim dikmas diterjunkan penerangan masyarakat menyerobot jalur saksikan live detiksore rgrdry
+Jarak Euclidean: 0.9123
+
+Dokumen ke-10: jakarta stnk kendaraan dijual wajib diblokir pendataan kendaraan akurat menghindari pajak progresif menjual kendaraan lupa mengajukan pemblokiran stnk pemblokiran stnk tercantum peraturan kepolisian no pasal ayat aturan pemblokiran data stnk kepentingan pencegahan pengesahan perpanjangan registrasi kendaraan bermotor penggantian stnk penegakan hukum pelanggaran lintas stnk kendaraan dijual disarankan pemblokiran data stnk kabid humas polda jateng kombes pol artanto dikutip laman korlantas polri pemblokiran stnk menghindari pajak progresif dibebankan pemilik kendaraan memiliki kendaraan dibebankan membayar pajak progresif kendaraan dibeli dianggap kendaraan nama pemilik kendaraan dijual membeli kendaraan dikenai pajak progresif memblokir stnk kendaraan dijual pemblokiran stnk penegakan aturan lintas tertib berkaitan penerapan tilang etle diharapkan salah kirim surat konfirmasi tilang data dimiliki akurat dokumen disiapkan blokir stnk pemblokiran mudah pemilik kendaraan menyediakan pernyataan bukti penjualan kendaraan bermaterai melampirkan fotokopi stnk kartu tanda penduduk ktp persyaratan terkumpul tinggal kantor samsat terdekat menyerahkan surat pernyataan kelengkapan fotokopi stnk menyertakan nomor polisi jenis kendaraan disertakan ktp sesuai stnk surat pernyataan kendaraan dijual blokir stnk online wilayah pemblokiran stnk online blokir stnk online wilayah jakarta langkahlangkah blokir stnk online buka registrasi nik ktp pemilik kendaraan klik menu pkb klik menu pelayanan pilih jenis pelayanan blokir kendaraan pilih nomor kendaraan diblokir unggah kelengkapan dokumen klik kirim status pemblokiran dikirim email kolom pkb menghubungi layanan hallo pajak jakarta dryrgr
+Jarak Euclidean: 0.9148
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nilai jarak ini menunjukkan tingkat kemiripan: semakin kecil nilai jaraknya, semakin relevan dokumen tersebut dengan kata kunci. Dengan jarak 0.8262, dokumen ini dianggap cukup relevan dalam konteks pencarian.</p>
+<p><strong>Cleaning:</strong></p>
+<ul class="simple">
+<li><p>re.sub(r’\d+’, ‘’, text): Menghapus semua angka dari teks menggunakan ekspresi reguler.</p></li>
+<li><p>text.translate(…): Menghapus semua tanda baca dengan menggunakan metode translate.</p></li>
+<li><p>text.lower(): Mengubah semua huruf dalam teks menjadi huruf kecil untuk menghindari perbedaan antara huruf besar dan kecil saat analisis.</p></li>
+<li><p>word_tokenize(text): Memisahkan teks menjadi kata-kata (token).</p></li>
+</ul>
+<p><strong>Stopword Removal:</strong></p>
+<ul class="simple">
+<li><p>stop_words = set(stopwords.words(“indonesian”)): Mengambil daftar kata-kata umum yang tidak memiliki makna penting dalam konteks analisis.</p></li>
+<li><p>words = [word for word in words if word not in stop_words]: Menggunakan pemahaman daftar untuk menghapus semua kata yang terdapat dalam daftar stopwords.</p></li>
+<li><p>Return: Fungsi mengembalikan string yang terdiri dari kata-kata yang telah diproses, digabungkan kembali menjadi satu kalimat.</p></li>
+</ul>
+<p><strong>Preprocessing:</strong></p>
+<ul class="simple">
+<li><p>query_text = preprocess_text(query_text): Memanggil fungsi preprocess_text untuk membersihkan dan mempersiapkan teks query sebelum analisis.</p></li>
+</ul>
+<p><strong>Transformasi:</strong></p>
+<ul class="simple">
+<li><p>query_tfidf = tfidf_vectorizer.transform([query_text]): Mengubah teks query yang telah diproses menjadi representasi TF-IDF.</p></li>
+<li><p>query_svd = svd.transform(query_tfidf): Mengubah matriks TF-IDF dari query menjadi bentuk yang direduksi dimensinya menggunakan SVD.</p></li>
+</ul>
+<p><strong>Menghitung Jarak:</strong></p>
+<ul class="simple">
+<li><p>distances = euclidean_distances(query_svd, svd_matrix): Menghitung jarak Euclidean antara representasi SVD dari query dan semua dokumen yang ada dalam matriks SVD.</p></li>
+</ul>
+<p><strong>Mengambil Dokumen Terdekat:</strong></p>
+<ul class="simple">
+<li><p>closest_indices = np.argsort(distances[0])[:top_k]: Mengurutkan jarak dari yang terkecil dan mengambil indeks dari top_k dokumen terdekat.</p></li>
+<li><p>similarities = distances[0][closest_indices]: Mengambil jarak dari dokumen terdekat sesuai dengan indeks yang diperoleh.</p></li>
+</ul>
+<p><strong>Melakukan Pencarian</strong></p>
+<ul class="simple">
+<li><p>top_k = 5 : Variabel ini menetapkan jumlah maksimum dokumen yang ingin ditampilkan sebagai hasil pencarian. Dalam hal ini, hanya 5 dokumen terdekat yang akan diambil berdasarkan kesamaan dengan query.</p></li>
+<li><p>indices, distances = search_similar_documents(processed_query_text, top_k):</p></li>
+<li><p>Fungsi search_similar_documents dipanggil dengan argumen processed_query_text dan top_k.</p></li>
+</ul>
+<p><strong>Menampilkan Hasil Pencarian</strong></p>
+<ul class="simple">
+<li><p>print(“\nHasil pencarian untuk query:”, processed_query_text):</p></li>
+<li><p>print(“\nHasil pencarian untuk query:”, processed_query_text):</p></li>
+<li><p>for idx, distance in zip(indices, distances):</p></li>
+<li><p>Menggunakan loop untuk iterasi melalui indices (indeks dokumen terdekat) dan distances (jarak Euclidean untuk setiap dokumen).</p></li>
+<li><p>Fungsi zip digunakan untuk menggabungkan dua list ini sehingga kita dapat mengakses elemen yang berpasangan.</p></li>
+<li><p>print(f”Dokumen ke-{idx + 1}: {documents[idx]}”):</p></li>
+<li><p>Menampilkan informasi tentang dokumen terdekat yang ditemukan, termasuk urutan dokumen (dengan menambahkan 1 pada indeks) dan isi dokumen dari list documents.</p></li>
+<li><p>print(f”Jarak Euclidean: {distance:.4f}\n”):</p></li>
+<li><p>Menampilkan jarak Euclidean antara query dan dokumen tersebut, dengan format hingga 4 angka desimal.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">euclidean_distances</span>
+
+<span class="c1"># Mengunduh stopwords dan tokenizer</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+
+<span class="c1"># Contoh DataFrame news_data (Anda harus menggantinya dengan DataFrame Anda sendiri)</span>
+<span class="c1"># news_data = pd.DataFrame({</span>
+<span class="c1">#     &#39;nomor&#39;: [...], # Ensure this column exists in your DataFrame</span>
+<span class="c1">#     &#39;tanggal&#39;: [...],</span>
+<span class="c1">#     &#39;judul&#39;: [...],</span>
+<span class="c1">#     &#39;kategori&#39;: [...],</span>
+<span class="c1">#     &#39;isi&#39;: [...],</span>
+<span class="c1">#     &#39;stopword_removal&#39;: [...]</span>
+<span class="c1"># })</span>
+
+<span class="c1"># ... (rest of the code remains the same) ...</span>
+
+<span class="c1"># Menampilkan hasil pencarian</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Hasil pencarian untuk query:&quot;</span><span class="p">,</span> <span class="n">processed_query_text</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">distance</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">distances</span><span class="p">):</span>
+    <span class="c1"># Ambil informasi dari news_data, using correct column names if different</span>
+    <span class="c1"># If &#39;nomor&#39; column doesn&#39;t exist, replace with actual column name</span>
+    <span class="c1"># For example, if the column with document number is named &#39;id&#39;, use:</span>
+    <span class="c1"># nomor_berita = news_data[&#39;id&#39;].iloc[idx]</span>
+    <span class="n">nomor_berita</span> <span class="o">=</span> <span class="n">news_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nomor&#39;</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Get &#39;nomor&#39; if exists, else default to idx + 1</span>
+    <span class="n">tanggal_berita</span> <span class="o">=</span> <span class="n">news_data</span><span class="p">[</span><span class="s1">&#39;tanggal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">judul_berita</span> <span class="o">=</span> <span class="n">news_data</span><span class="p">[</span><span class="s1">&#39;judul&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">kategori_berita</span> <span class="o">=</span> <span class="n">news_data</span><span class="p">[</span><span class="s1">&#39;kategori&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">isi_berita</span> <span class="o">=</span> <span class="n">news_data</span><span class="p">[</span><span class="s1">&#39;isi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="c1"># Menampilkan informasi berita</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dokumen ke-</span><span class="si">{</span><span class="n">nomor_berita</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span> <span class="c1"># Output using retrieved or default nomor_berita</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tanggal: </span><span class="si">{</span><span class="n">tanggal_berita</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Judul: </span><span class="si">{</span><span class="n">judul_berita</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kategori: </span><span class="si">{</span><span class="n">kategori_berita</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Isi Berita: </span><span class="si">{</span><span class="n">isi_berita</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jarak Euclidean: </span><span class="si">{</span><span class="n">distance</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil pencarian untuk query: roda
+Dokumen ke-21:
+Tanggal: Rabu, 18 Sep 2024 18:06 WIB
+Judul: Meluncur Sejak 2007, 800 Ribuan Unit Gran Max Beredar di Jalanan Indonesia
+Kategori: Otomotif
+Isi Berita: Jakarta - Daihatsu Gran Max sejak tahun 2007 sudah menemani para pengusaha di Indonesia. Tak heran 17 tahun berselang populasi Gran Max mencapai 830 ribu unit. Daihatsu Gran Max menjadi salah satu kendaraan populer di segmen komersial. Gran Max sudah belasan tahun menemani para pengusaha UMKM (Usaha Mikro, Kecil, dan Menengah). Disebutkan Daihatsu, Gran Max memiliki sejumlah keunggulan seperti daya angkut besar, harga kompetitif, serta perawatan yang mudah. &quot;Kami mengucapkan terima kasih atas kepercayaan para pelaku usaha terhadap Daihatsu Gran Max sebagai bagian dari perkembangan bisnis mereka, dan berkontribusi pada pertumbuhan ekonomi Indonesia. Semoga Gran Max dapat menjadi pilihan utama para pebisnis pemula di Indonesia,&quot; ujar Marketing Director dan Corporate Communication Director PT Astra Daihatsu Motor Sri Agung Handayani dalam siaran persnya. Keunggulan itu membuat Gran Max sukses memikat para pengusaha. Hal ini dibuktikan dengan lebih dari 830 ribu konsumen mempercayakan pilihan mereka terhadap Gran Max sejak diluncurkan perdana pada 2007 hingga saat ini. Terdapat berbagai bidang usaha, pada sektor UMKM yang menggunakan Gran Max, mulai dari logistik, komoditas, shuttle car, kuliner, industri kreatif, dan beragam bisnis lainnya. Untuk mendukung hal itu, Gran Max ditawarkan dalam dua pilihan mesin dengan kapasitas 1.300 cc dan 1.500 cc. Khusus pada varian mesin 1.500 cc, Gran Max menggunakan mesin baru 1.5L 2NR-VE Dual VVT-i memiliki performa yang bertenaga sehingga memudahkan pengusaha dalam membawa beragam muatan secara maksimal, sekaligus tetap irit bahan bakar. Gran Max 1.5L juga menyematkan ukuran roda berdiameter 14 inch, sehingga area ground clearance atau ketinggian dari tanah yang bertambah lebih tinggi 15 mm yang dapat membantu performa berkendara tetap aman dan nyaman saat melewati genangan air. Khusus pada beberapa varian 1.5L, Gran Max juga dilengkapi dengan EPS (Electronic Power Steering) agar lebih ringan ketika bermanuver saat berkendara dalam menjalankan operasional bisnis sehari-hari, dan juga mudah dalam perawatan. Pada bagian Interior, Gran Max juga memiliki desain stir kemudi terbaru yang memudahkan operasional berkendara, serta tambahan cup holder dan dashboard storage untuk kemudahan peletakan barang yang serbaguna. Soal harga, Gran Max pikap ditawarkan mulai harga mulai dari Rp 161.450.000, disusul tipe Gran Max Blind Van mulai dari Rp 179.100.000, serta Gran Max Mini Bus mulai dari Rp 205.250.000 (OTR DKI Jakarta). (dry/din)
+Jarak Euclidean: 0.9663
+
+Dokumen ke-40:
+Tanggal: Rabu, 18 Sep 2024 08:02 WIB
+Judul: Zeekr 009: Jangan Main-main dengan Mobil China, Ngeri-ngeri Sedap Barang Ini
+Kategori: Otomotif
+Isi Berita: Jakarta - Satu lagi merek mobil China yang akan masuk Indonesia. Adalah Zeekr, merek mobil premium di bawah naungan Geely Holding Group, yang bakal meramaikan pasar otomotif Indonesia mulai tahun ini. MPV mewah bertenaga listrik Zeekr 009 akan menjadi salah satu line up yang ditawarkan Zeekr di Indonesia. Untuk diketahui, Zeekr 009 adalah mobil listrik berbentuk MPV mewah, calon pesaing Alphard. Bahkan, Zeekr 009 bakal menjadi MPV mewah bertenaga listrik pertama yang akan dijual di Indonesia. &quot;Ya, Zeekr 009 akan menjadi Luxurious MPV listrik pertama di Indonesia. Kami percaya bahwa Zeekr 009 memiliki potensi untuk mewarnai pasar Indonesia,&quot; kata Marketing &amp; PR Head Zeekr Indonesia Lano Tungka belum lama ini. Memang beberapa waktu lalu sempat dipamerkan MPV mewah bertenaga listrik seperti Maxus Mifa 9 dari MG dan Denza D9 dari BYD. Namun, kedua MPV mewah bertenaga listrik itu belum resmi dijual di Indonesia. Lano belum bisa mengungkapkan kapan waktu peluncuran Zeekr 009. Namun, Lano membocorkan bahwa pihaknya akan meluncurkan mobil listrik Zeekr pada tahun ini. &quot;Kemungkinan menjelang akhir tahun,&quot; singkatnya. Sebelum meluncur di Indonesia, detikOto mendapat kesempatan untuk menjajal langsung Zeekr 009. Bukan di jalan raya, Zeekr menawarkan kami mengendarai Zeekr 009 di sirkuit, tepatnya di Ningbo International Circuit, Ningbo, Provinsi Zhejiang, China. Awalnya agak meragukan, apa iya MPV mewah bisa digeber di sirkuit? Mengingat sirkuit biasanya identik dengan kendaraan performa tinggi. Tapi, keraguan itu terbantahkan setelah saya mengendarai Zeekr 009 di sirkuit milik Geely sepanjang lebih dari 4 km itu. Sebelum menggeber Zeekr 009 di sirkuit, mari kenalan dulu sama MPV mewah dari Zeekr ini. Desain Eksterior Dari desain eksteriornya, sudah tampak bahwa Zeekr 009 ini adalah MPV premium. Zeekr 009 memiliki dimensi panjang 5.209 mm, lebar 2.024 mm, dan tinggi 1.812 mm dengan wheelbase 3.205 mm dan ground clearance 142 mm. Zeekr 009 Foto: Rangga Rahadiansyah/detikOto Di bagian depan, terlihat Zeekr 009 mengadopsi lampu utama Intelligent Matrix LED Projection Headlamps. Ada juga Adaptive Driving Beam (ADB) with Intelligent Zoning Lighting dan Adaptive Frontlighting System (AFS). Di bagian samping, Zeekr 009 tampil keren dengan velg mewahnya. Desain velgnya seperti mobil ultramewah dari pabrikan Eropa. Pilihan velgnya ada ukuran 19 inci dan 20 inci. Zeekr 009 Foto: Rangga Rahadiansyah/detikOto Fitur-fitur yang ada di Zeekr 009 antara lain pintu geser elektrik, E-latch Front Door, Electric Liftgate with Height Adjustment &amp; Memory Function, hingga Rear Side Window Roll-up Sun Screen (manual). Ada juga Front and Rear Double Panorama Sunroof with Electric Sun Shield. Interior Mewah Saat membuka pintu, kita akan disambut oleh kemewahan Zeekr 009. Material lapisan kulit Nappa yang dipilih menambah kesan mewah. Tata letak interiornya dirancang sedemikian rupa sehingga memanjakan para penghuninya. Dasbor Zeekr 009 Foto: Rangga Rahadiansyah/detikOto Di bangku baris depan, hadir cluster meter dengan layar LCD ukuran 10.25 inci Full HD. Ditambah, di bagian tengah ada layar hiburan OLED CSD Touch Screen berukuran 15.05 inci. Sistem hiburannya bisa terkoneksi dengan sistem Apple CarPlay dan Android Auto loh. Ada juga AR HUD 35,95 inci yang memberikan berbagai informasi lengkap untuk pengemudi saat berkendara. Zeekr memang menawarkan mobil-mobilnya dengan fitur canggih. Maka itu, Zeekr menyematkan Connected Service Network dengan koneksi 5G/WIFI/WIFI Hotspot. Untuk penumpang baris belakang, sudah tersedia layar OLED 17 inci yang tertanam di bagian atapnya. Zeekr 009 disematkan 30 YAMAHA Suround Stereo Luxury Speakers. Bahkan ada 8 YAMAHA Loudspeakers di headrest joknya. Interior mewah Zeekr 009 Foto: Rangga Rahadiansyah/detikOto Di China, Zeekr 009 hadir dengan beberapa konfigurasi, seperti 7 seater, 6 seater, bahkan ada yang 4 seater yang lebih mewah. Namun, yang masuk Indonesia mungkin versi yang 7 dan 6 seater. Duduk di baris kedua, kalian akan dimanjakan dengan kemewahannya. Zeekr 009 memang sangat memanjakan penumpang belakang, khususnya baris kedua. Joknya luas, bisa diatur secara elektrik, dan pastinya sangat nyaman. Untuk penumpang baris kedua, terdapat fitur pemijat di bagian joknya. Jadi kalau capek seharian meeting, langsung dimanjakan oleh mobil ini selama perjalanan pulang. Joknya juga bisa mengeluarkan udara hangat, cocok saat digunakan saat musim dingin. Jok belakang bisa direbahkan sehingga menambah kenyamanan. Ada juga sandaran kaki ottoman untuk menaruh kaki saat selonjoran yang membuat perjalanan tambah nyaman. Sistem Keamanan Jempolan Zeekr 009 hadir dengan sistem keamanan yang jempolan. Dalam sebuah video yang dibagikan, pengetesan keamanan Zeekr 009 sampai ditiban truk molen. Bukannya ringsek, Zeekr 009 tetap utuh, hanya lecet sedikit di bagian atapnya. Maklum, Zeekr 009 dibangun di atas platform Sustainable Experience Architecture (SEA) yang sangat kokoh. Apalagi, Zeekr juga masih saudaraan dengan Volvo, merek mobil Swedia yang dikenal dengan julukan &#39;Tank Swedia&#39; karena kekuatan mobilnya. Zeekr dan Volvo sama-sama berada di bawah naungan Geely Holding Group. [Gambas:Instagram] Fitur-fitur keamanannya antara lain ada 7 buah airbag, Safe Anchor Seat System, Child Care System, hingga Door Emergency Unlock, termasuk Crash Unlock. Tak cuma itu, Zeekr 009 mendapatkan fitur Visual Park Assist 360 (Camera), Digital Video Record (DVR), Electronic Stability Program (ESP), Anti-lock Brake System (ABS), Electronic Brake Distribution (EBD), Hill Start Assist (HSA), Hill Descent Control (HDC), Anti Rolling Program (ARP), Traction Control System (TCS), Cornering Brake Control (CBC), Distributed Traction Control System (dTCS), Direct Tire Presure Monitoring System (D-TPMS), Brake Assist System (incl. Improved Brake Distance, Fade Brake Support), Emergency Braking Light Flash, serta Low-Speed Pedestrain Warning Sound. Fitur Advance Driving Assistance System (ADAS) pada Zeekr 009 juga sangat lengkap. Di dalamnya ada LCC (Lane Centering Control), ACC (Adaptive Cruise Control), CMSF (Collision Mitigation Support Front), CMSR (Collision Mitigation Support Rear), LKA (Lane Keeping System, termasuk LDW, LDP), BSD (Blind Spot Detection), DOW (Door Open Warning), TSI (Traffic Sign Information), DPS (Driver Performance Monitor), Speeding Reminder (Warning Sound), Capacitive Steering Wheel Hands-off Monitoring, FCTA (Front Cross Traffic Alert), RCTA (Rear Cross Traffic Alert), APA (Autonomous Parking Assist), PEB (Parking Emergency Brake), dan ALC (Auto Lane Change). Geber Zeekr 009 di Sirkuit di Tengah Guyuran Hujan Deras Sayang sekali saat kami datang ke Ningbo International Circuit untuk menguji coba mobil-mobil Zeekr, hujan deras mengguyur. Meski begitu, kami tetap diberi lampu hijau untuk mengeksplorasi mobil-mobil Zeekr, walaupun dengan penuh kehati-hatian. Zeekr 009 Foto: Dok. Zeekr Kekhawatiran menggeber Zeekr 009 di sirkuit saat hujan deras adalah soal kestabilannya. Sebab, kesan pertama yang melintas di kepala melihat mobil MPV bongsor digeber di sirkuit adalah gejala &#39;mantul-mantul&#39; saat menikung. Tapi kenyataannya tidak. Kami lebih pede menggeber Zeekr 009 saat hujan di sirkuit setelah melihat data spesifikasi kendaraan yang menyebutkan beragam fitur keamanan dan keselamatannya. Sebagai informasi, Zeekr 009 telah dibekali air suspension. Jadi, meskipun diajak menikung dengan kecepatan yang lumayan tinggi, mobil ini tetap aman dan stabil. Kami juga diminta untuk melewati salah satu rintangan menantang, yaitu mengebut dengan gaspol dan mengubah arah secara tiba-tiba. Hasilnya, meskipun aspal sangat basah dan licin, mobil ini tetap stabil. Zeekr 009 Foto: Dok. Zeekr Performanya juga terbilang baik. Sebagai gambaran, Zeekr 009 dibekali motor listrik bertenaga tinggi dengan penggerak semua roda (all wheel drive/AWD). Kolaborasi dua motor di depan dan belakang dengan baterai tipe Li(NiCoMn)O2 berkapasitas 116 kWh dengan daya jangkau 582 km (WLTP) membuat mobil ini dapat melesat dengan cepat. Akselerasi dari posisi diam sampai kecepatan 100 km/jam dapat dituntaskan hanya dalah 4,5 detik. Kecepatan tertingginya mencapai 210 km. Di atas kertas, Zeekr 009 memiliki tenaga maksimal 450 kW dengan torsi maksimal 693 Nm. Maka tak perlu diragukan lagi soal performanya. Zeekr 009 juga dibekali beberapa pilihan mode berkendara atau Drive Mode. Ada mode Comfort, ECO, Sport, Snow dan Individual yang bisa dipilih pengemudi sesuai keinginan dan kondisi jalan. Kesimpulan Kalau harganya di Indonesia kompetitif, Zeekr009 bakal menjadi pilihan menarik bagi kalangan berkocek tebal yang menginginkan mobil mewah, fitur melimpah, nyaman dan ramah lingkungan. Alphard pun harus waspada karena Zeekr menawarkan sistem keamanan jempolan, fitur canggih, dan sudah bertenaga listrik sepenuhnya. Secara keseluruhan, Zeekr 009 tak terasa seperti mobil China yang dikenal dengan &#39;mobil murah&#39;. Zeekr 009 tak bisa dipandang sebelah mata sebagai mobil China, apalagi ada sentuhan tim desain global di dalamnya dan satu basis juga dengan &quot;tank Swedia&quot;, Volvo. Meminjam kata-kata Ketua Umum Golkar Bahlil Lahadalia, &quot;Ngeri-ngeri sedap barang ini.&quot; Namun, Zeekr belum membocorkan harga lengkap Zeekr 009 untuk pasar Indonesia. Sebagai gambaran, Zeekr 009 sudah meluncur versi setir kanannya di Hong Kong. Di sana, Zeekr 009 dijual dengan harga 755.000 dolar Hong Kong atau sekitar Rp 1,5 miliar. Sementara itu, Toyota Alphard di Indonesia saat ini dijual Rp 1,4 sampai 1,7 miliaran. (rgr/din)
+Jarak Euclidean: 0.9870
+
+Dokumen ke-63:
+Tanggal: Kamis, 19 Sep 2024 11:47 WIB
+Judul: Cipayung Plus Dukung KPPU Perkuat Kolaborasi &amp; Pengawasan Kemitraan UMKM
+Kategori: Keuangan
+Isi Berita: Jakarta - Sejumlah organisasi kemahasiswaan yang tergabung dalam Cipayung Plus mendukung Komisi Pengawas Persaingan Usaha (KPPU) untuk memperkuat pengawasan kemitraan terhadap UMKM. Mereka juga siap berkolaborasi untuk mendukung Program Sejuta Penyuluh Kemitraan. Dukungan tersebut diungkapkan ketika sejumlah ketua umum organisasi kemahasiswaan bertemu Ketua KPPU M. Fanshurullah Asa di Kantor Pusat KPPU Jakarta, Selasa (18/9/2024). Turut hadir dalam kesempatan tersebut Ketua Umum PB Himpunan Mahasiswa Islam (HMI) Bagas Kurniawan, Ketua Umum Gerakan Mahasiswa Kristen Indonesia (GMKI) Jefri Edi Irawan Gultom, Ketua PP Perhimpunan Mahasiswa Katolik Republik Indonesia (PMKRI) Susana Florinka Marianti Kandaimu, Ketua Umum PP Kesatuan Aksi Mahasiswa Muslim Indonesia (KAMMI) Ahmad Jundi Khalifatullah, anggota KPPU Budi Joyo Santoso, Plt. Sekretaris Jenderal Lukman Sungkar serta pimpinan dan anggota Cipayung Plus lainnya. Hadir pula Ketua Umum PP Kesatuan Mahasiswa Hindu Dharma Indonesia (KMHDI) I Wayan Darmawan, Ketua Umum Ikatan Mahasiswa Muhammadiyah (IMM) Riyan Betra Delza, Ketua Umum Himpunan Mahasiswa Buddhis Indonesia (Hikmahbudhi) Candra Aditya Nugaraha, Ketua Umum DPP Gerakan Mahasiswa Nasional Indonesia (GMNI) Imanuel Cahyadi, dan Ketua Umum PP Himpunan Mahasiswa Persatuan Islam (HIMA PERSIS) Ilham Nur Hidayatullah. &quot;KPPU perlu melibatkan civil society sebagai bagian dari program penyuluh kemitraan agar mampu menjangkau kemitraan secara masif sampai ke wilayah, dan menjamin kualitas pelaksanaan kemitraan UMKM kita dalam rantai pasok nasional,&quot; kata Fanshurullah dalam keterangan tertulis, Kamis (19/9/2024). Dia menjelaskan KPPU sejak awal tahun ini mencanangkan Program Sejuta Penyuluh Kemitraan untuk mengoptimalkan tugas KPPU dalam mengawasi pelaksanaan kemitraan UMKM. Inisiatif tersebut mendapat dukungan antara lain dari Wakil Presiden RI, Menteri Koperasi dan UKM RI, serta kalangan akademisi. &quot;Guna melengkapi strategi pentahelix yang dianut oleh KPPU, Ketua KPPU menilai penting untuk turut menggandeng organisasi kemahasiswaan dalam berkolaborasi melakukan pengawasan kemitraan guna mencapai pembangunan ekonomi yang inklusif dan berkualitas,&quot; tutupnya. (ega/ega)
+Jarak Euclidean: 1.0008
+
+Dokumen ke-100:
+Tanggal: Rabu, 18 Sep 2024 20:19 WIB
+Judul: PIS Beberkan Rencana Tekan Emisi Karbon di Masa Depan
+Kategori: Keuangan
+Isi Berita: Jakarta - Bisnis berkelanjutan dengan emisi karbon rendah menjadi urgensi bagi entitas di seluruh dunia termasuk PT Pertamina International Shipping (PIS). PIS membeberkan rencana bisnis jangka pendek dan jangka panjang mulai dari energi alternatif seperti biofuel hingga kesiapan di pengembangan bisnis pengangkutan dan penyimpanan karbon. Rencana tersebut dipaparkan perusahaan dalam forum internasional di Shipbuilding, Machinery and Marine (SMM) Hamburg, Jerman. Direktur Manajemen Armada PIS M. Irfan Zainul Fikri hadir sebagai salah satu pembicara di forum internasional ternama yang membahas industri maritim tersebut. Di hadapan para perwakilan industri maritim dunia, Irfan menyebutkan bahwa PIS tengah bertransformasi menjadi perusahaan modern dengan operasional dan model bisnis yang ramah lingkungan. Ia juga menegaskan PIS menargetkan menekan 30% total emisi karbon mereka pada 2030 nanti. &quot;Strategi kami melibatkan investasi pada pengembangan dan adopsi bahan bakar rendah emisi seperti biofuel, LNG, amonia, dan metanol, untuk mengoperasikan armada kami,&quot; ucap Irfan dalam sesi panel mengenai masa depan masa depan maritim awal September lalu seperti dalam keterangan tertulis, Rabu (18/9/2024). Sejumlah kapal dari lini armada PIS, khususnya yang beroperasi di domestik, telah menggunakan biofuel sebagai bahan bakar, didukung oleh infrastruktur biofuel Pertamina. Selain itu, kapal-kapal baru yang akan datang juga tengah disiapkan untuk penggunaan bahan bakar alternatif rendah karbon. Seperti MR Tankers dengan implementasi teknologi dual-fuel-ready LNG dan Handysize LPG dengan teknologi dual-fuel-ready amonia. Belum lagi kehadiran armada Very Large Gas Carrier (VLGC) juga berbahan bakar dual-fuel-ready amonia. Tak hanya itu, Irfan juga menyebut bahwa PIS sedang menjajal sumber energi baru seperti baterai dan hidrogen di masa depan. Selain armada green ships, bahan bakar alternatif, dan green terminal, PIS juga mulai merambah bisnis carbon capture storage (CCS)/carbon capture utilize storage (CCUS). Potensi bisnis dari sektor ini merentang mulai dari pengantaran, penyimpanan, injeksi, hingga infrastruktur terminal karbon. Untuk memasuki bisnis tersebut, PIS bersiap dengan investasi pada kapal pengangkut LCO2 (liquid carbon dioxide) dan receiving terminal. &quot;Yang terpenting saat ini adalah kami harus memastikan ketersediaan pemasok dalam rute operasional dan mempersiapkan armada kami berteknologi dual-fuel. Kami menargetkan sebagian besar armada kami akan bertenaga bahan bakar rendah karbon, agar dapat berkontribusi dalam upaya dunia untuk mengurangi emisi gas rumah kaca,&quot; imbuh Irfan. Seluruh strategi ini merupakan wujud keseriusan PIS sebagai pemain utama di sektor logistik energi di Asia Tengara untuk memimpin upaya dekarbonisasi, selaras dengan tujuan International Maritime Organization (IMO) dan komitmen Pertamina mencapai Net Zero Emission pada 2060. Guna mewujudkan komitmen tersebut, PIS menargetkan menurunkan 30% dari total emisi karbon dalam operasional perusahaan di akhir 2030. Seluruh inisiatif ini menunjukkan keseriusan PIS dalam mempraktikkan bisnis yang berkelanjutan di tengah upaya perusahaan memenuhi ketahanan energi nasional. PIS juga memastikan bahwa transformasi hijau terus berlangsung sesuai dengan Sustainable Development Goals (SDGs) serta upaya penerapan Environmental, Social, Governance (ESG) di seluruh lini bisnis dan operasional perusahaan. (akd/ega)
+Jarak Euclidean: 1.0008
+
+Dokumen ke-73:
+Tanggal: Kamis, 19 Sep 2024 10:03 WIB
+Judul: Tolak PP Kesehatan, Petani Tembakau Sebut Gerus Pendapatan
+Kategori: Keuangan
+Isi Berita: Jakarta - Asosiasi Petani Tembakau Indonesia (APTI) menyampaikan penolakan terhadap Rancangan Peraturan Menteri Kesehatan (RPMK) tentang Pengamanan Produk Tembakau dan Rokok Elektronik. Aturan itu merupakan turunan dari Peraturan Pemerintah (PP) 28 Tahun 2024 tentang Kesehatan yang merupakan aturan turunan dari Undang-Undang Kesehatan No 17 Tahun 2023. Petani khawatir aturan itu akan menggerus pendapatan petani tembakau. Mengingat, aturan pengamanan produk tembakau itu dikhawatirkan mengurangi hasil dari pertanian tembakau itu sendiri sebagai penghasilan utama petani. &quot;Kami tegas menolak karena berdampak pada mata pencarian kami sebagai petani tembakau. Kami memohon kepada pemerintah untuk mendengarkan aspirasi kami dari pulau terujung di Indonesia,&quot; ujarnya Ketua DPD APTI Aceh Tengah, Hasiun dalam keterangannya, dikutip Kamis (19/9/2024). Salah satu upaya penolakan yang dilakukan adalah ikut menyampaikan masukan melalui laman https://partisipasisehat.kemkes.go.id/naskah/detail?param=usulan-tertulis milik Kementerian Kesehatan (Kemenkes). Suara penolakan disampaikan dari berbagai sentra-sentra tembakau di Indonesia salah satunya adalah dari petani tembakau Aceh. Hasiun mengatakan, para petani tembakau di Aceh selama ini tidak pernah dilibatkan pemerintah dalam pembuatan regulasi yang berdampak pada mereka. Untuk itu, para petani tembakau di Aceh menolak secara tegas pengaturan pasal-pasal pertembakauan di PP 28/2024 yang telah disahkan Juli lalu dan RPMK yang saat ini sedang didorong Kemenkes untuk segera disahkan bulan ini. &quot;Peraturan yang dibuat tidak memberikan kesempatan kepada petani untuk menyampaikan kondisi yang sebenarnya di lapangan, makanya ketika aturannya muncul, justru tidak sinkron,&quot; sebutnya. Padahal bagi masyarakat Aceh menanam tembakau telah dilakukan secara turun temurun. Menurutnya hampir seluruh masyarakat di Aceh memiliki kemampuan dalam mengolah tanaman tembakau. Aceh memiliki lahan pertanian yang luas dan sangat cocok untuk pembudidayaan tembakau. Tembakau Aceh terkenal dengan keunikan cita rasanya yang mencakup 25 dari 75 jenis tembakau di dunia. Senada dengan Hasiun, Ketua DPC APTI Pemakesan, Samukrah menuturkan bersama perwakilan petani di 13 kecamatan, mereka beramai-ramai telah berpartisipasi memberikan suara penolakan atas RPMK di website Partisipasi Sehat. &quot;Sudah sangat jelas pasal-pasal pertembakauan di PP No 28 tahun 2024 dan penyusunan RPMK mengancam dan mematikan Industri Hasil Tembakau khususnya di Madura. Madura merupakan sentra terbesar untuk perkebunan tembakau. Kami terdzolimi dengan pasal-pasal Pertembakauan di PP dan RPMK yang mau menghilangkan mata pencaharian kami,&quot; seru Samukrah. Ia meminta agar Kemenkes dapat melaksanakan ulang public hearing dengan melibatkan keterwakilan petani tembakau yang berimbang dalam pembahasan aturan terkait pasal-pasal pertembakauan. &quot;Kemenkes harus memberikan solusi kepada petani tembakau agar kami tak kehilangan mata pencaharian,&quot; tambahnya. Perwakilan petani tembakau dari DPD APTI Jabar, Undang Herman, juga turut memberikan masukan terkait penyusunan RPMK secara daring. Ia mempertanyakan, pasal-pasal pertembakauan di PP No.28 Tahun 2024 masih polemik, namun mengapa Kemenkes terkesan tancap gas merampungkan RPMK. &quot;Merujuk kajian proses penyusunan PP No 28 Tahun 2024 sejak awal sudah menuai polemik, prosesnya sangat tidak transparan dan tanpa partisipasi bermakna. Padahal, partisipasi masyarakat dan pemangku kepentingan yang terdampak dijamin dalam Undang-Undang. Maka, saat ini, dalam penyusunan RPMK, semua masukan petani harus didengarkan, dipertimbangkan, dan diakomodir,&quot; kata Undang. Dia mengungkapkan pasal-pasal di dalam PP No 28 Tahun 2024 akan mematikan industri tembakau. Seperti pasal 435 adalah titipan untuk menuju kemasan polos yang sudah lama jadi misi kelompok anti tembakau yang memberikan tekanan pada pemerintah untuk mengadopsi ketentuan-ketentuan yang terlampau ketat dari Framework Convention on Tobacco Control (FCTC). &quot;Perlu dicatat, negara yang mempunyai pertanian tembakau dan industrinya seperti Amerika Serikat, Swiss, Kuba, Argentina, dan lain-lain secara gamblang menolak diintervensi dalam mengatur industri tembakau di negaranya masing-masing. Sekarang, mengapa masih didorong juga dalam RPMK untuk dilaksanakan. Negara mau mematikan jutaan petani?&quot; katanya. Simak Video: Temui Petani Tembakau di Temanggung, Gibran Dicurhati Masalah Pupuk [Gambas:Video 20detik] (ada/fdl)
+Jarak Euclidean: 1.0008
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package stopwords to /root/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+[nltk_data] Downloading package punkt to /root/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Tugas-PPWA"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Tugas06.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tugas 05 : <strong>keyword extraction</strong></p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 210411100002 - Mohammad Iqbal Surya Ramadhan
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
