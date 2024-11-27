@@ -178,7 +178,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Tugas03.html">Tugas 03 : <strong>Melakukan Pengujian dan Deploy</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Tugas05.html">Tugas 04 : <strong>Centrality</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Tugas06.html">Tugas 05 : <strong>keyword extraction</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Tugas08.html">Tugas 6 :  Sistem pencarian Query dengan kalimat dalam dokumen dengan penerapan Singular Value Decomposition (SVD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas08.html">Tugas 6 :  Membuat pencarian Query dengan kalimat dalam dokumen dengan penerapan Singular Value Decomposition (SVD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugass10.html">Tugas 7 : Klasifikasi Berita Metode Logistic Regression dengan reduksi dimensi deploy reduksi dimensi berita</a></li>
 </ul>
 
     </div>
@@ -624,7 +625,7 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
         <span class="n">isi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">kategori_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kategori</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
@@ -665,43 +666,49 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Title Not Found
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tim Lain Semakin Kuat, Ducati Pede Punya Bagnaia dan Marquez
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mitsubishi Resmikan Training Center Terbesar di ASEAN
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Review Mitsubishi XFORCE Ultimate DS: Makin Aman dengan Harga yang Masuk Akal!
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Begini Cara Mendapatkan Nomor Pembayaran Tilang Secara Online
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Truk Pemicu Kecelakaan: Sopir Dikejar Waktu, Tempat Istiwahat Tak Nyaman
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Motor Listrik Alva N3 Meluncur di IMOS 2024, Harga Rp 18 Jutaan!
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Raffi Ahmad Beli Mobil Listrik di Pameran GJAW
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tambah Lagi Mobil China Rakit Mobil di Indonesia, Ini Modelnya
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Belajar dari Kecelakaan Maut Truk di Slipi, Pahami Tanda-tanda Ngantuk!
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pindad Lagi Kembangkan Maung versi Listrik, Kecepatan 100 Km/Jam
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vespa Langka yang Dipakai Raffi Ahmad ke TPS, Harga Bekasnya Naik Terus
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Penampakan Mobil-mobil Disapu Banjir di Spanyol
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wuling Kasih Garansi Seumur Hidup Mobil Hybrid dan Jaminan Harga Jual Kembali
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wamenperin Mau Beli Maung Pakai Duit Sendiri, Kalau Harganya Murah
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lihat Lebih Dekat Chery J6, Mobil Listrik Off Road Pertama di RI
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kolaborasi Toyota dan Universitas Indonesia Dorong Percepatan Transisi Energi
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ada PPN 12 Persen, Harga Mobil Chery Naik Berapa?
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wanti-wanti Isuzu Imbas Kebijakan PPN 12% dan Opsen Pajak
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mau Sampai Kapan Truk Jadi &#39;Pembunuh Massal&#39; di Jalanan?
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-3-7ab36c1f35b8&gt;</span> in <span class="ni">&lt;cell line: 65&gt;</span><span class="nt">()</span>
+<span class="nn">&lt;ipython-input-3-a4fb0142235b&gt;</span> in <span class="ni">&lt;cell line: 65&gt;</span><span class="nt">()</span>
 <span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="k">while</span> <span class="nb">len</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kategori_list</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">category</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">min_articles_per_category</span><span class="p">:</span>
 <span class="g g-Whitespace">     </span><span class="mi">68</span>         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="ne">---&gt; </span><span class="mi">69</span>         <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">min_articles_per_category</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">70</span>         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">71</span>         <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="nn">&lt;ipython-input-3-7ab36c1f35b8&gt;</span> in <span class="ni">get_data</span><span class="nt">(url, kategori, min_articles_per_category)</span>
+<span class="nn">&lt;ipython-input-3-a4fb0142235b&gt;</span> in <span class="ni">get_data</span><span class="nt">(url, kategori, min_articles_per_category)</span>
 <span class="g g-Whitespace">     </span><span class="mi">17</span>         <span class="k">try</span><span class="p">:</span>
 <span class="g g-Whitespace">     </span><span class="mi">18</span>             <span class="n">link</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
 <span class="ne">---&gt; </span><span class="mi">19</span>             <span class="n">article_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
@@ -751,60 +758,65 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
 <span class="g g-Whitespace">    </span><span class="mi">791</span><span class="s2">                 method,</span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">_make_request</span><span class="nt">(self, conn, method, url, body, headers, retries, timeout, chunked, response_conn, preload_content, decode_content, enforce_content_length)</span>
-<span class="g g-Whitespace">    </span><span class="mi">534</span><span class="s2">         # Receive the response from the server</span>
-<span class="g g-Whitespace">    </span><span class="mi">535</span><span class="s2">         try:</span>
-<span class="ne">--&gt; </span><span class="mi">536</span><span class="s2">             response = conn.getresponse()</span>
-<span class="g g-Whitespace">    </span><span class="mi">537</span><span class="s2">         except (BaseSSLError, OSError) as e:</span>
-<span class="g g-Whitespace">    </span><span class="mi">538</span><span class="s2">             self._raise_timeout(err=e, url=url, timeout_value=read_timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">464</span><span class="s2">             # Trigger any extra validation we need to do.</span>
+<span class="g g-Whitespace">    </span><span class="mi">465</span><span class="s2">             try:</span>
+<span class="ne">--&gt; </span><span class="mi">466</span><span class="s2">                 self._validate_conn(conn)</span>
+<span class="g g-Whitespace">    </span><span class="mi">467</span><span class="s2">             except (SocketTimeout, BaseSSLError) as e:</span>
+<span class="g g-Whitespace">    </span><span class="mi">468</span><span class="s2">                 self._raise_timeout(err=e, url=url, timeout_value=conn.timeout)</span>
 
-<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connection.py</span> in <span class="ni">getresponse</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">505</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">506</span><span class="s2">         # Get the response from http.client.HTTPConnection</span>
-<span class="ne">--&gt; </span><span class="mi">507</span><span class="s2">         httplib_response = super().getresponse()</span>
-<span class="g g-Whitespace">    </span><span class="mi">508</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">509</span><span class="s2">         try:</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">_validate_conn</span><span class="nt">(self, conn)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1093</span><span class="s2">         # Force connect early to allow us to validate the connection.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1094</span><span class="s2">         if conn.is_closed:</span>
+<span class="ne">-&gt; </span><span class="mi">1095</span><span class="s2">             conn.connect()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1096</span><span class="s2"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1097</span><span class="s2">         # TODO revise this, see https://github.com/urllib3/urllib3/issues/2791</span>
 
-<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">getresponse</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1373</span><span class="s2">         try:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1374</span><span class="s2">             try:</span>
-<span class="ne">-&gt; </span><span class="mi">1375</span><span class="s2">                 response.begin()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1376</span><span class="s2">             except ConnectionError:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1377</span><span class="s2">                 self.close()</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connection.py</span> in <span class="ni">connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">728</span><span class="s2">             server_hostname_rm_dot = server_hostname.rstrip(&quot;.&quot;)</span>
+<span class="g g-Whitespace">    </span><span class="mi">729</span><span class="s2"> </span>
+<span class="ne">--&gt; </span><span class="mi">730</span><span class="s2">             sock_and_verified = _ssl_wrap_socket_and_match_hostname(</span>
+<span class="g g-Whitespace">    </span><span class="mi">731</span><span class="s2">                 sock=sock,</span>
+<span class="g g-Whitespace">    </span><span class="mi">732</span><span class="s2">                 cert_reqs=self.cert_reqs,</span>
 
-<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">begin</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">316</span><span class="s2">         # read until we get a non-100 response</span>
-<span class="g g-Whitespace">    </span><span class="mi">317</span><span class="s2">         while True:</span>
-<span class="ne">--&gt; </span><span class="mi">318</span><span class="s2">             version, status, reason = self._read_status()</span>
-<span class="g g-Whitespace">    </span><span class="mi">319</span><span class="s2">             if status != CONTINUE:</span>
-<span class="g g-Whitespace">    </span><span class="mi">320</span><span class="s2">                 break</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connection.py</span> in <span class="ni">_ssl_wrap_socket_and_match_hostname</span><span class="nt">(sock, cert_reqs, ssl_version, ssl_minimum_version, ssl_maximum_version, cert_file, key_file, key_password, ca_certs, ca_cert_dir, ca_cert_data, assert_hostname, assert_fingerprint, server_hostname, ssl_context, tls_in_tls)</span>
+<span class="g g-Whitespace">    </span><span class="mi">907</span><span class="s2">             server_hostname = normalized</span>
+<span class="g g-Whitespace">    </span><span class="mi">908</span><span class="s2"> </span>
+<span class="ne">--&gt; </span><span class="mi">909</span><span class="s2">     ssl_sock = ssl_wrap_socket(</span>
+<span class="g g-Whitespace">    </span><span class="mi">910</span><span class="s2">         sock=sock,</span>
+<span class="g g-Whitespace">    </span><span class="mi">911</span><span class="s2">         keyfile=key_file,</span>
 
-<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">_read_status</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">277</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">278</span><span class="s2">     def _read_status(self):</span>
-<span class="ne">--&gt; </span><span class="mi">279</span><span class="s2">         line = str(self.fp.readline(_MAXLINE + 1), &quot;iso-8859-1&quot;)</span>
-<span class="g g-Whitespace">    </span><span class="mi">280</span><span class="s2">         if len(line) &gt; _MAXLINE:</span>
-<span class="g g-Whitespace">    </span><span class="mi">281</span><span class="s2">             raise LineTooLong(&quot;status line&quot;)</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/util/ssl_.py</span> in <span class="ni">ssl_wrap_socket</span><span class="nt">(sock, keyfile, certfile, cert_reqs, ca_certs, server_hostname, ssl_version, ciphers, ssl_context, ca_cert_dir, key_password, ca_cert_data, tls_in_tls)</span>
+<span class="g g-Whitespace">    </span><span class="mi">467</span><span class="s2">     context.set_alpn_protocols(ALPN_PROTOCOLS)</span>
+<span class="g g-Whitespace">    </span><span class="mi">468</span><span class="s2"> </span>
+<span class="ne">--&gt; </span><span class="mi">469</span><span class="s2">     ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)</span>
+<span class="g g-Whitespace">    </span><span class="mi">470</span><span class="s2">     return ssl_sock</span>
+<span class="g g-Whitespace">    </span><span class="mi">471</span><span class="s2"> </span>
 
-<span class="nn">/usr/lib/python3.10/socket.py</span> in <span class="ni">readinto</span><span class="nt">(self, b)</span>
-<span class="g g-Whitespace">    </span><span class="mi">703</span><span class="s2">         while True:</span>
-<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="s2">             try:</span>
-<span class="ne">--&gt; </span><span class="mi">705</span><span class="s2">                 return self._sock.recv_into(b)</span>
-<span class="g g-Whitespace">    </span><span class="mi">706</span><span class="s2">             except timeout:</span>
-<span class="g g-Whitespace">    </span><span class="mi">707</span><span class="s2">                 self._timeout_occurred = True</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/util/ssl_.py</span> in <span class="ni">_ssl_wrap_socket_impl</span><span class="nt">(sock, ssl_context, tls_in_tls, server_hostname)</span>
+<span class="g g-Whitespace">    </span><span class="mi">511</span><span class="s2">         return SSLTransport(sock, ssl_context, server_hostname)</span>
+<span class="g g-Whitespace">    </span><span class="mi">512</span><span class="s2"> </span>
+<span class="ne">--&gt; </span><span class="mi">513</span><span class="s2">     return ssl_context.wrap_socket(sock, server_hostname=server_hostname)</span>
 
-<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1301</span><span class="s2">                   &quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot; %</span>
-<span class="g g-Whitespace">   </span><span class="mi">1302</span><span class="s2">                   self.__class__)</span>
-<span class="ne">-&gt; </span><span class="mi">1303</span><span class="s2">             return self.read(nbytes, buffer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1304</span><span class="s2">         else:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1305</span><span class="s2">             return super().recv_into(buffer, nbytes, flags)</span>
+<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">wrap_socket</span><span class="nt">(self, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, session)</span>
+<span class="g g-Whitespace">    </span><span class="mi">511</span><span class="s2">         # SSLSocket class handles server_hostname encoding before it calls</span>
+<span class="g g-Whitespace">    </span><span class="mi">512</span><span class="s2">         # ctx._wrap_socket()</span>
+<span class="ne">--&gt; </span><span class="mi">513</span><span class="s2">         return self.sslsocket_class._create(</span>
+<span class="g g-Whitespace">    </span><span class="mi">514</span><span class="s2">             sock=sock,</span>
+<span class="g g-Whitespace">    </span><span class="mi">515</span><span class="s2">             server_side=server_side,</span>
 
-<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">read</span><span class="nt">(self, len, buffer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1157</span><span class="s2">         try:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1158</span><span class="s2">             if buffer is not None:</span>
-<span class="ne">-&gt; </span><span class="mi">1159</span><span class="s2">                 return self._sslobj.read(len, buffer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1160</span><span class="s2">             else:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1161</span><span class="s2">                 return self._sslobj.read(len)</span>
+<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">_create</span><span class="nt">(cls, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, context, session)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1098</span><span class="s2">                         # non-blocking</span>
+<span class="g g-Whitespace">   </span><span class="mi">1099</span><span class="s2">                         raise ValueError(&quot;do_handshake_on_connect should not be specified for non-blocking sockets&quot;)</span>
+<span class="ne">-&gt; </span><span class="mi">1100</span><span class="s2">                     self.do_handshake()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span><span class="s2">             except (OSError, ValueError):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1102</span><span class="s2">                 self.close()</span>
+
+<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">do_handshake</span><span class="nt">(self, block)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1369</span><span class="s2">             if timeout == 0.0 and block:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1370</span><span class="s2">                 self.settimeout(None)</span>
+<span class="ne">-&gt; </span><span class="mi">1371</span><span class="s2">             self._sslobj.do_handshake()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1372</span><span class="s2">         finally:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1373</span><span class="s2">             self.settimeout(timeout)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -814,13 +826,13 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita-Otomotif&amp;Finance.csv&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-253abccc-2d03-4470-ab04-1be7f7fae8ed" class="colab-df-container">
+  <div id="df-9950cb75-8cea-4a33-90a8-6c5c5a56be10" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -848,81 +860,89 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
   <tbody>
     <tr>
       <th>0</th>
-      <td>Mobil Listrik Xiaomi Mejeng di Negara Tetangga...</td>
-      <td>Rabu, 16 Okt 2024 20:30 WIB</td>
-      <td>Jakarta - Mobil listrik perdana Xiaomi mejeng ...</td>
+      <td>Sama-sama Juara MotoGP dengan Tim Satelit, Mar...</td>
+      <td>Kamis, 21 Nov 2024 10:03 WIB</td>
+      <td>Jakarta - Jorge Martin berhasil memecahkan rek...</td>
       <td>Otomotif</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Ini Mobil Listrik Baru dari Wuling, Mirip Kei ...</td>
-      <td>Rabu, 16 Okt 2024 19:30 WIB</td>
-      <td>Jakarta - Wuling akan meluncurkan kei car bert...</td>
+      <td>3 Bulan Toyota Fortuner 2.4L Nihil Pengiriman,...</td>
+      <td>Kamis, 21 Nov 2024 09:36 WIB</td>
+      <td>Jakarta - Dalam tiga bulan terakhir, tak ada F...</td>
       <td>Otomotif</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Cek Harga Moge di Motobrads: Lengkap! Mulai Rp...</td>
-      <td>1,752 Views  |  Rabu, 16 Okt 2024 15:30 WIB</td>
-      <td>Tantangan di sektor ekonomi nyatanya tak membu...</td>
+      <td>Izin Trayek Susah, Mana Saja Rute Bus 'Pantura...</td>
+      <td>Kamis, 21 Nov 2024 09:09 WIB</td>
+      <td>Jakarta - Sahat's Transport jadi perusahaan di...</td>
       <td>Otomotif</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Gagah Pol! Toyota Hilux Rangga 'Disulap' Jadi ...</td>
-      <td>Rabu, 16 Okt 2024 18:36 WIB</td>
-      <td>Jakarta - Toyota-Astra Motor (TAM) turut menam...</td>
+      <td>Ternyata Ini yang Bikin Truk Maut Tol Cipulara...</td>
+      <td>Kamis, 21 Nov 2024 08:38 WIB</td>
+      <td>Jakarta - Korps Lalu Lintas (Korlantas) Polri ...</td>
       <td>Otomotif</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Jurus Jorge Martin Bikin Mentalnya Makin Kuat,...</td>
-      <td>Rabu, 16 Okt 2024 18:10 WIB</td>
-      <td>Jakarta - Jorge Martin mengaku mentalnya semak...</td>
+      <td>Macet Jakarta Bikin Rugi Triliunan</td>
+      <td>Kamis, 21 Nov 2024 08:08 WIB</td>
+      <td>Jakarta - Kemacetan Jakarta ditaksir menimbulk...</td>
       <td>Otomotif</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>Mengenal Komponen Karburator Motor dan Cara Ke...</td>
-      <td>Rabu, 16 Okt 2024 17:38 WIB</td>
-      <td>Jakarta - Karburator merupakan salah satu komp...</td>
-      <td>Otomotif</td>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>Sebelum Jual Hilux Rangga, Toyota Blusukan Dul...</td>
-      <td>Rabu, 16 Okt 2024 17:06 WIB</td>
-      <td>Jakarta - Sebelum meniagakan Hilux Rangga di I...</td>
-      <td>Otomotif</td>
+      <th>95</th>
+      <td>Menteri PPMI: Banyak Pekerja Migran Pulang Buk...</td>
+      <td>Rabu, 20 Nov 2024 18:15 WIB</td>
+      <td>Jakarta - Menteri Pelindungan Pekerja Migran (...</td>
+      <td>Keuangan</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>Sinyal BYD Bawa Mobil Hybrid ke Indonesia</td>
-      <td>Rabu, 16 Okt 2024 16:34 WIB</td>
-      <td>Jakarta - BYD tampaknya tidak hanya akan berma...</td>
-      <td>Otomotif</td>
+      <th>96</th>
+      <td>BNI dan Manulife Kolaborasi Optimalkan Layanan...</td>
+      <td>Rabu, 20 Nov 2024 17:36 WIB</td>
+      <td>Jakarta - PT Bank Negara Indonesia (Persero) T...</td>
+      <td>Keuangan</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>Ini Sebabnya Toyota Hilux Rangga Masih Diimpor...</td>
-      <td>Rabu, 16 Okt 2024 16:05 WIB</td>
-      <td>Jakarta - Toyota Hilux Rangga resmi dijual di ...</td>
-      <td>Otomotif</td>
+      <th>97</th>
+      <td>DPR Sebut Tax Amnesty Jilid III demi Dukung Pr...</td>
+      <td>Rabu, 20 Nov 2024 17:24 WIB</td>
+      <td>Jakarta - DPR RI mengusulkan pelaksanaan Tax A...</td>
+      <td>Keuangan</td>
     </tr>
     <tr>
-      <th>9</th>
-      <td>Bagaimana Cara Tahu 1 Liter Bensin Bisa Berapa...</td>
-      <td>Rabu, 16 Okt 2024 15:38 WIB</td>
-      <td>Jakarta - Bagi pemilik kendaraan konvensional,...</td>
-      <td>Otomotif</td>
+      <th>98</th>
+      <td>Siap-siap! Cokelat Dubai yang Lagi Viral Bisa ...</td>
+      <td>Rabu, 20 Nov 2024 17:19 WIB</td>
+      <td>Jakarta - Bank Indonesia (BI) terus memperluas...</td>
+      <td>Keuangan</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>Bupati Kendal Dorong Batik 'Kendil Emas' Bisa ...</td>
+      <td>Rabu, 20 Nov 2024 17:18 WIB</td>
+      <td>Jakarta - Indonesia adalah negeri yang kaya ak...</td>
+      <td>Keuangan</td>
     </tr>
   </tbody>
 </table>
+<p>100 rows × 4 columns</p>
 </div>
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-253abccc-2d03-4470-ab04-1be7f7fae8ed')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-9950cb75-8cea-4a33-90a8-6c5c5a56be10')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -974,12 +994,12 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
 
     <script>
       const buttonEl =
-        document.querySelector('#df-253abccc-2d03-4470-ab04-1be7f7fae8ed button.colab-df-convert');
+        document.querySelector('#df-9950cb75-8cea-4a33-90a8-6c5c5a56be10 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-253abccc-2d03-4470-ab04-1be7f7fae8ed');
+        const element = document.querySelector('#df-9950cb75-8cea-4a33-90a8-6c5c5a56be10');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -999,8 +1019,8 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
   </div>
 
 
-<div id="df-84b278c6-f8d6-44eb-904c-1d91f3b19f1d">
-  <button class="colab-df-quickchart" onclick="quickchart('df-84b278c6-f8d6-44eb-904c-1d91f3b19f1d')"
+<div id="df-17aba0a0-1777-4e8d-a9d3-35504593c721">
+  <button class="colab-df-quickchart" onclick="quickchart('df-17aba0a0-1777-4e8d-a9d3-35504593c721')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1119,7 +1139,7 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-84b278c6-f8d6-44eb-904c-1d91f3b19f1d button');
+        document.querySelector('#df-17aba0a0-1777-4e8d-a9d3-35504593c721 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
