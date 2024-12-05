@@ -433,17 +433,46 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: fuzzy-c-means in /usr/local/lib/python3.10/dist-packages (1.7.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting fuzzy-c-means
+  Downloading fuzzy_c_means-1.7.2-py3-none-any.whl.metadata (4.7 kB)
 Requirement already satisfied: joblib&lt;2.0.0,&gt;=1.2.0 in /usr/local/lib/python3.10/dist-packages (from fuzzy-c-means) (1.4.2)
 Requirement already satisfied: numpy&lt;2.0.0,&gt;=1.21.1 in /usr/local/lib/python3.10/dist-packages (from fuzzy-c-means) (1.26.4)
 Requirement already satisfied: pydantic&lt;3.0.0,&gt;=2.6.4 in /usr/local/lib/python3.10/dist-packages (from fuzzy-c-means) (2.9.2)
-Requirement already satisfied: tabulate&lt;0.9.0,&gt;=0.8.9 in /usr/local/lib/python3.10/dist-packages (from fuzzy-c-means) (0.8.10)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting tabulate&lt;0.9.0,&gt;=0.8.9 (from fuzzy-c-means)
+  Downloading tabulate-0.8.10-py3-none-any.whl.metadata (25 kB)
 Requirement already satisfied: tqdm&lt;5.0.0,&gt;=4.64.1 in /usr/local/lib/python3.10/dist-packages (from fuzzy-c-means) (4.66.6)
-Requirement already satisfied: typer&lt;0.10.0,&gt;=0.9.0 in /usr/local/lib/python3.10/dist-packages (from fuzzy-c-means) (0.9.4)
+Collecting typer&lt;0.10.0,&gt;=0.9.0 (from fuzzy-c-means)
+  Downloading typer-0.9.4-py3-none-any.whl.metadata (14 kB)
 Requirement already satisfied: annotated-types&gt;=0.6.0 in /usr/local/lib/python3.10/dist-packages (from pydantic&lt;3.0.0,&gt;=2.6.4-&gt;fuzzy-c-means) (0.7.0)
 Requirement already satisfied: pydantic-core==2.23.4 in /usr/local/lib/python3.10/dist-packages (from pydantic&lt;3.0.0,&gt;=2.6.4-&gt;fuzzy-c-means) (2.23.4)
 Requirement already satisfied: typing-extensions&gt;=4.6.1 in /usr/local/lib/python3.10/dist-packages (from pydantic&lt;3.0.0,&gt;=2.6.4-&gt;fuzzy-c-means) (4.12.2)
 Requirement already satisfied: click&lt;9.0.0,&gt;=7.1.1 in /usr/local/lib/python3.10/dist-packages (from typer&lt;0.10.0,&gt;=0.9.0-&gt;fuzzy-c-means) (8.1.7)
+Downloading fuzzy_c_means-1.7.2-py3-none-any.whl (9.1 kB)
+Downloading tabulate-0.8.10-py3-none-any.whl (29 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading typer-0.9.4-py3-none-any.whl (45 kB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/46.0 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">46.0/46.0 kB</span> <span class=" -Color -Color-Red">3.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: typer, tabulate, fuzzy-c-means
+  Attempting uninstall: typer
+    Found existing installation: typer 0.13.0
+    Uninstalling typer-0.13.0:
+      Successfully uninstalled typer-0.13.0
+  Attempting uninstall: tabulate
+    Found existing installation: tabulate 0.9.0
+    Uninstalling tabulate-0.9.0:
+      Successfully uninstalled tabulate-0.9.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">ERROR: pip&#39;s dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.</span>
+<span class=" -Color -Color-Red">bigframes 1.27.0 requires tabulate&gt;=0.9, but you have tabulate 0.8.10 which is incompatible.</span>
+Successfully installed fuzzy-c-means-1.7.2 tabulate-0.8.10 typer-0.9.4
 </pre></div>
 </div>
 </div>
@@ -482,45 +511,11 @@ Requirement already satisfied: click&lt;9.0.0,&gt;=7.1.1 in /usr/local/lib/pytho
 <span class="ne">--&gt; </span><span class="mi">176</span>   <span class="k">return</span> <span class="n">read_reply_from_input</span><span class="p">(</span><span class="n">request_id</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="p">)</span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">read_reply_from_input</span><span class="nt">(message_id, timeout_sec)</span>
-<span class="g g-Whitespace">     </span><span class="mi">92</span>     <span class="n">deadline</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout_sec</span>
-<span class="g g-Whitespace">     </span><span class="mi">93</span>   <span class="k">while</span> <span class="ow">not</span> <span class="n">deadline</span> <span class="ow">or</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">deadline</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">94</span>     <span class="n">reply</span> <span class="o">=</span> <span class="n">_read_next_input_message</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="n">reply</span> <span class="o">=</span> <span class="n">_read_next_input_message</span><span class="p">()</span>
 <span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">if</span> <span class="n">reply</span> <span class="o">==</span> <span class="n">_NOT_READY</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reply</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">96</span>       <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.025</span><span class="p">)</span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">_read_next_input_message</span><span class="nt">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span>     <span class="n">_NOT_READY</span> <span class="k">if</span> <span class="nb">input</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">available</span><span class="o">.</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span><span class="w">   </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">35</span><span class="sd">   kernel = ipython.get_kernel()</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span><span class="sd">   stdin_socket = kernel.stdin_socket</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span><span class="sd"> </span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_ipython.py</span> in <span class="ni">get_kernel</span><span class="nt">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span><span class="sd"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span><span class="sd"> def get_kernel():</span>
-<span class="ne">---&gt; </span><span class="mi">24</span><span class="sd">   return get_ipython().kernel</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span><span class="sd"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span><span class="sd"> </span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_ipython.py</span> in <span class="ni">get_ipython</span><span class="nt">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span><span class="sd"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span><span class="sd"> def get_ipython():</span>
-<span class="ne">---&gt; </span><span class="mi">20</span><span class="sd">   return IPython.get_ipython()</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span><span class="sd"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span><span class="sd"> </span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/IPython/core/getipython.py</span> in <span class="ni">get_ipython</span><span class="nt">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="kn">from</span> <span class="nn">IPython.core.interactiveshell</span> <span class="kn">import</span> <span class="n">InteractiveShell</span>
-<span class="ne">---&gt; </span><span class="mi">23</span>     <span class="k">if</span> <span class="n">InteractiveShell</span><span class="o">.</span><span class="n">initialized</span><span class="p">():</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span>         <span class="k">return</span> <span class="n">InteractiveShell</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/traitlets/config/configurable.py</span> in <span class="ni">initialized</span><span class="nt">(cls)</span>
-<span class="g g-Whitespace">    </span><span class="mi">564</span>             <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">565</span> 
-<span class="ne">--&gt; </span><span class="mi">566</span>     <span class="nd">@classmethod</span>
-<span class="g g-Whitespace">    </span><span class="mi">567</span>     <span class="k">def</span> <span class="nf">initialized</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">568</span><span class="w">         </span><span class="sd">&quot;&quot;&quot;Has an instance been created?&quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">96</span>       <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.025</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>       <span class="k">continue</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>     <span class="k">if</span> <span class="p">(</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
